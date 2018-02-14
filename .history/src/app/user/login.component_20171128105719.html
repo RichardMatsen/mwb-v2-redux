@@ -1,0 +1,44 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      <h1>Login</h1>
+      <hr>
+    </mat-card-title>
+    <mat-card-content layout="row" flex>
+      <div class="col-md-4">
+
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off" novalidate>
+
+          <div class="form-group">
+            <label for="userName">User Name:</label>
+            <em *ngIf="loginForm.controls.userName?.invalid && (loginForm.controls.userName?.touched || mouseoverLogin)">Required</em>
+            <input type="text" id="userName" class="form-control" name="userName"
+              (ngModel)="userName"  
+              required placeholder="User Name..." />
+          </div>
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <em *ngIf="loginForm.controls.password?.invalid && (loginForm.controls.password?.touched || mouseoverLogin)">Required</em>
+            <input (ngModel)="password" name="password" id="password" type="password" class="form-control" 
+              required placeholder="Password..." />
+          </div>
+
+          <span (mouseenter)="mouseoverLogin=true" (mouseleave)="mouseoverLogin=false">
+            <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+          </span>
+          <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+
+          <h6>Hint:</h6>
+          <ul>
+            <li *ngFor="let user of users$ | async">
+              <a (click)="select(loginForm.controls, user)">{{user.lastName}}</a>
+            </li>
+          </ul>
+
+        </form>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

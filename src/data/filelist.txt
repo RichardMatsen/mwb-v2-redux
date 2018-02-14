@@ -1,0 +1,41 @@
+Clinics DB3 (01 Jun 2016 - 11.00).html
+Clinics DB3 (03 Jun 2016 - 11.00).html
+Clinics DB3 (26 May 2016 - 11.00).html
+Clinics DB3 (25 May 2016 - 11.00).html
+Clinics DB3 (24 May 2016 - 11.00).html
+Clinics DB3 (23 May 2016 - 11.00).html
+Emergency RI checks (03 Jul 2016 - 15.12).html
+Emergency RI checks (03 Jul 2016 - 17.12).html
+Inpatient RI checks (03 Jul 2016 - 15.16).html
+Maternity RI checks (03 Jul 2016 - 17.09).html
+MedicalRecord RI checks (03 Jul 2016 - 18.00).html
+Outpatient RI checks (03 Jul 2016 - 15.18).html
+PatientRecord RI checks (03 Jul 2016 - 16.01).html
+Emergency RI checks (02 Jul 2016 - 15.12).html
+Emergency RI checks (02 Jul 2016 - 17.12).html
+Inpatient RI checks (02 Jul 2016 - 15.16).html
+Maternity RI checks (02 Jul 2016 - 17.09).html
+MedicalRecord RI checks (02 Jul 2016 - 18.00).html
+Outpatient RI checks (02 Jul 2016 - 15.18).html
+PatientRecord RI checks (02 Jul 2016 - 16.01).html
+Emergency RI checks (01 Jul 2016 - 15.12).html
+Emergency RI checks (01 Jul 2016 - 17.12).html
+Inpatient RI checks (01 Jul 2016 - 15.16).html
+Maternity RI checks (01 Jul 2016 - 17.09).html
+MedicalRecord RI checks (01 Jul 2016 - 18.00).html
+Outpatient RI checks (01 Jul 2016 - 15.18).html
+PatientRecord RI checks (01 Jul 2016 - 16.01).html
+Volatile Validations 06 Jun 2016.html
+Volatile Validations 09 Jun 2016 - 10.05.html
+Volatile Validations 09 Jun 2016 - 12.10.html
+Volatile Validations 09 Jun 2016 - 17.50.html
+Volatile Validations 10 May 2016.html
+Volatile Validations 11 May 2016.html
+Volatile Validations 12 May 2016.html
+Volatile Validations 13 May 2016.html
+Volatile Validations 14 May 2016.html
+Volatile Validations 15 May 2016.html
+Volatile Validations 16 May 2016.html
+Volatile Validations 17 May 2016.html
+Volatile Validations 18 May 2016.html
+Volatile Validations Appointments 24 May 2016 - DB1.html

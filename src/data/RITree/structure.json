@@ -1,0 +1,267 @@
+{
+  "name": "Patient",
+  "description": "Master Patient Record",
+  "children": [
+    {
+      "name": "Inpatients",
+      "children": [
+        {
+          "name": "Admissions",
+          "parent_FK": ["PatientId"],
+          "relation": "Inpatients.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "AdmissionId"],
+          "children": [
+            {
+              "name": "Transactions",
+              "parent_FK": ["AdmissionId"],
+              "relation": "Transactions.AdmissionId -> Inpatients.AdmissionId",
+              "keys": ["PatientId", "AdmissionId", "TransactionId"],
+              "children": [
+                  {
+                      "name": "Diagnoses",
+                      "relation": "Diagnoses.TransactionId -> Transactions.TransactionId",
+                      "keys": ["PatientId", "AdmissionId", "TransactionId", "Diagnosis"],
+                      "parent_FK": ["TransactionId"]
+                  },
+                  {
+                      "name": "Procedures",
+                      "parent_FK": ["TransactionId"],
+                      "relation": "Procedures.TransactionId -> Transactions.TransactionId",
+                      "keys": ["PatientId", "AdmissionId", "TransactionId", "Operation"]
+                  },
+                  {
+                      "name": "ICU",
+                      "relation": "ICU.TransactionId -> Transactions.TransactionId",
+                      "keys": ["PatientId", "AdmissionId", "TransactionId", "CareType"],
+                      "parent_FK": ["TransactionId"]
+                  },
+                  {
+                      "name": "ICUDrugs",
+                      "relation": "ICUDrugs.TransactionId -> Transactions.TransactionId",
+                      "keys": ["PatientId", "AdmissionId", "TransactionId", "CareType", "Type", "Drug"],
+                      "parent_FK": ["TransactionId"]
+                  }
+              ]
+            },
+            {
+              "name": "WaitingLists (admitted)",
+              "relation": "WaitingLists.AdmissionId -> Inpatients.AdmissionId",
+              "keys": ["PatientId", "WaitingListId", "AdmissionId"],
+              "parent_FK": ["AdmissionId"]
+            },
+            {
+              "name": "CallIns (admitted)",
+              "relation": "CallIns.AdmissionId -> Inpatients.AdmissionId",
+              "keys": ["PatientId", "WaitingListId", "CallDate", "AdmissionId"],
+              "parent_FK": ["AdmissionId"]
+            },
+            {
+              "name": "Absence",
+              "relation": "Absence.AdmissionId -> Inpatients.AdmissionId",
+              "keys": ["PatientId", "AdmissionId", "AbsenceDate"],
+              "parent_FK": ["AdmissionId"]
+            },
+            {
+              "name": "Attenders (admitted)",
+              "relation": "Attenders.AdmissionId -> Inpatients.AdmissionId",
+              "keys": ["PatientId", "AdmissionId", "AttendanceDate", "AttendanceTime", "Specialty"],
+              "parent_FK": ["AdmissionId"]
+            }
+          ]
+        },
+        {
+          "name": "WaitingLists (all)",
+          "relation": "WaitingLists.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "WaitingListId"],
+          "parent_FK": ["PatientId"],
+          "children": [
+              {
+              "name": "CallIns",
+              "relation": "CallIns.WaitingListId -> WaitingLists.WaitingListId",
+              "keys": ["PatientId", "WaitingListId", "CallDate"],
+              "parent_FK": ["WaitingListId"]
+            },
+            {
+              "name": "UnavailableDates",
+              "relation": "UnavailableDates.WaitingListId -> WaitingLists.WaitingListid",
+              "keys": ["PatientId", "WaitingListId", "DateFrom", "DateTo"],
+              "parent_FK": ["WaitingListId"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Outpatients",
+      "children": [
+      {
+          "name": "Appointments",
+          "relation": "Appointments.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "AppointmentId"],
+          "parent_FK": ["PatientId"],
+          "children": [
+              {
+                  "name": "Clinicians",
+                  "relation": "Clinicians.AppointmentId -> Appointments.AppointmentId",
+                  "keys": ["PatientId", "AppointmentId", "Clinician"],
+                  "parent_FK": ["AppointmentId"]
+              },
+              {
+                  "name": "Procedures",
+                  "relation": "Procedures.AppointmentId -> Appointments.AppointmentId",
+                  "keys": ["PatientId", "AppointmentId", "Procedure"],
+                  "parent_FK": ["AppointmentId"]
+              },
+              {
+                  "name": "Outcomes",
+                  "relation": "Outcomes.AppointmentId -> Appointments.AppointmentId",
+                  "keys": ["PatientId", "AppointmentId", "Outcome"],
+                  "parent_FK": ["AppointmentId"]
+              },
+              {
+                  "name": "WaitingLists (booked)",
+                  "relation": "WaitingLists.AppointmentId -> Appointments.AppointmentId",
+                  "keys": ["PatientId", "WaitingListId", "AppointmentId"],
+                  "parent_FK": ["AppointmentId"]
+              }
+          ]
+        },
+        {
+              "name": "WaitingLists (all)",
+              "relation": "WaitingLists.PatientId -> PatientRecord.PatientId",
+              "keys": ["PatientId", "WaitingListNumber"],
+              "parent_FK": ["PatientId"],
+              "children": [
+                  {
+                      "name": "CallIns",
+                      "relation": "CallIns.WaitingListId -> WaitingLists.WaitingListId",
+                      "keys": ["PatientId", "WaitingListId", "CallDate"],
+                      "parent_FK": ["WaitingListId"]
+                  },
+                  {
+                      "name": "UnavailableDates",
+                      "relation": "UnavailableDates.WaitingListId -> WaitingLists.WaitingListId",
+                      "keys": ["PatientId", "WaitingListId", "DateFrom", "DateTo"],
+                      "parent_FK": ["WaitingListId"]
+                  }
+              ]
+          }
+      ]
+    },
+    {
+      "name": "A&E",
+      "children": [
+        {
+          "name": "Attendances",
+          "relation": "Attendances.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "AttendanceId", "Location", "AttendanceDate", "AttendanceTime"],
+          "parent_FK": ["PatientId"],
+          "children": [
+            {
+              "name": "Clinicians",
+              "relation": "Clinicians.AttendanceId -> Attendances.AttendanceId",
+              "keys": ["Patient", "AttendanceId", "Specialist"],
+              "parent_FK": ["AttendanceId"]
+            },
+            {
+              "name": "Investigations",
+              "relation": "Investigations.AttendanceId -> Attendances.AttendanceId",
+              "keys": ["PatientId", "AttendanceId"],
+              "parent_FK": ["AttendanceId"]
+            },
+            {
+              "name": "Diagnoses",
+              "relation": "Diagnoses.AttendanceId -> Attendances.AttendanceId",
+              "keys": ["PatientId", "AttendanceId"],
+              "parent_FK": ["AttendanceId"]
+            },
+            {
+              "name": "Treatments",
+              "relation": "Treatments.AttendanceId -> Attendances.AttendanceId",
+              "keys": ["PatientId", "AttendanceId"],
+              "parent_FK": ["AttendanceId"]
+            },
+            {
+              "name": "Procedures",
+              "relation": "Procedures.AttendanceId -> Attendances.AttendanceId",
+              "keys": ["PatientId", "AttendanceId", "ProcedureOperation", "ProcedureDate"],
+              "parent_FK": ["AttendanceId"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Maternity",
+      "children": [
+        {
+          "name": "Pregnancy",
+          "relation": "Pregnancy.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "PregnancyId", "DateBooked"],
+          "parent_FK": ["PatientId"],
+          "children": [
+            {
+              "name": "Complications (current)",
+              "relation": "Complications.PregnancyId -> Pregnancy.PregnancyId",
+              "keys": ["PatientId", "PregnancyId", "Complication"],
+              "parent_FK": ["PregnancyId"]
+            }
+          ]
+        },
+        {
+          "name": "PriorPregnancies",
+          "relation": "PriorPregnancies.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "PregnancyId"],
+          "parent_FK": ["PatientId"],
+          "children": [
+            {
+              "name": "Babies",
+              "relation": "Babies.PregnancyId -> PriorPregnancies.PregnancyId",
+              "keys": ["PatientId", "PregnancyId", "BabyId"],
+              "parent_FK": ["PregnancyId"]
+            },
+            {
+              "name": "Complications (previous)",
+              "relation": "Complications.PregnancyId -> PriorPregnancies.PregnancyId",
+              "keys": ["PatientId", "PregnancyId", "Complication"],
+              "parent_FK": ["PregnancyId"]
+            }
+          ],
+          "errors": 0
+        },
+        {
+          "name": "WaitingLists",
+          "relation": "WaitingLists.PatientId -> PatientRecord.PatientId",
+          "keys": ["PatientId", "PregnancyId"],
+          "parent_FK": ["PatientId"]
+        }
+      ]
+    },
+    {
+      "name": "Medical Records",
+      "keys": ["PatientId", "MedicalRecordId", "MedicalRecordType"],
+      "children": [
+          {
+              "name": "MRTVolumes",
+              "relation": "MRTVolumes.MedicalRecordId -> MediaclRecord.MedicalRecordId",
+              "keys": ["PatientId", "MedicalRecordId", "MedicalRecordType", "VolumeId"],
+              "parent_FK": ["MedicalRecordId"],
+              "children": [
+                  {
+                      "name": "Movements",
+                      "relation": "Movements.MedicalRecordId -> Volumes.MedicalRecordId, MRTMovements.VolumeId -> MRTVolumes.VolumeId",
+                      "keys": ["PatientId", "MedicalRecordId", "MedicalRecordType", "VolumeId", "FromLocation", "ToLocation"],
+                      "parent_FK": ["VolumeId"]
+                  },
+                  {
+                      "name": "Requests",
+                      "relation": "Requests.MedicalRecordId -> Volumes.MedicalRecordId, Requests.VolumeId -> Volumes.VolumeId",
+                      "keys": ["PatientId", "MedicalRecordId", "MedicalRecordType", "VolumeId", "Reason", "DateRequired", "TimeRequired", "RequestingLocation"],
+                      "parent_FK": ["VolumeId"]
+                  }
+              ]
+          }
+      ]
+    }
+  ]
+}

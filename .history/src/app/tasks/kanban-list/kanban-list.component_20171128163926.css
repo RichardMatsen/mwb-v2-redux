@@ -1,0 +1,43 @@
+.list {
+	background: #e2e4e6;
+	width: 258px;
+	padding: 6px;
+	margin: 5px;
+	display: inline-block;
+  min-height: 250px;
+  vertical-align: top;	
+  position: relative; 
+}
+.list_title {
+	margin: 0;
+	padding: 1em 0;
+}
+.list_footer {
+  width: 100%;
+  height: 10%;
+  position: absolute;
+  bottom:0;
+}
+.list a {
+	width: 100%;
+	text-decoration: none;
+}
+
+input{
+  width: 245px;
+  height: 2em;
+  padding: 5px;
+  border: 2px solid orange;
+  outline: 0;
+  background: #fff;
+  box-shadow:none;
+  position: absolute;
+  bottom: 5px;
+}
+
+input[placeholder]{
+  color: whitesmoke;
+  opacity: 1;
+  font-weight: lighter;
+  font-style: italic;
+}  

@@ -1,0 +1,62 @@
+hr { margin-bottom: 0.1em; }
+
+mat-card {
+  height: 100%;
+  padding: 0.5em;
+}
+
+div.filelistcontainer { 
+  padding: 0; 
+}
+file-list { 
+  padding-right: 1em; 
+  margin-top: 0.1em 
+}
+
+div.result { 
+  padding-left: 0.7em; 
+}
+div.result-wrapper { 
+  overflow-y: scroll; 
+  padding-left: 0.10em; 
+  height: 85% 
+}
+
+@media only screen and (min-width: 990px) {
+  /* Make content take remainder of the page */
+  div.filelistcontainer { height: calc(100vh - 220px); }
+  div.result { height: calc(100vh - 220px); }
+}
+
+
+/* Vertically align badge with title */
+.title { display: flex; }
+error-badge { margin: auto; }
+
+error-badge {
+  opacity: 0.7;
+  font-size: 0.75em;
+  margin-left: 0.7em;
+}
+
+.last-refresh-label {
+  text-align: right;
+}
+
+.pointable {
+    cursor: pointer;
+}
+
+div.bannertitle {
+  display: flex;
+  padding-left: 15px;
+  margin-top: 1.5em;
+}
+div.bannertitle h1 {
+  margin: auto;
+  margin-left: 0;
+}
+div.bannertitle app-search {
+  margin: auto;
+  margin-right: 15px;
+}

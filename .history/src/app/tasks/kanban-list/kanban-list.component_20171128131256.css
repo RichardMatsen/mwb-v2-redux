@@ -1,0 +1,37 @@
+.list {
+	background: #e2e4e6;
+	width: 258px;
+	padding: 6px;
+	margin: 5px;
+	display: inline-block;
+  height: 250px;
+  vertical-align: top;	
+  position: relative; 
+}
+.list_title {
+	margin: 0;
+	padding: 1em 0;
+}
+.list_footer {
+	/* margin-top: 75%; */
+	/* padding: 1em 0; */
+  width: 100%;
+  height: 20%;
+  position: absolute;
+  bottom:0;
+}
+.list a {
+	width: 100%;
+	display: block;
+	text-decoration: none;
+  /* vertical-align: bottom;	 */
+}
+
+input{
+  width: 248px;
+  padding: 5px;
+  border: 2px solid orange;
+  outline: 0;
+  background: #fff;
+  box-shadow:none;
+}

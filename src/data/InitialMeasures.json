@@ -1,0 +1,23 @@
+{
+  "measures": [
+    { "id": "validations", "title": "Code Validations", "icon": "fa-check-square-o", "link": "validations",
+      "metric": "0", "color": "grey", 
+      "narrative": "Code Validation checks the extract fields which contain code values against the code tables and corresponding code maps." },
+    
+    { "id": "referentials", "title": "Referential Integrity", "icon": "fa-list-ol", "link": "referentials",
+      "metric": "0", "color": "grey", 
+      "narrative": "Referential Integrity checks for orphans in parent-child relationships between extracts. (See detail page for a graph of relationships)" },
+    
+    { "id": "exceptions", "title": "Loading Exceptions", "icon": "fa-exclamation-triangle", "link": "exceptions",
+      "metric": "242", "color": "orange", 
+      "narrative": "Loading Exceptions shows how many errors occurred during attempted loading of extracts.",
+      "history": [1020, 1050, 888, 999, 666, 555, 242] },
+    
+    { "id": "clinics", "title": "Clinic Matching", "icon": "fa-medkit", "link": "clinics",
+      "metric": "0%", "color": "grey", 
+      "narrative": "Clinic Matching checks existing Appointments against the clinic schedule appointment slots. This gives an indication of how many slots are missing and if the mapping is working correctly." },
+    
+    { "id": "tasks", "title": "Team Tasks", "icon": "fa-cogs", "link": "tasks",
+      "metric": "23", "color": "blue" }
+  ]
+}

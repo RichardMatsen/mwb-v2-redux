@@ -1,0 +1,26 @@
+
+li {
+  padding-top: 1em;
+  margin-right: 0.3em;
+}
+
+span a {
+  background-color: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+span.moreChevron {
+  border-bottom: none;
+}
+
+span.moreChevron.disabled, span.moreChevron.disabled i {
+  pointer-events:none;
+  opacity:0.6;
+}
+
+span.moreChevron i.fa-angle-double-down {
+  width: 100%;
+  text-align: center;
+}
+

@@ -1,0 +1,944 @@
+<!DOCTYPE HTML []>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="Generator" content="LINQ to XML, baby!"/>
+    <style type="text/css">
+        body {
+            margin: 0.3em 0.3em 0.4em 0.4em;
+            font-family: Verdana;
+            font-size: 80%;
+            background: white;
+        }
+
+        p, pre {
+            margin: 0;
+            padding: 0;
+            font-family: Verdana;
+        }
+
+        table {
+            border-collABCe: collABCe;
+            border: 2px solid #17b;
+            margin: 0.3em 0.2em;
+        }
+
+        table.limit {
+            border-collABCe: collABCe;
+            border-bottom: 2px solid #c31;
+        }
+
+        td, th {
+            vertical-align: top;
+            border: 1px solid #aaa;
+            padding: 0.1em 0.2em;
+            margin: 0;
+        }
+
+        th {
+            text-align: left;
+            background-color: #ddd;
+            border: 1px solid #777;
+            font-family: tahoma;
+            font-size: 90%;
+            font-weight: bold;
+        }
+
+        th.member {
+            padding: 0.1em 0.2em 0.1em 0.2em;
+        }
+
+        td.typeheader {
+            font-family: tahoma;
+            font-size: 100%;
+            font-weight: bold;
+            background-color: #17b;
+            color: white;
+            padding: 0 0.2em 0.15em 0.1em;
+        }
+
+        td.n {
+            text-align: right
+        }
+
+        a:link.typeheader, a:visited.typeheader, a:link.extenser, a:visited.extenser {
+            font-family: tahoma;
+            font-size: 90%;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: #17b;
+            color: white;
+            float: left;
+        }
+
+        a:link.extenser, a:visited.extenser {
+            float: right;
+            padding-left: 2pt;
+            margin-left: 4pt
+        }
+
+        span.typeglyph, span.typeglyphx {
+            padding: 0 0.2em 0 0;
+            margin: 0;
+        }
+
+        span.extenser, span.extenserx {
+            margin-top: 1.2pt;
+        }
+
+        span.typeglyph, span.extenser {
+            font-family: webdings;
+        }
+
+        span.typeglyphx, span.extenserx {
+            font-family: arial;
+            font-weight: bold;
+            margin: 2px;
+        }
+
+        table.group {
+            border: none;
+            margin: 0;
+        }
+
+        td.group {
+            border: none;
+            padding: 0 0.1em;
+        }
+
+        div.spacer {
+            margin: 0.6em 0;
+        }
+
+        table.headingpresenter {
+            border: none;
+            border-left: 3px dotted #1a5;
+            margin: 1em 0em 1.2em 0.15em;
+        }
+
+        th.headingpresenter {
+            font-family: Arial;
+            border: none;
+            padding: 0 0 0.2em 0.5em;
+            background-color: white;
+            color: green;
+            font-size: 110%;
+        }
+
+        td.headingpresenter {
+            border: none;
+            padding: 0 0 0 0.6em;
+        }
+
+        td.summary {
+            background-color: #def;
+            color: #024;
+            font-family: Tahoma;
+            padding: 0 0.1em 0.1em 0.1em;
+        }
+
+        td.columntotal {
+            font-family: Tahoma;
+            background-color: #eee;
+            font-weight: bold;
+            color: #17b;
+            font-size: 90%;
+            text-align: right;
+        }
+
+        span.graphbar {
+            background: #17b;
+            color: #17b;
+            margin-left: -2px;
+            margin-right: -2px;
+        }
+
+        a:link.graphcolumn, a:visited.graphcolumn {
+            color: #17b;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: Arial;
+            font-size: 110%;
+            letter-spacing: -0.2em;
+            margin-left: 0.3em;
+            margin-right: 0.1em;
+        }
+
+        a:link.collection, a:visited.collection {
+            color: green
+        }
+
+        a:link.reference, a:visited.reference {
+            color: blue
+        }
+
+        i {
+            color: green;
+        }
+
+        em {
+            color: red;
+        }
+
+        span.highlight {
+            background: #ff8;
+        }
+
+        code {
+            font-family: Consolas
+        }
+
+        code.xml b {
+            color: blue;
+            font-weight: normal
+        }
+
+        code.xml i {
+            color: maroon;
+            font-weight: normal;
+            font-style: normal
+        }
+
+        code.xml em {
+            color: red;
+            font-weight: normal;
+            font-style: normal
+        }
+    </style>
+</head>
+<body>Command Timeout only supported by SQL Client (so far)<br/><br/><span
+        style="color: green; font-weight:bold; font-size: 110%;"><th class="headingpresenter">
+    Extracts.Appointments.Consultant vs MasterTables.Consultants
+</th></span>
+<td class="headingpresenter">
+    <table id="t1">
+        <tr>
+            <td class="typeheader" colspan="7">(77 items)</td>
+        </tr>
+        <tr>
+            <th title="System.Int32">Extract LineNo</th>
+            <th title="System.String">Patient</th>
+            <th title="System.String">Value in extract</th>
+            <th title="System.String">Value in code map</th>
+            <th title="System.Object">Compare db & extract</th>
+            <th title="System.Object">Compare db & map</th>
+            <th title="System.String">Action</th>
+        </tr>
+        <tr>
+            <td class="n">35599</td>
+            <td>1010535</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">51735</td>
+            <td>1010536</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">63216</td>
+            <td>1010527</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">70508</td>
+            <td>1010973</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">110963</td>
+            <td>1010441</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">127704</td>
+            <td>1010196</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">130191</td>
+            <td>1010034</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">144184</td>
+            <td>1010009</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">150908</td>
+            <td>1010465</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">152101</td>
+            <td>1010920</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">152102</td>
+            <td>1010920</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">153627</td>
+            <td>1010464</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">163830</td>
+            <td>1010158</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">180508</td>
+            <td>1010290</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">192271</td>
+            <td>1010591</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">194290</td>
+            <td>1010278</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">196605</td>
+            <td>1010173</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">203537</td>
+            <td>1010930</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">232286</td>
+            <td>1010158</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">234971</td>
+            <td>1010095</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">258159</td>
+            <td>1010411</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">264456</td>
+            <td>1010868</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">288321</td>
+            <td>1010408</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">296774</td>
+            <td>1010069</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">302318</td>
+            <td>1010277</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">313472</td>
+            <td>1010263</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">402379</td>
+            <td>1010772</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">409316</td>
+            <td>1010671</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">418897</td>
+            <td>1010666</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">422871</td>
+            <td>1010254</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">438184</td>
+            <td>1010561</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">444929</td>
+            <td>1010172</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">450371</td>
+            <td>1010810</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">450373</td>
+            <td>1010810</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">457598</td>
+            <td>1010557</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">481425</td>
+            <td>1010965</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">490397</td>
+            <td>101064</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">498497</td>
+            <td>1010710</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">506288</td>
+            <td>1010841</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">518297</td>
+            <td>1010391</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123502</td>
+            <td>1010341</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123092</td>
+            <td>1010816</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123130</td>
+            <td>1010318</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123832</td>
+            <td>1010397</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123650</td>
+            <td>1010099</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123472</td>
+            <td>1010920</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123091</td>
+            <td>1010778</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123595</td>
+            <td>1010681</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123541</td>
+            <td>1010287</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">123793</td>
+            <td>1010321</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">730483</td>
+            <td>1010478</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">757355</td>
+            <td>1010873</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">774445</td>
+            <td>1010440</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">808996</td>
+            <td>1010265</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">808997</td>
+            <td>1010265</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">835473</td>
+            <td>1010306</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">835474</td>
+            <td>1010306</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">841179</td>
+            <td>1010519</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">855499</td>
+            <td>1010513</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">890896</td>
+            <td>1010553</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">903331</td>
+            <td>1010986</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">909760</td>
+            <td>1010364</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">918660</td>
+            <td>1010102</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">928797</td>
+            <td>1010598</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">932172</td>
+            <td>1010251</td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>ABCSPRHWC</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">946778</td>
+            <td>1010252</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">951820</td>
+            <td>1010606</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">992994</td>
+            <td>1010224</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1008083</td>
+            <td>1010659</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1024503</td>
+            <td>1010125</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1035870</td>
+            <td>1010049</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1126395</td>
+            <td>1010499</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1135838</td>
+            <td>1010797</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1147529</td>
+            <td>1010472</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1164325</td>
+            <td>1010640</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1168013</td>
+            <td>1010484</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td class="n">1182446</td>
+            <td>1010708</td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>ABCBE</td>
+            <td> </td>
+            <td>Add to Code Table Map</td>
+        </tr>
+        <tr>
+            <td title="Total=111111&#xD;&#xA;Average=111111.1169" class="columntotal">111111</td>
+            <td title="Totals" class="columntotal"></td>
+            <td title="Totals" class="columntotal"></td>
+            <td title="Totals" class="columntotal"></td>
+            <td title="Totals" class="columntotal"></td>
+            <td title="Totals" class="columntotal"></td>
+            <td title="Totals" class="columntotal"></td>
+        </tr>
+    </table>
+</td>
+Command Timeout only supported by SQL Client (so far)<br/><br/><span
+        style="color: green; font-weight:bold; font-size: 110%;"><th class="headingpresenter">
+    Extracts.Patient.Title vs MasterTables.Title
+</th></span>
+<td class="headingpresenter">
+    <table id="t2">
+        <tr>
+            <td class="typeheader" colspan="1">(0 items)</td>
+        </tr>
+    </table>
+</td>
+</body>
+</html>

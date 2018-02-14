@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div #bannertitle class="row">
+    <div class="row bannertitle">
+      <h1 class="pageTitle">{{config?.pageTitle}}</h1>
+      <ng-content select="[banner-button]"></ng-content>
+      <app-search class="bordered"></app-search>
+    </div>
+    <span class="pageDescription">{{config?.pageDescription}}</span>
+    <hr/>
+  </div>
+  <div #filecontent class="filecontent row">
+    <div class="filelistcontainer" [ngClass]="'col-md-' + config?.listWidth">
+      <file-list #filelist [title]="config?.listTitle" [visibleFiles]="visibleFiles$ | async"
+        [numToDisplay]="numVisible$ | async" [fileCount]="fileCount$ | async"
+        (fileSelected)="handleFileChange($event)" 
+        (numDisplayedChanged)="handleNumDisplayedChange($event)">
+      </file-list>
+    </div>
+    <div class="result" [ngClass]="'col-md-' + (12 - config?.listWidth)">
+      <mat-card>
+      <div class="header row">
+
+        <div class="header-title col-md-10">
+          <h3 class="title">
+            <span class="titleText">{{(fileInfo$ | async)?.name}}</span>
+            <error-badge #errorbadge [item]="fileInfo$ | async" [units]="config?.badgeUnits"></error-badge>
+          </h3>
+          <h6>
+            <span>Last modified: {{(fileInfo$ | async)?.lastModified}}</span>
+          </h6>
+        </div>
+
+        <div class="header-refresh col-md-2">
+          <h2>
+            <a (click)="refresh()" class="refresh-page-button pointable">
+              <i class="fa fa-md fa-refresh pull-right" aria-hidden="true"></i>
+            </a>
+          </h2>
+          <h6 class="last-refresh-label pull-right">
+            <span *ngIf="(lastRefresh$ | async)">Refreshed</span>
+            <span class="lastRefreshTime">{{(lastRefresh$ | async)}}</span>
+          </h6>
+        </div>
+
+      </div>
+      <div class="result-wrapper">
+        <result-wrapper [fileInfo]="fileInfo$ | async" [zoom]="config?.resultsZoom"></result-wrapper>
+      </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

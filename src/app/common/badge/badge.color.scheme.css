@@ -1,0 +1,5 @@
+span.badge.green { color: black; background-color: springgreen; }
+span.badge.orange { color: black; background-color: darkorange; }
+span.badge.red { color: white; background-color: indianred; }
+span.badge.blue { color: white; background-color: blue; }
+span.badge.grey { color: white; background-color: lightslategray; }

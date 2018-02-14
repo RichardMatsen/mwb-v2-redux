@@ -1,0 +1,24 @@
+<div class="list" (dragover)="allowDrop($event)" (drop)="drop($event)">
+
+  <p class="list_title"><strong>{{list?.name}}</strong></p>
+
+  <div class="cards">
+		<mwb-kanban-card *ngFor="let card of list?.cards" [card]="card"></mwb-kanban-card>
+	</div>
+	
+  <div class="list_footer">
+    <input #addcard type="text" 
+      tabindex="0"
+      autofocus
+      placeholder="new card description"
+      (keyup.enter)="addNewCard(addcard.value)" 
+      (keyup.esc)="hideNewCard()"
+      [hidden]="!displayAddCard">
+
+    <a class="list__newcard" 
+      (click)="showNewCard();" 
+      [hidden]="displayAddCard">Add a card...</a>
+
+  </div>
+
+</div>
