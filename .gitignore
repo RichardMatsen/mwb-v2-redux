@@ -32,6 +32,10 @@
 npm-debug.log
 testem.log
 /typings
+<<<<<<< HEAD
+=======
+/.history
+>>>>>>> a79444da2e277852a4ca16d28688ea429ebfef23
 
 # e2e
 /e2e/*.js

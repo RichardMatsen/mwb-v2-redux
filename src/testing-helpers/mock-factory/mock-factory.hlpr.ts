@@ -5,3 +5,4 @@ export function mockFactory(typeToMock) {
   methods.forEach(method => { mock[method].and.callFake(() => { }); });
   return mock;
 }
+
