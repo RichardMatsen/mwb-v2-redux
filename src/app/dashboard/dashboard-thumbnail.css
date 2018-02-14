@@ -1,0 +1,82 @@
+div.well-sm {
+  margin-top: 5px;
+  height: 100%;
+  width: 100%;
+}
+div.metric {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  /* justify-content: space-between; */
+  margin-left: 0;
+  margin-right: 0;
+}
+span.title {
+  margin-left: 0.5em;
+  font-size: xx-large;
+}
+
+div.metric i.measure-icon {
+  font-size: xx-large;
+  line-height: normal;
+}
+
+a.measure {
+  margin: 6px 3px;
+  padding: 6px 7px;
+  min-width: 70px;
+  cursor: pointer;
+}
+
+a.narrative-button {
+  position:absolute;
+  bottom: 20px; 
+  right: 20px; 
+  cursor: pointer;
+}
+@media only screen and (max-width: 768px) {
+  a.narrative-button {
+    bottom: 0; 
+  }
+}
+
+a.narrative-button i {
+  color: gray;
+  font-size: 10px;
+}
+
+div.narrative-text {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+div.filler {
+  flex-grow: 1;
+}
+
+error-badge {
+  min-width: 35px;
+  font-size: x-large;
+  font-family: "Courier New", Courier, monospace;
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex-basis: 3.3em;
+}
+
+sparkline {
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  flex-basis: 3em;
+}
+
+@media screen and (max-width: 640px) {
+  span.title {
+    font-size: x-large;
+  }
+  div.error-badge {
+    font-size: large;
+  }
+}

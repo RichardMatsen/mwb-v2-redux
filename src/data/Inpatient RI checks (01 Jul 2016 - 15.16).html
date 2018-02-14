@@ -1,0 +1,748 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="Generator" content="LINQ to XML, baby!"/>
+<style type='text/css'>
+    body {
+        margin: 0.3em 0.3em 0.4em 0.4em;
+        font-family: Verdana;
+        font-size: 80%;
+        background: white;
+    }
+
+    p, pre {
+        margin: 0;
+        padding: 0;
+        font-family: Verdana;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 2px solid #17b;
+        margin: 0.3em 0.2em;
+    }
+
+    table.limit {
+        border-collapse: collapse;
+        border-bottom: 2px solid #c31;
+    }
+
+    td, th {
+        vertical-align: top;
+        border: 1px solid #aaa;
+        padding: 0.1em 0.2em;
+        margin: 0;
+    }
+
+    th {
+        text-align: left;
+        background-color: #ddd;
+        border: 1px solid #777;
+        font-family: tahoma;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+    th.member {
+        padding: 0.1em 0.2em 0.1em 0.2em;
+    }
+
+    td.typeheader {
+        font-family: tahoma;
+        font-size: 100%;
+        font-weight: bold;
+        background-color: #17b;
+        color: white;
+        padding: 0 0.2em 0.15em 0.1em;
+    }
+
+    td.n {
+        text-align: right
+    }
+
+    a:link.typeheader, a:visited.typeheader, a:link.extenser, a:visited.extenser {
+        font-family: tahoma;
+        font-size: 90%;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #17b;
+        color: white;
+        float: left;
+    }
+
+    a:link.extenser, a:visited.extenser {
+        float: right;
+        padding-left: 2pt;
+        margin-left: 4pt
+    }
+
+    span.typeglyph, span.typeglyphx {
+        padding: 0 0.2em 0 0;
+        margin: 0;
+    }
+
+    span.extenser, span.extenserx {
+        margin-top: 1.2pt;
+    }
+
+    span.typeglyph, span.extenser {
+        font-family: webdings;
+    }
+
+    span.typeglyphx, span.extenserx {
+        font-family: arial;
+        font-weight: bold;
+        margin: 2px;
+    }
+
+    table.group {
+        border: none;
+        margin: 0;
+    }
+
+    td.group {
+        border: none;
+        padding: 0 0.1em;
+    }
+
+    div.spacer {
+        margin: 0.6em 0;
+    }
+
+    table.headingpresenter {
+        border: none;
+        border-left: 3px dotted #1a5;
+        margin: 1em 0em 1.2em 0.15em;
+    }
+
+    th.headingpresenter {
+        font-family: Arial;
+        border: none;
+        padding: 0 0 0.2em 0.5em;
+        background-color: white;
+        color: green;
+        font-size: 110%;
+    }
+
+    td.headingpresenter {
+        border: none;
+        padding: 0 0 0 0.6em;
+    }
+
+    td.summary {
+        background-color: #def;
+        color: #024;
+        font-family: Tahoma;
+        padding: 0 0.1em 0.1em 0.1em;
+    }
+
+    td.columntotal {
+        font-family: Tahoma;
+        background-color: #eee;
+        font-weight: bold;
+        color: #17b;
+        font-size: 90%;
+        text-align: right;
+    }
+
+    span.graphbar {
+        background: #17b;
+        color: #17b;
+        margin-left: -2px;
+        margin-right: -2px;
+    }
+
+    a:link.graphcolumn, a:visited.graphcolumn {
+        color: #17b;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: Arial;
+        font-size: 110%;
+        letter-spacing: -0.2em;
+        margin-left: 0.3em;
+        margin-right: 0.1em;
+    }
+
+    a:link.collection, a:visited.collection {
+        color: green
+    }
+
+    a:link.reference, a:visited.reference {
+        color: blue
+    }
+
+    i {
+        color: green;
+    }
+
+    em {
+        color: red;
+    }
+
+    span.highlight {
+        background: #ff8;
+    }
+
+    code {
+        font-family: Consolas
+    }
+
+    code.xml b {
+        color: blue;
+        font-weight: normal
+    }
+
+    code.xml i {
+        color: maroon;
+        font-weight: normal;
+        font-style: normal
+    }
+
+    code.xml em {
+        color: red;
+        font-weight: normal;
+        font-style: normal
+    }
+</style>
+
+<script language='JavaScript' type='text/javascript'>
+
+    function toggle(id) {
+        table = document.getElementById(id);
+        if (table == null) return false;
+        updown = document.getElementById(id + 'ud');
+        if (updown == null) return false;
+        if (updown.innerHTML == '5' || updown.innerHTML == '6') {
+            expand = updown.innerHTML == '6';
+            updown.innerHTML = expand ? '5' : '6';
+        } else {
+            expand = updown.innerHTML == '˅';
+            updown.innerHTML = expand ? '˄' : '˅';
+        }
+        table.style.borderBottom = expand ? '2px solid #17b' : 'dashed 2px #17b';
+        elements = table.rows;
+        if (elements.length == 0 || elements.length == 1) return false;
+        for (i = 1; i != elements.length; i++)
+            if (elements[i].id.substring(0, 3) != 'sum')
+                elements[i].style.display = expand ? 'table-row' : 'none';
+        return false;
+    }
+
+</script>
+</head>
+<body><!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="Generator" content="LINQ to XML, baby!"/>
+<style type='text/css'>
+    body {
+        margin: 0.3em 0.3em 0.4em 0.4em;
+        font-family: Verdana;
+        font-size: 80%;
+        background: white;
+    }
+
+    p, pre {
+        margin: 0;
+        padding: 0;
+        font-family: Verdana;
+    }
+
+    table {
+        border-collapse: collapse;
+        border: 2px solid #17b;
+        margin: 0.3em 0.2em;
+    }
+
+    table.limit {
+        border-collapse: collapse;
+        border-bottom: 2px solid #c31;
+    }
+
+    td, th {
+        vertical-align: top;
+        border: 1px solid #aaa;
+        padding: 0.1em 0.2em;
+        margin: 0;
+    }
+
+    th {
+        text-align: left;
+        background-color: #ddd;
+        border: 1px solid #777;
+        font-family: tahoma;
+        font-size: 90%;
+        font-weight: bold;
+    }
+
+    th.member {
+        padding: 0.1em 0.2em 0.1em 0.2em;
+    }
+
+    td.typeheader {
+        font-family: tahoma;
+        font-size: 100%;
+        font-weight: bold;
+        background-color: #17b;
+        color: white;
+        padding: 0 0.2em 0.15em 0.1em;
+    }
+
+    td.n {
+        text-align: right
+    }
+
+    a:link.typeheader, a:visited.typeheader, a:link.extenser, a:visited.extenser {
+        font-family: tahoma;
+        font-size: 90%;
+        font-weight: bold;
+        text-decoration: none;
+        background-color: #17b;
+        color: white;
+        float: left;
+    }
+
+    a:link.extenser, a:visited.extenser {
+        float: right;
+        padding-left: 2pt;
+        margin-left: 4pt
+    }
+
+    span.typeglyph, span.typeglyphx {
+        padding: 0 0.2em 0 0;
+        margin: 0;
+    }
+
+    span.extenser, span.extenserx {
+        margin-top: 1.2pt;
+    }
+
+    span.typeglyph, span.extenser {
+        font-family: webdings;
+    }
+
+    span.typeglyphx, span.extenserx {
+        font-family: arial;
+        font-weight: bold;
+        margin: 2px;
+    }
+
+    table.group {
+        border: none;
+        margin: 0;
+    }
+
+    td.group {
+        border: none;
+        padding: 0 0.1em;
+    }
+
+    div.spacer {
+        margin: 0.6em 0;
+    }
+
+    table.headingpresenter {
+        border: none;
+        border-left: 3px dotted #1a5;
+        margin: 1em 0em 1.2em 0.15em;
+    }
+
+    th.headingpresenter {
+        font-family: Arial;
+        border: none;
+        padding: 0 0 0.2em 0.5em;
+        background-color: white;
+        color: green;
+        font-size: 110%;
+    }
+
+    td.headingpresenter {
+        border: none;
+        padding: 0 0 0 0.6em;
+    }
+
+    td.summary {
+        background-color: #def;
+        color: #024;
+        font-family: Tahoma;
+        padding: 0 0.1em 0.1em 0.1em;
+    }
+
+    td.columntotal {
+        font-family: Tahoma;
+        background-color: #eee;
+        font-weight: bold;
+        color: #17b;
+        font-size: 90%;
+        text-align: right;
+    }
+
+    span.graphbar {
+        background: #17b;
+        color: #17b;
+        margin-left: -2px;
+        margin-right: -2px;
+    }
+
+    a:link.graphcolumn, a:visited.graphcolumn {
+        color: #17b;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: Arial;
+        font-size: 110%;
+        letter-spacing: -0.2em;
+        margin-left: 0.3em;
+        margin-right: 0.1em;
+    }
+
+    a:link.collection, a:visited.collection {
+        color: green
+    }
+
+    a:link.reference, a:visited.reference {
+        color: blue
+    }
+
+    i {
+        color: green;
+    }
+
+    em {
+        color: red;
+    }
+
+    span.highlight {
+        background: #ff8;
+    }
+
+    code {
+        font-family: Consolas
+    }
+
+    code.xml b {
+        color: blue;
+        font-weight: normal
+    }
+
+    code.xml i {
+        color: maroon;
+        font-weight: normal;
+        font-style: normal
+    }
+
+    code.xml em {
+        color: red;
+        font-weight: normal;
+        font-style: normal
+    }
+</style>
+
+<script language='JavaScript' type='text/javascript'>
+
+    function toggle(id) {
+        table = document.getElementById(id);
+        if (table == null) return false;
+        updown = document.getElementById(id + 'ud');
+        if (updown == null) return false;
+        if (updown.innerHTML == '5' || updown.innerHTML == '6') {
+            expand = updown.innerHTML == '6';
+            updown.innerHTML = expand ? '5' : '6';
+        } else {
+            expand = updown.innerHTML == '˅';
+            updown.innerHTML = expand ? '˄' : '˅';
+        }
+        table.style.borderBottom = expand ? '2px solid #17b' : 'dashed 2px #17b';
+        elements = table.rows;
+        if (elements.length == 0 || elements.length == 1) return false;
+        for (i = 1; i != elements.length; i++)
+            if (elements[i].id.substring(0, 3) != 'sum')
+                elements[i].style.display = expand ? 'table-row' : 'none';
+        return false;
+    }
+
+</script>
+</head>
+<body>
+<div style="color:green; font-weight: bold;">Inpatient RI checks - LoadNo 1.31</div>
+<div class="spacer">
+    <table id="t17">
+        <tr>
+            <td class="typeheader" colspan="5"><a href="" class="typeheader" onclick="return toggle('t17');"><span
+                    class="typeglyphx" id="t17ud">&#708;</span>List&lt;RIResult&gt; (15 items)</a></td>
+        </tr>
+        <tr>
+            <th title="System.String">Description</th>
+            <th title="System.Int32">ParentCount</th>
+            <th title="System.Int32">ChildCount</th>
+            <th title="System.Int32">OrphanCount</th>
+            <th title="IEnumerable&lt;System.Object&gt;">Orphans</th>
+        </tr>
+        <tr>
+            <td>Procedures vs Transactions (TransactionId)</td>
+            <td class="n">472687</td>
+            <td class="n">332041</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t18">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Procedures vs Inpatients (AdmissionId)</td>
+            <td class="n">195489</td>
+            <td class="n">332041</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t19">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Diagnoses vs Transactions (TransactionId)</td>
+            <td class="n">472687</td>
+            <td class="n">661861</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t20">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Diagnoses vs Inpatients (AdmissionId)</td>
+            <td class="n">195489</td>
+            <td class="n">661861</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t21">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Transactions vs Inpatients (AdmissionId)</td>
+            <td class="n">195489</td>
+            <td class="n">472687</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t22">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingLists vs Inpatients (AdmissionId)</td>
+            <td class="n">195489</td>
+            <td class="n">104323</td>
+            <td class="n">19868</td>
+            <td>
+                <table id="t23">
+                    <tr>
+                        <td class="typeheader" colspan="4"><a href="" class="typeheader"
+                                                              onclick="return toggle('t23');"><span class="typeglyphx"
+                                                                                                    id="t23ud">&#708;</span>List&lt;Object&gt;
+                            (5 items)</a></td>
+                    </tr>
+                    <tr>
+                        <th title="System.String">PatientId</th>
+                        <th title="System.String">WaitinglistId</th>
+                        <th title="System.String">AdmissionId</th>
+                        <th title="System.String">TreatmentId</th>
+                    </tr>
+                    <tr>
+                        <td>1234934</td>
+                        <td>6666635</td>
+                        <td>1111635</td>
+                        <td>XYZ010001</td>
+                    </tr>
+                    <tr>
+                        <td>1234599</td>
+                        <td>6666266</td>
+                        <td>1111266</td>
+                        <td>XYZ020002</td>
+                    </tr>
+                    <tr>
+                        <td>1234010</td>
+                        <td>6666895</td>
+                        <td>1111895</td>
+                        <td>XYZ030003</td>
+                    </tr>
+                    <tr>
+                        <td>1234015</td>
+                        <td>6666569</td>
+                        <td>1111569</td>
+                        <td>XYZ040004</td>
+                    </tr>
+                    <tr>
+                        <td>1234017</td>
+                        <td>6666151</td>
+                        <td>1111151</td>
+                        <td>XYZ050005</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListProposed vs WaitingLists (WaitinglistId)</td>
+            <td class="n">104323</td>
+            <td class="n">654</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t26">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListProposed vs PatientRecord (PatientId)</td>
+            <td class="n">275546</td>
+            <td class="n">654</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t27">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListConfirmed vs PatientRecord (PatientId)</td>
+            <td class="n">275546</td>
+            <td class="n">115299</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t29">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListConfirmed vs WaitingLists (WaitinglistId)</td>
+            <td class="n">104323</td>
+            <td class="n">115299</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t24">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListConfirmed vs Inpatients (AdmissionId)</td>
+            <td class="n">195489</td>
+            <td class="n">115299</td>
+            <td class="n">11392</td>
+            <td>
+                <table id="t25">
+                    <tr>
+                        <td class="typeheader" colspan="3"><a href="" class="typeheader"
+                                                              onclick="return toggle('t25');"><span class="typeglyphx"
+                                                                                                    id="t25ud">&#708;</span>List&lt;Object&gt;
+                            (5 items)</a></td>
+                    </tr>
+                    <tr>
+                        <th title="System.String">PatientId</th>
+                        <th title="System.String">WaitinglistId</th>
+                        <th title="System.String">AdmissionId</th>
+                    </tr>
+                    <tr>
+                        <td>1234703</td>
+                        <td>6666067</td>
+                        <td>1111067</td>
+                    </tr>
+                    <tr>
+                        <td>1234516</td>
+                        <td>6666694</td>
+                        <td>1111694</td>
+                    </tr>
+                    <tr>
+                        <td>1234346</td>
+                        <td>6666323</td>
+                        <td>1111323</td>
+                    </tr>
+                    <tr>
+                        <td>1234452</td>
+                        <td>6666498</td>
+                        <td>1111498</td>
+                    </tr>
+                    <tr>
+                        <td>1234310</td>
+                        <td>6666764</td>
+                        <td>1111764</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListDeclined vs WaitingLists (WaitinglistId)</td>
+            <td class="n">104323</td>
+            <td class="n">2391</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t30">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>WaitingListDeclined vs PatientRecord (PatientId)</td>
+            <td class="n">275546</td>
+            <td class="n">2391</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t31">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>Inpatients vs PatientRecord (PatientId)</td>
+            <td class="n">275546</td>
+            <td class="n">195489</td>
+            <td class="n">0</td>
+            <td>
+                <table id="t32">
+                    <tr>
+                        <td class="typeheader" colspan="1">(0 items)</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td title="Totals" class="columntotal"></td>
+            <td title="Total=3442295&#xD;&#xA;Average=229486.3333" class="columntotal">3442295</td>
+            <td title="Total=3227589&#xD;&#xA;Average=215172.6" class="columntotal">3227589</td>
+            <td title="Total=31260&#xD;&#xA;Average=2084" class="columntotal">30260</td>
+            <td title="Totals" class="columntotal"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

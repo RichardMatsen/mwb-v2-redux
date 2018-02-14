@@ -1,0 +1,9 @@
+div.bannertitle {
+  display: flex;
+  padding-left: 15px;
+}
+
+app-referentials-diagram {
+  margin: auto;
+  margin-right: 10px;
+}

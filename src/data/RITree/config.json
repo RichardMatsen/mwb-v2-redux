@@ -1,0 +1,10 @@
+{
+    "margins": [0, 20, 20, 50],     // top, right, bottom, left margins
+    "width": 900,
+    "height": 850,
+    "levelDepths": [ 0, 150, 200, 200, 200, 100, 100, 100, 100, 100 ],
+
+    "treeFile": "structure.json",
+    "dataFile": "data.json",
+    "pathToData": "/data/"
+}

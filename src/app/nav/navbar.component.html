@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default navbar-inverse">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed"
+          data-toggle="collapse" data-target="#myNavbar"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Migration Workbench</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="myNavbar" >
+
+      <!-- Page navigaion -->
+      <ul class="nav navbar-nav">
+        <li><a routerLink="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a></li>
+        <li><a routerLink="validations" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Validations</a></li>
+        <li><a routerLink="referentials" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Referential Integrity</a></li>
+        <li><a routerLink="clinics" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Clinics</a></li>
+        <li><a routerLink="tasks" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Team Tasks</a></li>
+      </ul>
+
+      <!-- User functions -->
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a *ngIf="!(isAuthenticated$ | async)" [routerLink]="['user/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >
+            <span class="fa fa-lg fa-sign-in"></span> Login</a>
+          <a  *ngIf="(isAuthenticated$ | async)" [routerLink]="['user/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <span class="fa fa-lg fa-user"></span> {{ (currentUser$ | async)?.firstName}}</a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>

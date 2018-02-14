@@ -1,0 +1,49 @@
+ul {
+  scrollbar-track-color: #2175bc;
+  scrollbar-face-color: #90bade;
+}
+
+::-webkit-scrollbar
+{
+  width: 0.6em;  /* for vertical scrollbars */
+  height: 0.6em; /* for horizontal scrollbars */
+  margin-right: -0.8em;
+}
+::-webkit-scrollbar-track
+{
+  background: #2175bc;
+}
+::-webkit-scrollbar-thumb
+{
+  background: #90bade;
+}
+
+/* NOT IMPLEMENTED */
+::-moz-scrollbar
+{
+  width: 0.6em;  /* for vertical scrollbars */
+  height: 0.6em; /* for horizontal scrollbars */
+}
+::-moz-scrollbar-track
+{
+  background: #2175bc;
+}
+::-moz-scrollbar-thumb
+{
+  background: #90bade;
+}
+
+/* NOT IMPLEMENTED */
+::-ms-scrollbar
+{
+  width: 0.6em;  /* for vertical scrollbars */
+  height: 0.6em; /* for horizontal scrollbars */
+}
+::-ms-scrollbar-track
+{
+  background: #2175bc;
+}
+::-ms-scrollbar-thumb
+{
+  background: #90bade;
+}

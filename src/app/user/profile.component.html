@@ -1,0 +1,38 @@
+<div class="container">
+  <mat-card>
+    <mat-card-title>
+      <h1>Edit Your Profile </h1>
+      <hr>
+    </mat-card-title>
+    <mat-card-content layout="row" flex>
+      <div class="col-md-4">
+
+        <form #profileForm="ngForm" [formGroup]="profileFormGroup" novalidate (ngSubmit)="saveProfile(profileForm.value)" autocomplete="off" >
+
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <em *ngIf="!validateFirstName() && profileFormGroup.controls.firstName.errors.required">Required</em>
+            <em *ngIf="!validateFirstName() && profileFormGroup.controls.firstName.errors.pattern">Must start with a letter</em>
+            <input type="text"
+                   id="firstName" placeholder="First Name..." 
+                   name="firstName" 
+                   class="form-control" formControlName="firstName" />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <em *ngIf="!validateLastName()">Required</em>
+            <input type="text" 
+                   id="lastName" placeholder="Last Name..."
+                   name="lastName" 
+                   class="form-control" formControlName="lastName" />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-default" (click)="cancel()">Cancel</button>
+
+        </form>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

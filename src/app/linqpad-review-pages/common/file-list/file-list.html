@@ -1,0 +1,18 @@
+<div #borderwrapper class="borderwrapper">
+  <h4 class="title">{{title}}</h4>
+  <div #scrollwrapper class="scrollwrapper" scrollbarPaddingAdjust>
+    <div #listwrapper class="listwrapper" >
+      <ul #scrollingList [scrollTop]="scrollingList.scrollHeight">
+        <li class="file-list-item" *ngFor="let item of visibleFiles">
+          <a (click)=selectFile(item)>
+            <span class="title">{{item.displayName}}</span>
+            <error-badge class="pull-right" [item]="item"></error-badge>
+            <span class="effectiveTime pull-right">{{item.effectiveTime}}</span>
+          </a>
+        </li>
+        <list-limiter #limiter [listCount]="fileCount" [tooltip]="'Show older dates'"
+          [numToDisplay]="numToDisplay" (numDisplayed)=setNumDisplayed($event)></list-limiter>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="sparkline" [id]="id" [ngStyle]="{'height': height}">
+  <svg [attr.width]="width" [attr.height]="height" style="margin-top: 8">
+    <defs>
+      <linearGradient [id]="'gradient-' + id" x1="0" x2="0" y1="1" y2="0">
+        <stop offset="10%" stop-color="#c6e48b"></stop>
+        <stop offset="33%" stop-color="#7bc96f"></stop>
+        <stop offset="66%" stop-color="#239a3b"></stop>
+        <stop offset="90%" stop-color="#196127"></stop>
+      </linearGradient>
+      <mask [id]="'sparkline-' + id" x="0" y="0" [attr.width]="width" [attr.height]="height">
+        <polyline [attr.transform]="'translate(0, ' + height + ') scale(1,-1)'" 
+          [attr.points]="points"
+          fill="transparent" 
+          stroke="#8cc665" 
+          stroke-width="2">
+        </polyline>
+      </mask>
+    </defs>
+    
+    <g transform="translate(0, 1.0)">
+      <rect x="0" y="-2" [attr.width]="width" [attr.height]="height" 
+        style="stroke: none;"
+        [ngStyle]="{'fill': 'url(#gradient-' + id + ')', 'mask': 'url(#sparkline-' + id + ')'}">
+      </rect>
+    </g>
+  </svg>
+</div>

@@ -1,0 +1,24 @@
+[
+    { "child": "IP", "orphans": 0 },
+    { "child": "Inpatients", "orphans": 0 },
+    { "child": "Transactions", "orphans": 1 },
+    { "child": "Procedures", "orphans": 0 },
+    { "child": "Diagnoses", "orphans": 0 },
+    { "child": "CriticalCare" },
+    { "child": "ICUDrugs" },
+    { "child": "WaitingLists (booked)", "orphans": 0 },
+    { "child": "Absence", "orphans": 1 },
+    { "child": "Attenders (admitted)", "orphans": 0 },
+    { "child": "WaitingLists (all)", "orphans": 0 },
+    { "child": "Calls", "orphans": 0 },
+    { "child": "WaitingListTCI (all)", "orphans": 0 },
+    { "child": "WaitingListNotAvailableDates", "orphans": 2962 },
+
+    { "child": "OP", "orphans": 0 },
+    { "child": "Appointments", "orphans": 0 },
+    { "child": "WaitingLists (booked)", "orphans": 0 },
+    { "child": "Procedures", "orphans": 0 },
+    { "child": "WaitingLists (all)", "orphans": 0 },
+    { "child": "Calls (all)", "orphans": 0 },
+    { "child": "UnavailableDates", "orphans": 0 }
+]
