@@ -10,7 +10,7 @@ export function isAuthenticatedSelector(state) {
 };
 
 @Component({
-  selector: 'nav-bar',
+  selector: 'mwb-nav-bar',
   templateUrl: 'navbar.component.html',
   styles: [`
     li > a.active { color: #F97924 }

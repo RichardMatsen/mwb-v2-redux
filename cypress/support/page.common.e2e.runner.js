@@ -38,7 +38,7 @@ export function page_common_e2e(testParams, runtimeConfig) {
       describe('file list', () => {
 
         it('should have title text', () => {
-          cy.get('file-list h4.title').should('contain', testParams.config.page.listTitle)
+          cy.get('mwb-file-list h4.title').should('contain', testParams.config.page.listTitle)
         });
 
         it('should have a list of files', () => {
@@ -177,7 +177,7 @@ export function page_common_e2e(testParams, runtimeConfig) {
 
       describe('file list', () => {
         it('should be left-justified', () => {
-          isLeftJustified({ subject: 'file-list', relativeTo: '.filecontent' })
+          isLeftJustified({ subject: 'mwb-file-list', relativeTo: '.filecontent' })
         })
       })
 

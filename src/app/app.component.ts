@@ -5,20 +5,14 @@ import { AuthguardService } from './nav/authguard.service';
 import { Http, Response, ResponseOptions } from '@angular/http';
 
 @Component({
-  selector: 'app-root',
+  selector: 'mwb-root',
   template: `
   <div class="container-fluid">
-    <nav-bar></nav-bar>
+    <mwb-nav-bar></mwb-nav-bar>
     <router-outlet  id="bgimage"></router-outlet>
     <spinner></spinner>
   </div>
   `,
-  // styles: [`
-  //   #bgimage {
-  //     background: url('./src/assets/s3.jpg') no-repeat center;
-  //     background-size: cover;
-  //   }
-  // '],
   providers: [
     ConfigActions,
  ],

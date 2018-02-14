@@ -6,7 +6,7 @@ import { ClinicsDataService } from './services/clinics-data.service';
 
 @Component({
   selector: 'mwb-clinics',
-  template: `<page-common  [config]="config | async" [PAGE]="PAGE" [services]="services"></page-common>`,
+  template: `<mwb-page-common  [config]="config | async" [PAGE]="PAGE" [services]="services"></mwb-page-common>`,
 })
 export class ClinicsComponent {
 

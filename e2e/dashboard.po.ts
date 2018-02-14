@@ -63,7 +63,7 @@ export class DashboardPage {
     return el.getAttribute('class')
       .then( (classes) => {
         return classes.split(' ')
-          .filter(cl => { return cl.substr(0, 3) === 'fa-' && !faSizes.includes(cl); })[0];
+          .filter(cl => cl.substr(0, 3) === 'fa-' && !faSizes.includes(cl))[0];
       });
   }
 

@@ -8,7 +8,7 @@ import { ReferentialsGraphDrawLinksService } from './services/referentials-graph
 import { ReferentialsGraphToggleService } from './services/referentials-graph.toggle.service';
 
 @Component({
-  selector: 'referentials-graph',
+  selector: 'mwb-referentials-graph',
   templateUrl: './referentials-graph.component.html',
   styleUrls: ['./referentials-graph.component.css'],
   providers: [

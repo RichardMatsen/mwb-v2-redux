@@ -3,13 +3,13 @@ import { ReferentialsDiagramModal } from '../referentials-diagram/referentials-d
 import { SharedDataService } from '../../../services/shared-data.service';
 
 @Component({
-  selector: 'app-referentials-diagram',
+  selector: 'mwb-referentials-diagram',
   template: `
     <div>
       <button class="btn btn-info pull-right" (click)="showDiagram()">
         <i class="fa fa-sitemap" aria-hidden="true"></i> {{ buttonPrompt }}
       </button>
-      <referentials-diagram-modal #diagramModal></referentials-diagram-modal>
+      <mwb-referentials-diagram-modal #diagramModal></mwb-referentials-diagram-modal>
     </div>
   `,
   styles: ['.btn { margin-right: 12px }']
@@ -18,7 +18,7 @@ export class ReferentialsDiagramComponent implements OnInit {
 
   @ViewChild('diagramModal') modal: ReferentialsDiagramModal;
   buttonPrompt: string;
-    
+
   constructor(
     private sharedDataService: SharedDataService,
   ) {}
@@ -26,12 +26,12 @@ export class ReferentialsDiagramComponent implements OnInit {
   ngOnInit() {
     this.sharedDataService.buttonPrompt$
       .subscribe(prompt => {
-        this.buttonPrompt = prompt
-      })
+        this.buttonPrompt = prompt;
+      });
   }
 
   showDiagram() {
     this.modal.show();
-    this.sharedDataService.changePrompt('Close Diagram')
+    this.sharedDataService.changePrompt('Close Diagram');
   }
 }

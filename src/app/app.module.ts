@@ -8,10 +8,6 @@ import { RouterModule } from '@angular/router';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
-// import { ResponsiveModule } from 'ng2-responsive';
-
-// import * as cloudinary from 'cloudinary-core/cloudinary-core-shrinkwrap';
-// import {CloudinaryModule, CloudinaryConfiguration, provideCloudinary} from '@cloudinary/angular-4.x';
 
 import { AppComponent } from './app.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -34,16 +30,9 @@ import { SharedDataService } from './services/shared-data.service';
       prefix: 'migwb',
       storageType: 'localStorage'
     }),
-    // MaterialModule,
     MatCardModule,
     ModalModule.forRoot(),
     NgReduxModule,
-    // ResponsiveModule,
-    // CloudinaryModule.forRoot(cloudinary,
-    //   {
-    //     cloud_name: 'ccloudd'
-    //   } as CloudinaryConfiguration),
-
     DashboardModule,
     LinqpadPagesModule,
     MigrationWorkBenchCommonModule,
@@ -58,7 +47,6 @@ import { SharedDataService } from './services/shared-data.service';
   ],
   declarations: [
     AppComponent,
-    // MatCard,
   ],
   providers: [
     { provide: Logger, useFactory: loggerFactory },

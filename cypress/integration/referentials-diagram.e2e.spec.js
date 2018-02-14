@@ -87,22 +87,23 @@ const getPathsForCircles = (paths, circles) => {
   })
 }
 
-const getCirclesForTexts = (nodeLabels, circles) => {
-  nodeLabels.forEach(nodeLabel => {
-    const cStart = circles.filter(c => c.center.x == path.vector.start.x && c.center.y == path.vector.start.y )
-    const cEnd = circles.filter(c => c.center.x == path.vector.end.x && c.center.y == path.vector.end.y )
-    path.nodes = { 
-      start: cStart.length ? cStart[0] : null,
-      end: cEnd.length ? cEnd[0] : null
-    } 
-  })
-}
+// const getCirclesForTexts = (nodeLabels, circles) => {
+//   console.log('nodeLabels', nodeLabels)
+//   nodeLabels.forEach(nodeLabel => {
+//     const cStart = circles.filter(c => c.center.x == nodeLabel.bounds.x && c.center.y == nodeLabel.vector.start.y )
+//     const cEnd = circles.filter(c => c.center.x == nodeLabel.vector.end.x && c.center.y == nodeLabel.vector.end.y )
+//     nodeLabel.nodes = { 
+//       start: cStart.length ? cStart[0] : null,
+//       end: cEnd.length ? cEnd[0] : null
+//     } 
+//   })
+// }
 
 before(function(){
   cy.viewport((3000/1.5), (2000/1.5))
   cy.visit('localhost:4200/referentials')
   cy.wait(5000)
-  cy.get('app-referentials-diagram').click()
+  cy.get('mwb-referentials-diagram').click()
   cy.wait(500)
 })
 
@@ -242,14 +243,19 @@ describe('Referentials diagram', () => {
         })
       })
 
-      it('texts should start and end at nodes', () => {
-        cy.get('@circles').then(circles => {
-          cy.get('@texts').then(texts => {
-            const nodeLabels = texts.filter(text => text.groupedWith === 'circle')
-            getCirclesForTexts(nodeLabels, circles)
-          })
-        })
+      /// TODO: test the position of nodeLabel texts relative to their circles 
+      /// - if leaf, should be right of node and vertically aligned
+      /// - if non-leaf should be left of node and vertically above
+      // it('texts should start and end at nodes', () => {
+      //   cy.get('@circles').then(circles => {
+      //     cy.get('@texts').then(texts => {
+      //       const nodeLabels = texts.filter(text => text.groupedWith === 'circle')
+      //       getCirclesForTexts(nodeLabels, circles)
+      //     })
+      //   })
+      // })
     })
+
   })
 
 })

@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import { MaterialModule } from '@angular/material';
 
 import { DataService } from '../../services/data-service/data.service';
 import { ClinicsComponent } from './clinics.component';
@@ -20,7 +19,6 @@ export function loggerFactory() {
 @NgModule({
   imports: [
     CommonModule,
-    // MaterialModule,
     ClinicsRoutingModule,
     RevieWPagesCommonModule,
     MigrationWorkBenchCommonModule

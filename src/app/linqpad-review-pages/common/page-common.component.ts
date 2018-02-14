@@ -7,7 +7,7 @@ import { IAppState } from '../../store/state/AppState';
 import { spreadSelector } from '../../store/selector-helpers/spread-selector';
 
 @Component({
-  selector: 'page-common',
+  selector: 'mwb-page-common',
   templateUrl: './page-common.component.html',
   styleUrls: ['./page-common.component.css']
 })

@@ -6,7 +6,7 @@ import { ValidationsDataService } from './services/validations-data.service';
 
 @Component({
   selector: 'mwb-validations',
-  template: `<page-common  [config]="config | async" [PAGE]="PAGE" [services]="services"></page-common>`,
+  template: `<mwb-page-common  [config]="config | async" [PAGE]="PAGE" [services]="services"></mwb-page-common>`,
 })
 export class ValidationsComponent {
 

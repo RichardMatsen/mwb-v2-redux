@@ -9,7 +9,7 @@ import { IFileInfo } from '../../../model/fileInfo.model';
 //      http://stackoverflow.com/questions/35232731/angular2-scroll-to-bottom-chat-style
 
 @Component({
-  selector: 'file-list',
+  selector: 'mwb-file-list',
   templateUrl: './file-list.html',
   styleUrls: ['../../../common/thin.scrollbar/thin.scrollbar.css', './file-list.css', ],
 })

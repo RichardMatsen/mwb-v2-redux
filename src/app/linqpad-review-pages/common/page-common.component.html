@@ -10,11 +10,11 @@
   </div>
   <div #filecontent class="filecontent row">
     <div class="filelistcontainer" [ngClass]="'col-md-' + config?.listWidth">
-      <file-list #filelist [title]="config?.listTitle" [visibleFiles]="visibleFiles$ | async"
+      <mwb-file-list #filelist [title]="config?.listTitle" [visibleFiles]="visibleFiles$ | async"
         [numToDisplay]="numVisible$ | async" [fileCount]="fileCount$ | async"
         (fileSelected)="handleFileChange($event)" 
         (numDisplayedChanged)="handleNumDisplayedChange($event)">
-      </file-list>
+      </mwb-file-list>
     </div>
     <div class="result" [ngClass]="'col-md-' + (12 - config?.listWidth)">
       <mat-card>

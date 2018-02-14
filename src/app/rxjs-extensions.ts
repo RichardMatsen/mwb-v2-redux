@@ -25,7 +25,6 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/takeWhile';
 import 'rxjs/add/operator/toArray';
 
-
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/from';

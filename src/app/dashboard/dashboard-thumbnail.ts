@@ -5,7 +5,7 @@ import { ErrorBadgeComponent } from '../common/mw.common.module';
 import { SparklineComponent } from '../graphs/sparkline/sparkline.component';
 
 @Component( {
-  selector: 'dashboard-thumbnail',
+  selector: 'mwb-dashboard-thumbnail',
   template: `
       <div class="well well-sm hoverwell thumbnail">
         <div class="metric row">
@@ -24,10 +24,12 @@ import { SparklineComponent } from '../graphs/sparkline/sparkline.component';
             <div class="narrative-text">{{measure.narrative}}</div>
           </div>
         </div>
-        <a class="narrative-button" *ngIf="measure.narrative" 
-          data-toggle="collapse" [attr.data-target]="'#narrtext_'+measure.id" 
+        <a class="narrative-button" *ngIf="measure.narrative"
+          data-toggle="collapse" [attr.data-target]="'#narrtext_'+measure.id"
           (click)="this.isExpanded = !this.isExpanded">
-          <i class="narrative-icon fa" [ngClass]="{ 'fa-chevron-down': !isExpanded, 'fa-chevron-up': isExpanded }" aria-hidden="true"></i>
+          <i class="narrative-icon fa"
+            [ngClass]="{ 'fa-chevron-down': !isExpanded, 'fa-chevron-up': isExpanded }"
+            aria-hidden="true"></i>
         </a>
       </div>
   `,

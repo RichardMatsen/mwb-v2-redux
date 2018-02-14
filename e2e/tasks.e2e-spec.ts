@@ -1,5 +1,4 @@
 /// <reference path="../node_modules/@types/jasmine-expect/index.d.ts"/>
-// import { toStartWith } from 'jasmine-expect';  
 
 import { TasksPage } from './tasks.po';
 import { AppPage } from './app.po';
@@ -16,11 +15,7 @@ const config = require('../src/data/migration-workbench.config');
 const startsWith = (actual, subString) => actual.slice(0, subString.length) === subString;
 
 let tasksPage, appPage, loginPage;
-// const getTasksPage = () => {
-//   tasksPage = new TasksPage();
-//   tasksPage.navigateTo();
-//   browser.driver.sleep(500);
-// };
+
 const getAppPage = () => {
   appPage = new AppPage();
   appPage.navigateTo();

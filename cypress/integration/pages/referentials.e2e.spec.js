@@ -50,8 +50,8 @@ describe('Referentials extra features', () => {
     })
   
     it('should have a referentials diagram button', () => {
-      cy.get('app-referentials-diagram').click()
-      cy.get('referentials-diagram-modal > .modal').should('be.visible')
+      cy.get('mwb-referentials-diagram').click()
+      cy.get('mwb-referentials-diagram-modal > .modal').should('be.visible')
     })
   })
 

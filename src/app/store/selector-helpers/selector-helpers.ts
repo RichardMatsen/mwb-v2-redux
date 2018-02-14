@@ -61,6 +61,7 @@ Observable.prototype.snapshot = snapshot;
 Observable.prototype.logSnapshot = logSnapshot;
 
 declare module 'rxjs/Observable' {
+  // tslint:disable-next-line:no-shadowed-variable
   interface Observable<T> {
     waitFor$: typeof waitFor$;
     waitForWithCondition$: typeof waitForWithCondition$;

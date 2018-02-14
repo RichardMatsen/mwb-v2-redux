@@ -23,7 +23,6 @@ export class ReferentialsGraphDrawLinksService {
     this.drawTransition(linkSelect, currentNode);
   }
 
-
   private drawPath(linkEnter, currentNode) {
     const paths = linkEnter.append('path')
       .attr('class', 'link')

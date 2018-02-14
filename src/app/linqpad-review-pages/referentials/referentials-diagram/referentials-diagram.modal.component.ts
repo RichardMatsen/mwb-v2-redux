@@ -4,11 +4,11 @@ import { ReferentialsGraphComponent } from '../../../graphs/referentials-graph/r
 import { SharedDataService } from '../../../services/shared-data.service';
 
 @Component({
-  selector: 'referentials-diagram-modal',
+  selector: 'mwb-referentials-diagram-modal',
   template: `
-    <div bsModal #modal="bs-modal" class="modal fade" 
-         tabindex="-1" role="dialog" 
-         aria-labelledby="myLargeModalLabel" aria-hidden="true" 
+    <div bsModal #modal="bs-modal" class="modal fade"
+         tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true"
          (onHidden)="hide()">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -19,7 +19,7 @@ import { SharedDataService } from '../../../services/shared-data.service';
             </button>
           </div>
           <div class="modal-body">
-            <referentials-graph #graph></referentials-graph>
+            <mwb-referentials-graph #graph></mwb-referentials-graph>
           </div>
         </div>
       </div>
@@ -36,9 +36,6 @@ export class ReferentialsDiagramModal {
     private sharedDataService: SharedDataService,
   ) {}
 
-  ngOnInit() {
-  }
-
   show() {
     this.graph.setup();
     this.modal.show();
@@ -46,6 +43,6 @@ export class ReferentialsDiagramModal {
 
   hide() {
     this.modal.hide();
-    this.sharedDataService.changePrompt('Referentials Diagram')
+    this.sharedDataService.changePrompt('Referentials Diagram');
   }
 }

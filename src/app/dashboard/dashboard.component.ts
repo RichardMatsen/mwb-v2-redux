@@ -19,7 +19,7 @@ import { MeasureService } from './measure.service';
     }
 })
 @Component({
-  selector: 'dashboard',
+  selector: 'mwb-dashboard',
   template: `
   <mat-card>
     <div class="dashboard container-fluid">
@@ -28,7 +28,7 @@ import { MeasureService } from './measure.service';
       <hr class="titles-rule"/>
       <div class="thumbnails row">
         <div *ngFor="let measure of measures$ | async" class="dashboard col-md-8 col-md-offset-2">
-          <dashboard-thumbnail [measure]="measure"></dashboard-thumbnail>
+          <mwb-dashboard-thumbnail [measure]="measure"></mwb-dashboard-thumbnail>
         </div>
       </div>
     </div>

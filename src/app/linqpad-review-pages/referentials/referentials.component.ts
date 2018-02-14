@@ -8,9 +8,9 @@ import { SharedDataService } from '../../services/shared-data.service';
 @Component({
   selector: 'mwb-referentials',
   template: `
-    <page-common  [config]="config | async" [PAGE]="PAGE" [services]="services">
-      <app-referentials-diagram banner-button #diagramModal></app-referentials-diagram>
-    </page-common>
+    <mwb-page-common  [config]="config | async" [PAGE]="PAGE" [services]="services">
+      <mwb-referentials-diagram banner-button #diagramModal></mwb-referentials-diagram>
+    </mwb-page-common>
   `,
   styleUrls: ['referentials.component.css'],
 })

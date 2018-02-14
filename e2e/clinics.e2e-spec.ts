@@ -1,5 +1,4 @@
 /// <reference path="../node_modules/@types/jasmine-expect/index.d.ts"/>
-// import { toStartWith } from 'jasmine-expect';  
 
 import { ClinicsPage } from './clinics.po';
 import { browser, element, by, ElementFinder, ExpectedConditions } from 'protractor';
