@@ -10,7 +10,7 @@ Details of individual result files are displayed on secondary pages. There are t
 - Referentials - check the referential integrity between records in the migration data
 - Clinics - check the degree of corelation between Outpatient records in the migration data and configured clinics  
 
-### ***Application Feature list***
+### **Application Feature list**
 
 #### Dashboard
 - compact summary information for each area of interest (measure)
