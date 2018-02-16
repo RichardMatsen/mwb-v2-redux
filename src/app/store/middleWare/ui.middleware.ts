@@ -17,18 +17,20 @@ export class UiMiddleware {
   ) {}
 
   uiMiddlewareFactory() {
-    return (store) => (next) => (action) => {
-      if (!!action.uiStartLoading) {
-        this.uiActions.incrementLoading(action.uiStartLoading);
-      }
-      if (!!action.uiEndLoading) {
-        this.uiActions.decrementLoading(action.uiEndLoading);
-      }
-      if (!!action.toastr) {
-        this.toastr.info(action.toastr);
-      }
-      return next(action);
+    const vm = this;
+    return function uiMiddleware(store) {
+      return (next) => (action) => {
+        if (!!action.uiStartLoading) {
+          vm.uiActions.incrementLoading(action.uiStartLoading);
+        }
+        if (!!action.uiEndLoading) {
+          vm.uiActions.decrementLoading(action.uiEndLoading);
+        }
+        if (!!action.toastr) {
+          vm.toastr.info(action.toastr);
+        }
+        return next(action);
+      };
     };
   }
-
 }

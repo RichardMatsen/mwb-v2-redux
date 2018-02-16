@@ -27,32 +27,35 @@ export class HttpMiddleware {
   ) {}
 
   public httpMiddlewareFactory() {
-    return (store) => (next) => (action) => {
+    const vm = this;
+    return function httpMiddleware(store) {
+      return (next) => (action) => {
 
-      if (!action.httpRequest) {
-        return next(action);
-      }
-
-      this.uiActions.incrementLoading(action.type);
-      this.http.get(action.httpRequest.url).subscribe(
-        (response) => {
-          const data = response.json();
-          const isValid = !action.httpRequest.validateResponse || action.httpRequest.validateResponse(data);
-          if (isValid) {
-            store.dispatch(action.httpRequest.successAction(data));
-          } else {
-            store.dispatch(action.httpRequest.failedAction(new Error(this.invalidDataMessage)));
-          }
-        },
-        (error) => {
-          this.uiActions.decrementLoading(action.type);
-          store.dispatch(action.httpRequest.failedAction(error));
-       },
-        (/*complete*/) => {
-          this.uiActions.decrementLoading(action.type);
+        if (!action.httpRequest) {
+          return next(action);
         }
-      );
+
+        vm.uiActions.incrementLoading(action.type);
+        vm.http.get(action.httpRequest.url).subscribe(
+          (response) => {
+            const data = response.json();
+            const isValid = !action.httpRequest.validateResponse || action.httpRequest.validateResponse(data);
+            if (isValid) {
+              store.dispatch(action.httpRequest.successAction(data));
+            } else {
+              store.dispatch(action.httpRequest.failedAction(new Error(vm.invalidDataMessage)));
+            }
+          },
+          (error) => {
+            vm.uiActions.decrementLoading(action.type);
+            store.dispatch(action.httpRequest.failedAction(error));
+        },
+          (/*complete*/) => {
+            vm.uiActions.decrementLoading(action.type);
+          }
+        );
+      };
     };
-  };
+  }
 
 }

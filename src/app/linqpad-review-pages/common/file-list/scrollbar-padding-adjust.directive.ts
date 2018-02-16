@@ -1,6 +1,7 @@
 import { Directive, AfterViewInit, AfterViewChecked, Host, ElementRef } from '@angular/core';
 
 @Directive({
+  // tslint:disable-next-line:directive-selector
   selector: '[scrollbarPaddingAdjust]',
 })
 export class ScrollbarPaddingAdjustDirective implements AfterViewInit, AfterViewChecked {

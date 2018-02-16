@@ -1,3 +1,9 @@
+div.well {
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;  
+  display: flex;
+}
 div.well-sm {
   margin-top: 5px;
   height: 100%;
@@ -30,15 +36,9 @@ a.measure {
 }
 
 a.narrative-button {
-  position:absolute;
-  bottom: 20px; 
-  right: 20px; 
+  justify-content: flex-end;
+  display: flex;
   cursor: pointer;
-}
-@media only screen and (max-width: 768px) {
-  a.narrative-button {
-    bottom: 0; 
-  }
 }
 
 a.narrative-button i {

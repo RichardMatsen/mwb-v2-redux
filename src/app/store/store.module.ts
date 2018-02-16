@@ -5,6 +5,7 @@ import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store'
 import { applyMiddleware, Store, combineReducers, compose, createStore } from 'redux';
 import { reduxLogger, createLogger } from 'redux-logger';
 
+import { environment } from '../../environments/environment';
 import { IAppState, appInitialState } from './state/AppState';
 import { rootReducer } from './reducers/root.reducer';
 import { ValidationsActions } from '../linqpad-review-pages/validations/services/validations.actions';
@@ -44,14 +45,15 @@ export class StoreModule {
       predicate: includeActions
     });
 
-    const middleware = [
-      freezeState,
-      this.httpMiddleware.httpMiddlewareFactory(),
-      this.uiMiddleware.uiMiddlewareFactory(),
-      // logger
-    ];
+    const middleware =
+      (environment.production ? [] : [freezeState])
+      .concat(
+        this.httpMiddleware.httpMiddlewareFactory(),
+        this.uiMiddleware.uiMiddlewareFactory(),
+        // logger
+      );
 
-    this.ngRedux.configureStore(
+      this.ngRedux.configureStore(
       rootReducer,
       appInitialState,
       [...middleware],

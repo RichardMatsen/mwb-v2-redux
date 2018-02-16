@@ -13,34 +13,41 @@
 Panels are implemented with bootstrap `class="well well-sm"` (responsive), with `{display: block}` (vertical stack)
 
 **Aligning elements vertically**  
-Elements of the thumbnail are vertically aligned with `{display: flex}` on the enclosing div and `{margin: auto}` on the element.  
-Enclosed elements can also adjust left and right margins (but not top and bottom).
+Content elements of the thumbnail are vertically aligned with `{display: flex}` on the enclosing div and `{margin: auto}` on the element.  
+Content elements can also adjust left and right margins (but not top and bottom).
 ```javascript
-  div.metric {
-    display: flex;
-    justify-content: space-between;
-  }
-  error-badge {
-    ...
-    margin: auto;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
+div.metric {
+  display: flex;
+  justify-content: space-between;
+}
+error-badge {
+  ...
+  margin: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
 ```
 
 **Shifting elements left and right**  
 Left-side and right-side elements are separated by a filler element:
 ```javascript
-  <div class="filler"></div>
+<div class="filler"></div>
 
-  div.filler {
-    flex-grow: 1;
-  }
+div.filler {
+  flex-grow: 1;
+}
 ```
 
 **Linking to detail pages**  
 Link is implemented with routerLink attribute:
   `<a class="measure" [routerLink]="['/'+ measure.link ]" >`.  
 Auth on Task metric is implemented with a route guard in AppRoutingModule:  
-`  { path: 'tasks', canActivate: [AuthguardService], component: TasksComponent, data: { toastrPrompt: 'Team Tasks'} }`  
+```javascript
+{ 
+  path: 'tasks', 
+  canActivate: [AuthguardService], 
+  component: TasksComponent, 
+  data: { toastrPrompt: 'Team Tasks'} 
+}
+```
 The data attribute allows a common Authguard component to recieve use-specific static data (e.g Toastr text).

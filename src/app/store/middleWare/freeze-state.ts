@@ -12,7 +12,7 @@ export function deepFreeze (o) {
   });
 
   return o;
-};
+}
 
 export function freezeState(store) {
   return (next) => (action) => {

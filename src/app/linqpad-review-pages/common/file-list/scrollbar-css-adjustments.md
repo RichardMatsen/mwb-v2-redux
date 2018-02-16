@@ -7,7 +7,7 @@ The file-list component is a standard list with some adjustments for better UX. 
 - jump to scrollbar bottom when list elements increase 
 - prevent list narrowing when vertical scrollbar appears
 
-## Styling for automatic scrolling to bottom of the list
+## **Styling for automatic scrolling to bottom of the list**
 
 This is acheived by setting the **scrollTop** attribute via an expression.
 
@@ -19,7 +19,7 @@ This is acheived by setting the **scrollTop** attribute via an expression.
 </ul>
 ```
 
-## Styling for thin scrollbar
+## **Styling for thin scrollbar**
 
 Use vendor-prefixes to change various aspects of the scrollbar. 
 
@@ -65,61 +65,57 @@ ul {
 
 ```
 
-## Auto scrollbar prevent list width change
+## **Auto scrollbar prevent list width change**
 
 The FileList component scrollbar is set to 'auto', so when the scrollbar appears the list is redrawn as it's area is made narrower. The UX is improved if we maintain constant list width, which could be achieved by adjusting **padding-right**.  
 
 This needs to be done in javascript, in order to detect the scrollbar during Angular's change detection cycle.
 
-### ScrollbarPaddingAdjust directive
+### **ScrollbarPaddingAdjust directive**  
+The code for this is wrapped in an attribute directive, which grabs a reference to it's host element and changes it's properties as appropriate.
 
-The code for this is wrapped in an attribute directive.
-
-**Host Referenece**
-
-The elements of the host component are accessed by injecting the host. Note the type is limited to the defined host type, in this case 'FileList'.
-The **@Host()** directive indicates that the DI should go as far up the injector tree as far as the host component. 
-
+**Host Referenece**  
+The elements of the host component are accessed by injecting the host.  
 ```javascript
 @Directive({ 
   selector: '[scrollbarPaddingAdjust]',
 })
 export class ScrollbarPaddingAdjust implements AfterViewInit, AfterViewChecked {
-
   constructor(private elementRef: ElementRef) {}
+  ...
+}
 ```
 
-**Host configuration**
-
-The configuration required for this to work is checked in ngAfterViewInit.
+**Host configuration**  
+The configuration required for this to work is checked in **ngAfterViewInit**.
 
 ```javascript
-  private hostConfigOk;
-  private wrapper;
-  private list;
+private hostConfigOk;
+private wrapper;
+private list;
 
-  ngAfterViewInit() {
-    this.getHostConfig();
-  }
+ngAfterViewInit() {
+  this.getHostConfig();
+}
 
-  getHostConfig() {
-    this.wrapper = this.elementRef.nativeElement;
-    this.list = this.wrapper.querySelector('ul');
-    if (!this.list) {
-      this.hostConfigOk = false;
-      return;
-    }
-    const overflowY = this.list.ownerDocument.defaultView
-      .getComputedStyle(this.list, undefined).overflowY;
-    this.hostConfigOk = (overflowY === 'auto' || overflowY === 'scroll') && this.wrapper && this.list;
+getHostConfig() {
+  this.wrapper = this.elementRef.nativeElement;
+  this.list = this.wrapper.querySelector('ul');
+  if (!this.list) {
+    this.hostConfigOk = false;
+    return;
   }
+  const overflowY = this.list.ownerDocument.defaultView
+    .getComputedStyle(this.list, undefined).overflowY;
+  this.hostConfigOk = (overflowY === 'auto' || overflowY === 'scroll') && this.wrapper && this.list;
+}
 ```
 
-**Changing padding-right**
-
+**Changing padding-right**  
 Padding-right is adjusted after each change detection.  
 
-Note, because of Angular's checks for feedback loops in change detection, we set the css using **nativeElement**. If we used an Angular mechanism for setting padding-right (e.g [ngStyle]"..."), we would get the exception _'ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked'_ 
+Note, because of Angular's checks for feedback loops in change detection, we set the css using **nativeElement**.  
+If we used an Angular mechanism for setting padding-right (e.g `[ngStyle]"..."`), we would get the exception ***ExpressionChangedAfterItHasBeenCheckedError*** 
 
 ```javascript
 ngAfterViewChecked() {
