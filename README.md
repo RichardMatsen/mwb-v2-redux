@@ -49,11 +49,11 @@ Testing consists of unit tests, e2e tests via karma/protractor and also a siute 
 ### **Detail pages**
 
 - [Component DashboardThumbnail](dashboard-thumbnail.md)
-- [Thumbnail Dropdown Panel](\src\app\dashboard\narrative-dropdown-panel.md)
-- [Scrollbar CSS Adjustments](\src\app\linqpad-review-pages\common\file-list\scrollbar-css-adjustments.md)
-- [SearchComponent Testing Notes](\src\app\linqpad-review-pages\common\search\search.component-tests.md)
-- [Redux Store](\src\app\store\redux_store.md)
-- [Reducer Testing](\src\app\store\reducers\reducer-testing.md)
+- [Thumbnail Dropdown Panel](narrative-dropdown-panel.md)
+- [Scrollbar CSS Adjustments](scrollbar-css-adjustments.md)
+- [SearchComponent Testing Notes](search.component-tests.md)
+- [Redux Store](redux_store.md)
+- [Reducer Testing](reducer-testing.md)
 
 <br/>
 

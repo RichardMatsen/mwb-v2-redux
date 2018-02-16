@@ -6,15 +6,6 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../state/AppState';
 import { UiActions } from '../../common/ui-actions/ui-actions';
 
-/*
-Problem running angular method outside the zone
-Solved with a factory method and fat-arrow syntax which captures 'this' context, allowing http to be visible in the middleware.
-
-error_handler.js:54 EXCEPTION: Uncaught (in promise): Error: Error in :0:0 caused by: Cannot read property 'httpRunner' of undefined
-Error: Error in :0:0 caused by: Cannot read property 'httpRunner' of undefined
-    at ViewWrappedError.ZoneAwareError (http://localhost:4200/vendor.bundle.js:122372:33)
-*/
-
 @Injectable()
 export class HttpMiddleware {
 
