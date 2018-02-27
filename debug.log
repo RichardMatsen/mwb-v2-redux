@@ -40,3 +40,7 @@
 [0207/102202.248:ERROR:process_reader_win.cc(242)] ReadMemory at 0x33b55ed000 of 77824 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [0207/102202.252:ERROR:crash_report_exception_handler.cc(116)] WriteEverything failed
 [0207/102202.267:ERROR:scoped_process_suspend.cc(39)] NtResumeProcess: An attempt was made to access an exiting process.  (0xc000010a)
+[0219/142105.164:ERROR:process_info.cc(632)] range at 0x9a1a3d8c00000000, size 0x1ab fully unreadable
+[0219/142105.165:ERROR:process_info.cc(632)] range at 0x9a1a3dee00000000, size 0x1ab fully unreadable
+[0219/142105.165:ERROR:process_info.cc(632)] range at 0x0, size 0x1ab fully unreadable
+[0219/142105.211:ERROR:process_info.cc(380)] UncheckedAllocate

@@ -5,6 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 
 import { IAppState } from '../state/AppState';
 import { UiActions } from '../../common/ui-actions/ui-actions';
+import { HttpRequest } from '../actions/action-types';
 
 @Injectable()
 export class HttpMiddleware {
@@ -22,25 +23,29 @@ export class HttpMiddleware {
     return function httpMiddleware(store) {
       return (next) => (action) => {
 
-        if (!action.httpRequest) {
+        const request: HttpRequest = action.httpRequest;
+        if (!request) {
           return next(action);
         }
 
         vm.uiActions.incrementLoading(action.type);
-        vm.http.get(action.httpRequest.url).subscribe(
+        vm.http.get(request.url).subscribe(
           (response) => {
             const data = response.json();
-            const isValid = !action.httpRequest.validateResponse || action.httpRequest.validateResponse(data);
+            const isValid = !request.validateResponse || request.validateResponse(data);
             if (isValid) {
-              store.dispatch(action.httpRequest.successAction(data));
+              store.dispatch(request.successAction(data));
             } else {
-              store.dispatch(action.httpRequest.failedAction(new Error(vm.invalidDataMessage)));
+              store.dispatch(request.failedAction(new Error(vm.invalidDataMessage)));
             }
           },
           (error) => {
             vm.uiActions.decrementLoading(action.type);
-            store.dispatch(action.httpRequest.failedAction(error));
-        },
+            store.dispatch(request.failedAction(error));
+            if (error.status === 404 && request.four0FourMessage) {
+              vm.uiActions.setFour0FourMessage(`Action type: ${action.type}`, request.four0FourMessage, request.url);
+            }
+          },
           (/*complete*/) => {
             vm.uiActions.decrementLoading(action.type);
           }

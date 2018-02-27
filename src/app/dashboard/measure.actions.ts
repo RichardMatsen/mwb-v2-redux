@@ -13,7 +13,7 @@ export class MeasureActions {
   static INITIALIZE_MEASURES_FAILED = 'INITIALIZE_MEASURES_FAILED';
   static UPDATE_MEASURE = 'UPDATE_MEASURE';
 
-  public errorMeasure = (error) => { return { id: 'err', title: `Error loading measures: ${error}`, icon: 'fa-exclamation-triangle' }; };
+  public errorMeasure = (error) => ({ id: 'err', title: `Error loading measures: ${error}`, icon: 'fa-exclamation-triangle' });
 
   constructor(
     private ngRedux: NgRedux<IAppState>,

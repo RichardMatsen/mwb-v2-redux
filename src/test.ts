@@ -62,11 +62,11 @@ getTestBed().initTestEnvironment(
 // let context = require.context('./', true, /http.middleware.spec.ts/);
 // let context = require.context('./', true, /ui.middleware.spec.ts/);
 // let context = require.context('./', true, /selector-helpers\.spec\.ts/);
-// let context = require.context('./', true, /selector-helpers.observable\.spec\.ts/);
+let context = require.context('./', true, /selector-helpers.observable\.spec\.ts/);
 
 /* Components */
 // let context = require.context('./', true, /app.component\.spec\.ts/);
-let context = require.context('./', true, /dashboard.component\.spec\.ts/);
+// let context = require.context('./', true, /dashboard.component\.spec\.ts/);
 // let context = require.context('./', true, /search.component\.spec\.ts/);
 
 /* Common */

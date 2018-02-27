@@ -16,7 +16,7 @@ export function waitforFirstNotNull<T>(selector$: Observable<T>, fnOnData, fnOnE
 export function ifNull<T>(selector$: Observable<T>, fnWhenNoData, fnOnError = null) {
   selector$
     .take(1)
-    .filter(data => !data)
+    .filter(data => data === null || data === undefined)
     .subscribe(
       (falsyData) => { fnWhenNoData(falsyData); },
       (error) => { console.error(error); if (fnOnError) { fnOnError(error); } }
@@ -24,7 +24,9 @@ export function ifNull<T>(selector$: Observable<T>, fnWhenNoData, fnOnError = nu
 }
 
 export const waitFor$ = function() {
-  return this.filter(data => !!data ).take(1);
+  return this
+    .filter(data => !!data )
+    .take(1);
 };
 
 export const waitForWithCondition$ = function(predicate = null) {
@@ -32,7 +34,8 @@ export const waitForWithCondition$ = function(predicate = null) {
 };
 
 export const ifNull$ = function() {
-  return this.take(1).filter(data => !data);
+  return this.take(1)
+    .filter(data => data === null || data === undefined);
 };
 
 export const snapshot = function(transform = null): any[] | any | undefined {

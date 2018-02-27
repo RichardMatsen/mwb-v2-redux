@@ -1,7 +1,7 @@
 import { Injectable,  } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/state/AppState';
-import { UiActionType } from '../../store/state/action-types';
+import { UiActionType } from '../../store/actions/action-types';
 
 @Injectable()
 export class UiActions {
@@ -49,7 +49,7 @@ export class UiActions {
       }
     };
   }
-  setFour0FourMessage(caller, message, url, methodArgs) {
+  setFour0FourMessage(caller, message, url, methodArgs = null) {
     this.ngRedux.dispatch(this.createSetFour0FourMessage(caller, message, url, methodArgs));
   }
 

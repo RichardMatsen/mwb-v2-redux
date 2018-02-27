@@ -277,20 +277,46 @@ describe('snapshot (resolves an observable)', () => {
 
 });
 
-describe('ifNull$ (tests an observable for falsy value)', () => {
+describe('ifNull$ (tests an observable for falsey value)', () => {
 
   beforeEach(() => {
     flagData = false;
   });
 
-  it('should not call chained observable function if source contains data', () => {
-    const source = Observable.from(['one', 'two', 'three']);
-    source.ifNull$()
-      .subscribe(data => {
-        flagData = true;
+  const dataCasesThatShouldNotTrigger = [
+    '',
+    'one',
+    1,
+    0,
+    true,
+    false
+  ];
+
+  describe('should NOT call chained function', () => {
+
+    dataCasesThatShouldNotTrigger.forEach(data => {
+      it(`if source contains data: '${data}'`, () => {
+        const source = Observable.of(data);
+        source.ifNull$()
+          .subscribe(d => {
+            flagData = true;
+        });
+        expect(flagData).toBeFalsy();
+      });
     });
-    expect(flagData).toBeFalsy();
+
+
+    // it('if source contains non-null falsey data', () => {
+    //   const source = Observable.of(false);
+    //   source.ifNull$()
+    //     .subscribe(data => {
+    //       flagData = true;
+    //   });
+    //   expect(flagData).toBeFalsy();
+    // });
+
   });
+
 
   it('should call chained observable function if source does not contain data', () => {
     const source = Observable.of(null);

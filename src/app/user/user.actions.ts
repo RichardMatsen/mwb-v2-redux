@@ -5,7 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../store/state/AppState';
 import { IUser } from '../model/user.model';
 import { ifNull } from '../store/selector-helpers/selector-helpers';
-import { UserActionType } from '../store/state/action-types';
+import { UserActionType } from '../store/actions/action-types';
 
 @Injectable()
 export class UserActions {

@@ -5,7 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../../store/state/AppState';
 import { IFileInfo } from '../../model/fileInfo.model';
 import { formatAMPM } from '../../common/mw.common.module';
-import { PageActionType } from '../../store/state/action-types';
+import { PageActionType } from '../../store/actions/action-types';
 
 @Injectable()
 export abstract class PageActions {

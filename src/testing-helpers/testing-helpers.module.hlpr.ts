@@ -8,6 +8,7 @@ import { subscribeAndExpectAllValues,
          subscribeAndExpectValue,
          subscribeAndExpectNoDataEmitted } from './subscribeAndExpect/subscribeAndExpect.hlpr';
 import { mockFactory } from './mock-factory/mock-factory.hlpr';
+import { MockError, MockResponse } from './http.test.helpers/http.test.hlpr';
 
 @NgModule({
   imports: [ ],
@@ -25,7 +26,8 @@ import { mockFactory } from './mock-factory/mock-factory.hlpr';
 export class TestingHelpersModule {}
 export { DummyAppComponent };
 export { DummyTargetComponent };
-export { setupMockStore, addtoMockStore }
-export { setupMockFileService, setupMockFormatService, setupMockPageActions }
-export { subscribeAndExpectAllValues, subscribeAndExpectValue, subscribeAndExpectNoDataEmitted }
-export { mockFactory }
+export { setupMockStore, addtoMockStore };
+export { setupMockFileService, setupMockFormatService, setupMockPageActions };
+export { subscribeAndExpectAllValues, subscribeAndExpectValue, subscribeAndExpectNoDataEmitted };
+export { mockFactory };
+export { MockError, MockResponse };

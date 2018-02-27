@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { IFileInfo } from '../../model/fileinfo.model';
 import { pageReducer } from './page.reducer';
 import { PageActions } from '../../linqpad-review-pages/common/page.actions';
-import { PageActionType } from '../state/action-types';
+import { PageActionType } from '../actions/action-types';
 import { pagesInitialState } from '../state/page.state';
 import { runReducerTests } from './generic.reducer.testing.hlpr';
 

@@ -3,17 +3,39 @@ import { freezeState, deepFreeze } from './freeze-state';
 
 describe('freezeState', () => {
 
-  const state = { x: 1 };
+  const state = { x: 1, y: [{ a: 1, b: 2 }, { a: 3, b: 4 }] };
   const mockStore = jasmine.createSpyObj('mockStore', ['dispatch', 'getState']);
   mockStore.getState.and.returnValue(state);
   const mockNext = jasmine.createSpy('next');
 
   const action = { type: 'NOP' };
 
-  it('should freeze state', () => {
+  it('should freeze state properties', () => {
     freezeState(mockStore)(mockNext)(action);
-    // tslint:disable-next-line:quotemark
-    expect(() => { state.x = 2; }).toThrow( new TypeError("Cannot assign to read only property 'x' of object '[object Object]'"));
+    expect(() => { state.x = 2; })
+      // tslint:disable-next-line:quotemark
+      .toThrow( new TypeError("Cannot assign to read only property 'x' of object '[object Object]'"));
+  });
+
+  it('should freeze nested state properties', () => {
+    freezeState(mockStore)(mockNext)(action);
+    expect(() => { state.y[1].b = 3; })
+      // tslint:disable-next-line:quotemark
+      .toThrow( new TypeError("Cannot assign to read only property 'b' of object '[object Object]'"));
+  });
+
+  it('should freeze nested state arrays', () => {
+    freezeState(mockStore)(mockNext)(action);
+    expect(() => { state.y = []; })
+      // tslint:disable-next-line:quotemark
+      .toThrow( new TypeError("Cannot assign to read only property 'y' of object '[object Object]'"));
+  });
+
+  it('should freeze nested state array elements', () => {
+    freezeState(mockStore)(mockNext)(action);
+    expect(() => { state.y.push({a: 5, b: 6}); })
+      // tslint:disable-next-line:quotemark
+      .toThrow( new TypeError("Cannot add property 2, object is not extensible"));
   });
 
   it('should call next', () => {

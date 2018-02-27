@@ -20,13 +20,13 @@ export class UiMiddleware {
     const vm = this;
     return function uiMiddleware(store) {
       return (next) => (action) => {
-        if (!!action.uiStartLoading) {
+        if (action.uiStartLoading) {
           vm.uiActions.incrementLoading(action.uiStartLoading);
         }
-        if (!!action.uiEndLoading) {
+        if (action.uiEndLoading) {
           vm.uiActions.decrementLoading(action.uiEndLoading);
         }
-        if (!!action.toastr) {
+        if (action.toastr) {
           vm.toastr.info(action.toastr);
         }
         return next(action);

@@ -1,7 +1,4 @@
 
-// import * as dnd from 'html-dnd'
-// console.log('dnd', dnd)
-
 describe('Navigating to Tasks Page', () => {
 
   describe('navigating to, when user is not logged in', () => {

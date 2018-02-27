@@ -1,11 +1,11 @@
 // tslint:disable:interface-over-type-literal
 
 import { Action } from 'redux';
-import { IAppState } from './AppState';
-import { PageState } from './page.state';
-import { UserState } from './user.state';
-import { UiState } from './ui.state';
-import { SearchState } from './search.state';
+import { IAppState } from '../state/AppState';
+import { PageState } from '../state/page.state';
+import { UserState } from '../state/user.state';
+import { UiState } from '../state/ui.state';
+import { SearchState } from '../state/search.state';
 
 export type PageActionType = {
   type: string,
@@ -37,6 +37,11 @@ export type SearchActionType = {
   payload?: SearchState,      // Constrain the payload properties to match those on state
 };
 
+export type ConfigActionType = {
+  type: string,
+  payload: any,      // Constrain the payload properties to match those on state
+};
+
 /*
   Map state handed to reducer into a sub-component, e.g
   for generic page components, the Page reducer needs to act on a single page
@@ -51,12 +56,21 @@ export type ActionWithSubState = {
 export type HttpRequest = {
   url: string,
   successAction: Function,
+  validateResponse?: Function,
   failedAction: Function,
-  // template?: string
-  validateResponse?: Function
+  four0FourMessage?: string
 };
 
 export type ActionWithHttpRequest = {
   type: string,
   request?: HttpRequest,
 };
+
+// export type Ui = {
+//   url: string,
+//   successAction: Function,
+//   failedAction: Function,
+//   // template?: string
+//   validateResponse?: Function
+// };
+

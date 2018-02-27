@@ -10,7 +10,7 @@ import { Http, Response, ResponseOptions } from '@angular/http';
   <div class="container-fluid">
     <mwb-nav-bar></mwb-nav-bar>
     <router-outlet  id="bgimage"></router-outlet>
-    <spinner></spinner>
+    <mwb-spinner></mwb-spinner>
   </div>
   `,
   providers: [

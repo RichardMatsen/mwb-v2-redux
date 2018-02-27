@@ -4,7 +4,7 @@ import { NgRedux, select } from '@angular-redux/store';
 // Place me last on the page to overlay page content.
 
 @Component({
-  selector: 'spinner',
+  selector: 'mwb-spinner',
   template: `
     <div class="loading-overlay" *ngIf="(activeRequests$ | async) > 0">
       <i class="center-fix main-spinner fa fa-spin fa-spinner"></i>

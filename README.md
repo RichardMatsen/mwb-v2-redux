@@ -13,7 +13,7 @@ There are three types of results, setails displayed on secondary pages, each han
 
 <br/>
 
-## **Application Feature list**
+## **Feature list**
 
 #### Dashboard
 - compact summary information for each area of interest (measure)
