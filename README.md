@@ -51,9 +51,11 @@ Testing consists of unit tests, e2e tests via karma/protractor and also a siute 
 - [Component DashboardThumbnail](dashboard-thumbnail.md)
 - [Thumbnail Dropdown Panel](narrative-dropdown-panel.md)
 - [Scrollbar CSS Adjustments](scrollbar-css-adjustments.md)
+- [Redux Store](redux store.md)
+- [Redux Middleware](redux middleware.md)
+- [Redux Selector Helpers](redux selector helpers.md)
+- [Redux Reducer Testing](reducer-testing.md)
 - [SearchComponent Testing Notes](search.component-tests.md)
-- [Redux Store](redux_store.md)
-- [Reducer Testing](reducer-testing.md)
 
 <br/>
 
