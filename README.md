@@ -54,7 +54,7 @@ Testing consists of unit tests, e2e tests via karma/protractor and also a siute 
 - [Redux Store](redux store.md)
 - [Redux Middleware](redux middleware.md)
 - [Redux Selector Helpers](redux selector helpers.md)
-- [Redux Reducer Testing](reducer-testing.md)
+- [Redux Reducer Testing](redux reducer testing.md)
 - [SearchComponent Testing Notes](search.component-tests.md)
 
 <br/>
