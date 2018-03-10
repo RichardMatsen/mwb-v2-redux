@@ -4,7 +4,7 @@ import { measureReducer } from './measure.reducer';
 import { MeasureActions } from '../../dashboard/measure.actions';
 import { MeasureState, measureInitialState } from '../state/measure.state';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
-import { runReducerTests } from './generic.reducer.testing.hlpr';
+import { runAllReducerTests } from './generic.reducer.testing.hlpr';
 
 describe('measureReducer', () => {
 

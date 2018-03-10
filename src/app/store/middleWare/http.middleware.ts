@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux, select } from '@angular-redux/store';
 
 import { IAppState } from '../state/AppState';
-import { UiActions } from '../../common/ui-actions/ui-actions';
-import { HttpRequest } from '../actions/action-types';
+import { UiActions } from '../../common/ui-actions/ui.actions';
+import { HttpRequest } from '../actions/userActionType';
 
 @Injectable()
 export class HttpMiddleware {

@@ -5,7 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IAppState } from '../../store/state/AppState';
 import { IFileInfo } from '../../model/fileInfo.model';
 import { formatAMPM } from '../../common/mw.common.module';
-import { PageActionType } from '../../store/actions/action-types';
+import { PageActionType } from '../../store/actions/pageActionType';
 
 @Injectable()
 export abstract class PageActions {
@@ -164,7 +164,7 @@ export abstract class PageActions {
   }
 
   protected calcVisibleFiles(numToDisplay): IFileInfo[] {
-    const state = this.ngRedux.getState()
+    const state = this.ngRedux.getState();
     return state
       .pages[this.PAGE].files
         .slice(0, numToDisplay);

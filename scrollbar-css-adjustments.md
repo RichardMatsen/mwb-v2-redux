@@ -1,7 +1,7 @@
 
 # Scrollbar CSS Adjustments
 
-The file-list component is a standard list with some adjustments for better UX. One area of improvement is the scroll bar, which needs the following features:
+The file-list component is a wrapper for a listbox which encapsulates changes to the scroll bar, as follows:
 - thinner scroll thumb, since horizontal space is at a premium
 - no up/down arrows at top and bottom
 - jump to scrollbar bottom when list elements increase 
@@ -21,7 +21,7 @@ This is acheived by setting the **scrollTop** attribute via an expression.
 
 ## **Styling for thin scrollbar**
 
-Use vendor-prefixes to change various aspects of the scrollbar. 
+Use vendor-prefixes to change various attributes of the scrollbar. 
 
 ```css
 ::-webkit-scrollbar
@@ -67,9 +67,9 @@ ul {
 
 ## **Auto scrollbar prevent list width change**
 
-The FileList component scrollbar is set to 'auto', so when the scrollbar appears the list is redrawn as it's area is made narrower. The UX is improved if we maintain constant list width, which could be achieved by adjusting **padding-right**.  
+`overflow-y` is set to `auto`, so when the scrollbar appears the list redraws, as it's area is made narrower. To avoid the 'blink' on redraw, we maintain a constant list width by adjusting **padding-right** on the list.  
 
-This needs to be done in javascript, in order to detect the scrollbar during Angular's change detection cycle.
+This needs to be done in javascript in order to detect the scrollbar appearance during Angular's change detection cycle.
 
 ### **ScrollbarPaddingAdjust directive**  
 The code for this is wrapped in an attribute directive, which grabs a reference to it's host element and changes it's properties as appropriate.

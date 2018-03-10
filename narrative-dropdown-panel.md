@@ -11,26 +11,29 @@
 Use bootsrap collapse as it is the simplest implementaion of show/hide with animation.  
 The narative text div:
 ```javascript
-<div [id]="'narrtext_'+measure.id" class="collapse">
+    <div [id]="'narrtext_'+measure.id" class="collapse">
 ```
 The toggle button:
 ```javascript
-<a class="narrative-button" data-toggle="collapse" [attr.data-target]="'#narrtext_'+measure.id">
+    <a class="narrative-button" data-toggle="collapse" [attr.data-target]="'#narrtext_'+measure.id">
 ```
-Note the use of 'attr.' prefix on data-target to prevent error _"Can't bind to 'data-target' since it isn't a known property of 'a'."_  
-Note the data-target id has suffix of measure.id to give each thumbnail a unique reference.
+Note 
+- the use of 'attr.' prefix on data-target to prevent error _"Can't bind to 'data-target' since it isn't a known property of 'a'."_  
+- the data-target id has suffix of measure.id to give each thumbnail a unique reference.
 
 ### **Changing button icon**  
 
-Can't use ngIf on the icons because the structural change stops collapse from working.
+Can't use ngIf on the icons because the structural change stops collapse from working.  
+
+___Does not work___
 ```javascript
-<i class="fa fa-chevron-down" *ngIf="!isExpanded" aria-hidden="true"></i>
-<i class="fa fa-chevron-up" *ngIf="isExpanded" aria-hidden="true"></i>
+    <i class="fa fa-chevron-down" *ngIf="!isExpanded" aria-hidden="true"></i>
+    <i class="fa fa-chevron-up" *ngIf="isExpanded" aria-hidden="true"></i>
 ```
 
-Use ngClass instead: 
+___Use ngClass instead:___ 
 ```javascript
-[ngClass]="{ 'fa-chevron-down': !isExpanded, 'fa-chevron-up': isExpanded }"
+    [ngClass]="{ 'fa-chevron-down': !isExpanded, 'fa-chevron-up': isExpanded }"
 ```
 
 ### **Click event**  

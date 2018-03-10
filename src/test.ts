@@ -25,7 +25,7 @@ getTestBed().initTestEnvironment(
   platformBrowserDynamicTesting()
 );
 // Then we find all the tests.
-// const context = require.context('./', true, /\.spec\.ts$/);
+const context = require.context('./', true, /\.spec\.ts$/);
 
 /* Services */
 // let context = require.context('./', true, /data.service.base\.spec\.ts/);
@@ -48,9 +48,9 @@ getTestBed().initTestEnvironment(
 // let context = require.context('./', true, /page.actions\.spec\.ts/);
 // let context = require.context('./', true, /user.actions\.spec\.ts/);
 
+// let context = require.context('./', true, /root.reducer\.spec\.ts/);
 // let context = require.context('./', true, /page.reducer\.spec\.ts/);
 // let context = require.context('./', true, /page.reducer.verbose\.spec\.ts/);
-// let context = require.context('./', true, /root.reducer\.spec\.ts/);
 // let context = require.context('./', true, /search.reducer.spec.ts/);
 // let context = require.context('./', true, /config.reducer.spec.ts/);
 // let context = require.context('./', true, /user.reducer.spec.ts/);
@@ -62,7 +62,7 @@ getTestBed().initTestEnvironment(
 // let context = require.context('./', true, /http.middleware.spec.ts/);
 // let context = require.context('./', true, /ui.middleware.spec.ts/);
 // let context = require.context('./', true, /selector-helpers\.spec\.ts/);
-let context = require.context('./', true, /selector-helpers.observable\.spec\.ts/);
+// let context = require.context('./', true, /selector-helpers.observable\.spec\.ts/);
 
 /* Components */
 // let context = require.context('./', true, /app.component\.spec\.ts/);

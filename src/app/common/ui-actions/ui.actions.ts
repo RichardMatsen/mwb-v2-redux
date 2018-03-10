@@ -1,7 +1,7 @@
 import { Injectable,  } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
 import { IAppState } from '../../store/state/AppState';
-import { UiActionType } from '../../store/actions/action-types';
+import { UiActionType } from '../../store/actions/uiActionType';
 
 @Injectable()
 export class UiActions {
@@ -17,7 +17,7 @@ export class UiActions {
   createIncrementLoading(trigger: string): UiActionType {
     return {
       type: UiActions.INCREMENT_LOADING,
-      trigger: trigger,
+      triggeringAction: trigger,
       excludeFromLog: true,
     };
   }
@@ -28,7 +28,7 @@ export class UiActions {
   createDecrementLoading(trigger: string): UiActionType {
     return {
       type: UiActions.DECREMENT_LOADING,
-      trigger: trigger,
+      triggeringAction: trigger,
       excludeFromLog: true,
     };
   }

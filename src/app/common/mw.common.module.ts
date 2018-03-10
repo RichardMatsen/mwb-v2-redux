@@ -10,10 +10,10 @@ import { Logger } from './logger/logger';
 import {  } from './masked-trim/masked-trim';
 import { formatAMPM } from './format-AMPM/format-AMPM';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { UiActions } from './ui-actions/ui-actions';
+import { UiActions } from './ui-actions/ui.actions';
 import { ObjectShapeComparer } from './object-shape-comparer/object-shape-comparer';
 
-declare var require
+declare var require;
 const maskedTrim = require('./masked-trim/masked-trim');
 
 export function loggerFactory() {

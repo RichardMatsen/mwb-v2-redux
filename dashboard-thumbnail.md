@@ -8,6 +8,7 @@
 - Right side elements: badge with color and value
 - Click icon and title to go to detail page
 - Optional auth required on link
+<br/>
 
 **Basic layout**  
 Panels are implemented with bootstrap `class="well well-sm"` (responsive), with `{display: block}` (vertical stack)

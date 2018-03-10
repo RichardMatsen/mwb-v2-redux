@@ -1,5 +1,5 @@
 
-SearchComponent Testing Notes
+# SearchComponent Testing Notes
 
 1) Uses Location.path to determine which page is active, and decide if it's searchable.
 (not strictly necessary after move of the search control from the nav-bar to the common page component)

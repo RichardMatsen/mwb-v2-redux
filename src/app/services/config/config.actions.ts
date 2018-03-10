@@ -17,8 +17,8 @@ export class ConfigActions {
                     ConfigActions.INITIALIZE_CONFIG_SUCCESS,
                     ConfigActions.INITIALIZE_CONFIG_FAILED];
 
-  private configTemplate;
-  private pageConfigTemplate;
+  configTemplate;
+  pageConfigTemplate;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,

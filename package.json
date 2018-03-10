@@ -16,7 +16,8 @@
     "postpostbuild-prod": "echo done building",
     "postbuild-prod": "copyfiles ./dist/**/* c:/dist",
     "bundle-report": "webpack-bundle-analyzer dist/stats.json",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "build-stats": "ng build --prod --stats-json --sourcemaps"
   },
   "private": true,
   "dependencies": {
@@ -96,6 +97,7 @@
     "sass-loader": "^6.0.6",
     "saucelabs": "^1.4.0",
     "script-loader": "^0.7.2",
+    "source-map-explorer": "^1.5.0",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.20.1",
     "stylus-loader": "^3.0.1",

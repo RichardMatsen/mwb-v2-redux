@@ -1,4 +1,4 @@
-import { UiActions } from './ui-actions';
+import { UiActions } from './ui.actions';
 
 describe('UiActions', () => {
 

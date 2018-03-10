@@ -5,7 +5,7 @@ import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions, Respon
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
-import { UiActions } from '../../common/ui-actions/ui-actions';
+import { UiActions } from '../../common/ui-actions/ui.actions';
 import { ConfigActions } from '../../services/config/config.actions';
 import { HttpMiddleware } from '../middleware/http.middleware';
 import { DummyAppComponent, DummyTargetComponent, setupMockStore,

@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { uiReducer } from './ui.reducer';
-import { UiActions } from '../../common/ui-actions/ui-actions';
+import { UiActions } from '../../common/ui-actions/ui.actions';
 import { IAppState, appInitialState } from '../state/AppState';
 
 describe('UiReducer', () => {

@@ -17,13 +17,13 @@ describe('pageReducer', () => {
   mockNgReduxDispatcher.getState.and.returnValue({
     pages: {
       validations: {
-        files: files, 
-        fileInfo: null, 
-        numVisible: 0, 
+        files: files,
+        fileInfo: null,
+        numVisible: 0,
         visibleFiles: []
       }
     }
-  })
+  });
   const pageActions = new TestPageActions(mockNgReduxDispatcher);
 
   let testState;
@@ -44,8 +44,9 @@ describe('pageReducer', () => {
     });
   });
 
-  function checkFileSuccessMethod(actionForTest) {
+  describe('PageActions.INITIALIZE_FILES_SUCCESS', () => {
 
+    const actionForTest = pageActions.createInitializeListSuccess(files, 1);
     let action;
     beforeEach( () => {
       action = Object.assign({}, actionForTest);
@@ -62,12 +63,6 @@ describe('pageReducer', () => {
       expect(testState.pages.validations.fileInfo).toEqual(files[0]);
     });
 
-    // it('should not set fileInfo if not null', () => {
-    //   testState.pages.validations.fileInfo = 'not null';
-    //   testState.pages = pageReducer(testState.pages, action);
-    //   expect(testState.pages.validations.fileInfo).toEqual('not null');
-    // });
-
     it('should set numVisible', () => {
       testState.pages = pageReducer(testState.pages, action);
       expect(testState.pages.validations.numVisible).toEqual(1);
@@ -83,11 +78,6 @@ describe('pageReducer', () => {
       testState.pages = pageReducer(testState.pages, action);
       expect(testState.pages.validations.lastRefresh).toBeTruthy();
     });
-  }
-
-  describe('PageActions.INITIALIZE_FILES_SUCCESS', () => {
-    const action = pageActions.createInitializeListSuccess(files, 1);
-    checkFileSuccessMethod(action);
   });
 
   describe('PageActions.INITIALIZE_FILES_FAIL', () => {
@@ -108,9 +98,32 @@ describe('pageReducer', () => {
   });
 
   describe('PageActions.UPDATE_FILES_SUCCESS', () => {
-    it('should set the payload', () => {
-      const action = pageActions.createUpdateListSuccess(files, 1);
-      checkFileSuccessMethod(action);
+
+    const actionForTest = pageActions.createUpdateListSuccess(files, 1);
+    let action;
+    beforeEach( () => {
+      action = Object.assign({}, actionForTest);
+    });
+
+    it('should set files list', () => {
+      testState.pages = pageReducer(testState.pages, action);
+      expect(testState.pages.validations.files).toEqual(files);
+    });
+
+    it('should set numVisible', () => {
+      testState.pages = pageReducer(testState.pages, action);
+      expect(testState.pages.validations.numVisible).toEqual(1);
+    });
+
+    it('should set visibleFiles', () => {
+      testState.pages = pageReducer(testState.pages, action);
+      expect(testState.pages.validations.visibleFiles).toEqual([files[0]]);
+    });
+
+    it('should set lastRefresh', () => {
+      expect(testState.pages.validations.lastRefresh).toBeFalsy();
+      testState.pages = pageReducer(testState.pages, action);
+      expect(testState.pages.validations.lastRefresh).toBeTruthy();
     });
   });
 
@@ -135,7 +148,7 @@ describe('pageReducer', () => {
       const action = pageActions.createSetNumToDisplay(1);
       testState.pages.validations.files = files;
       testState.pages = pageReducer(testState.pages, action);
-      expect(testState.pages.validations.visibleFiles).toEqual(files.slice(0,1));
+      expect(testState.pages.validations.visibleFiles).toEqual(files.slice(0, 1));
     });
 
   });
@@ -158,13 +171,13 @@ describe('pageReducer', () => {
   }
 
   describe('PageActions.CHANGE_FILE', () => {
-    const action = pageActions.createChangeFile(files[1])
+    const action = pageActions.createChangeFile(files[1]);
     test_SetCurrentFile(action);
   });
 
   describe('PageActions.RELOAD_FILE', () => {
-    const clone = Object.assign({}, files[0])
-    const action = pageActions.createRefresh(clone); 
+    const clone = Object.assign({}, files[0]);
+    const action = pageActions.createRefresh(clone);
     test_SetCurrentFile(action);
   });
 

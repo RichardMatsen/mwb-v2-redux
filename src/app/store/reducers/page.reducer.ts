@@ -4,6 +4,7 @@ import { PageState, PageStateRoot, pagesInitialState } from '../state/page.state
 import { PageActions } from '../../linqpad-review-pages/common/page.actions';
 
 const factory = new GenericReducerFactory();
+
 export const pageReducer: Reducer<PageStateRoot>  = factory.createReducer({
   initialState: pagesInitialState,
   handledActions: PageActions.ACTIONS,

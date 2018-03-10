@@ -2,7 +2,7 @@ import '../../rxjs-extensions';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
-import { UiActions } from '../../common/ui-actions/ui-actions';
+import { UiActions } from '../../common/ui-actions/ui.actions';
 import { UiMiddleware } from '../middleware/ui.middleware';
 import { ToastrService } from '../../common/mw.common.module';
 

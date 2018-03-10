@@ -7,7 +7,7 @@ import { NgRedux, select } from '@angular-redux/store';
 
 import { IAppState } from '../../store/state/AppState';
 import { Logger } from '../../common/mw.common.module';
-import { UiActions } from '../../common/ui-actions/ui-actions';
+import { UiActions } from '../../common/ui-actions/ui.actions';
 
 @Injectable()
 export class FileService {

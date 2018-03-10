@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Action } from 'redux';
 import { NgRedux, select, } from '@angular-redux/store';
 import { IAppState } from '../../../store/state/AppState';
-import { SearchActionType } from '../../../store/actions/action-types';
+import { SearchActionType } from '../../../store/actions/searchActionType';
 import { searchInitialState } from '../../../store/state/search.state';
 
 @Injectable()

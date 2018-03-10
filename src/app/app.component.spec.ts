@@ -87,7 +87,7 @@ describe('AppComponent', () => {
       const fixture = TestBed.createComponent(AppComponent);
       fixture.detectChanges();
       const compiled = fixture.debugElement.nativeElement;
-      expect(compiled.querySelector('nav-bar')).toBeTruthy();
+      expect(compiled.querySelector('mwb-nav-bar')).toBeTruthy();
       expect(compiled.querySelector('.navbar-brand').textContent).toContain('Migration Workbench');
     }));
   });

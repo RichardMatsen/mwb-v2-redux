@@ -104,7 +104,7 @@ before(function(){
   cy.visit('localhost:4200/referentials')
   cy.wait(5000)
   cy.get('mwb-referentials-diagram').click()
-  cy.wait(500)
+  // cy.wait(500)
 })
 
 describe('Referentials diagram', () => {
