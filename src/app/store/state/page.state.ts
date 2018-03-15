@@ -12,9 +12,7 @@ export type PageState = {
   files?: IFileInfo[],
   fileInfo?: IFileInfo,
   lastRefresh?: string,
-  fileCount?: number,
   numVisible?: number,
-  visibleFiles?: IFileInfo[] | Function
   error?: any
 };
 

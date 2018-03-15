@@ -68,11 +68,6 @@ describe('pageReducer', () => {
       expect(testState.pages.validations.numVisible).toEqual(1);
     });
 
-    it('should set visibleFiles', () => {
-      testState.pages = pageReducer(testState.pages, action);
-      expect(testState.pages.validations.visibleFiles).toEqual([files[0]]);
-    });
-
     it('should set lastRefresh', () => {
       expect(testState.pages.validations.lastRefresh).toBeFalsy();
       testState.pages = pageReducer(testState.pages, action);
@@ -115,11 +110,6 @@ describe('pageReducer', () => {
       expect(testState.pages.validations.numVisible).toEqual(1);
     });
 
-    it('should set visibleFiles', () => {
-      testState.pages = pageReducer(testState.pages, action);
-      expect(testState.pages.validations.visibleFiles).toEqual([files[0]]);
-    });
-
     it('should set lastRefresh', () => {
       expect(testState.pages.validations.lastRefresh).toBeFalsy();
       testState.pages = pageReducer(testState.pages, action);
@@ -142,13 +132,6 @@ describe('pageReducer', () => {
       const action = pageActions.createSetNumToDisplay(1);
       testState.pages = pageReducer(testState.pages, action);
       expect(testState.pages.validations.numVisible).toEqual(1);
-    });
-
-    it('should set visibleFiles', () => {
-      const action = pageActions.createSetNumToDisplay(1);
-      testState.pages.validations.files = files;
-      testState.pages = pageReducer(testState.pages, action);
-      expect(testState.pages.validations.visibleFiles).toEqual(files.slice(0, 1));
     });
 
   });

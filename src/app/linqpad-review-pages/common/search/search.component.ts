@@ -1,6 +1,6 @@
-import { Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Location } from '@angular/common';
-import { NgRedux, select } from '@angular-redux/store';
+import { select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
 import { IAppState } from '../../../store/state/AppState';
@@ -8,9 +8,10 @@ import { IFileInfo } from '../../../model/fileInfo.model';
 import { SearchResultsModalComponent } from './search-results.modal';
 import { SearchActions } from './search.actions';
 import { } from '../../../store/selector-helpers/selector-helpers';
+import { Computed } from '../../../store/computed/computed-properties';
 
 @Component({
-  selector: 'app-search',
+  selector: 'mwb-search',
   template: `
     <form id="searchForm" #searchForm="ngForm" (ngSubmit)="search(searchTerm)" novalidate class="form-horizontal" role="form">
       <div class="input-group">
@@ -27,7 +28,7 @@ import { } from '../../../store/selector-helpers/selector-helpers';
   `,
   styles: ['div.input-group { width: 250px; }']
 })
-export class SearchComponent {
+export class SearchComponent implements OnInit {
 
   @ViewChild(SearchResultsModalComponent) searchResultsModal: SearchResultsModalComponent;
   @select(['search']) search$: Observable<any>;
@@ -35,15 +36,23 @@ export class SearchComponent {
   public searchTerm;
   public searchDisabled = false;
   private readonly searchablePages = ['validations', 'referentials', 'clinics'];
+  private page: string;
+  private isSearchable: boolean;
 
   constructor(
     public location: Location,
-    private ngRedux: NgRedux<IAppState>,
-    private searchActions: SearchActions
+    private searchActions: SearchActions,
+    private computed: Computed
   ) {}
 
+  ngOnInit() {
+    const pageType = this.getPage();
+    this.page = pageType.page;
+    this.isSearchable = pageType.isSearchable;
+  }
+
   search(searchTerm: string) {
-    if (!searchTerm) {
+    if (!searchTerm || !this.isSearchable) {
       return;
     }
 
@@ -51,18 +60,20 @@ export class SearchComponent {
     this.searchActions.resetResults();
     this.searchActions.setSearchTerm(this.searchTerm);
 
-    const pageType = this.getPage();
-    if (!pageType.isSearchable) {
-      return;
-    }
-
-    this.getResults(this.searchTerm, pageType);
+    this.getResults(this.searchTerm);
     this.openModal();
   }
 
-  private getResults(searchTerm, pageType) {
-    const visibleFiles$ = this.ngRedux.select<IFileInfo[]>(['pages', pageType.page, 'visibleFiles']);
-    visibleFiles$
+  private getPage(): { page: string, isSearchable: boolean} {
+    const page = this.location.path().replace('/', '');
+    const isSearchable = this.searchablePages.indexOf(page) > -1;
+    this.searchActions.setPage(page, isSearchable);
+    return {page, isSearchable};
+  }
+
+  private getResults(searchTerm) {
+    this.computed.visibleFiles$(this.page)
+      .take(1)
       .map(files => files.filter(file => this.seachFileInfo(file, searchTerm)) )
       .map(files => files.map(file => file.name))
       .subscribe(results => {
@@ -72,13 +83,6 @@ export class SearchComponent {
           this.searchActions.setResultsFailed();
         }
       });
-  }
-
-  private getPage(): { page: string, isSearchable: boolean} {
-    const page = this.location.path().replace('/', '');
-    const isSearchable = this.searchablePages.indexOf(page) > -1;
-    this.searchActions.setPage(page, isSearchable);
-    return {page, isSearchable};
   }
 
   private seachFileInfo(file, searchTerm): boolean {

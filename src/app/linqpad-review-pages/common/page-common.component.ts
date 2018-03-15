@@ -5,6 +5,7 @@ import { NgRedux, select } from '@angular-redux/store';
 import { IFileInfo } from '../../model/fileInfo.model';
 import { IAppState } from '../../store/state/AppState';
 import { spreadSelector } from '../../store/selector-helpers/spread-selector';
+import { Computed } from '../../store/computed/computed-properties';
 
 @Component({
   selector: 'mwb-page-common',
@@ -17,20 +18,24 @@ export class PageCommonComponent implements OnInit, OnDestroy {
   @Input() PAGE;
   @Input() services;
 
+  // State, initialized in onInit via spreadSelector
   fileInfo$;
-  visibleFiles$;
   numVisible$;
-  fileCount$;
   lastRefresh$;
-  start;
-  
+
+  // Computed state
+  fileCount$;
+  visibleFiles$;
+
   constructor(
     private ngRedux: NgRedux<IAppState>,
+    private computed: Computed
   ) {}
 
   ngOnInit() {
     this.services.page = spreadSelector({self: this}, ['pages', this.PAGE]);
-    this.start = new Date()
+    this.visibleFiles$ = this.computed.visibleFiles$(this.PAGE);
+    this.fileCount$ = this.computed.fileCount$(this.PAGE);
   }
 
   handleFileChange(fileInfo: IFileInfo) {

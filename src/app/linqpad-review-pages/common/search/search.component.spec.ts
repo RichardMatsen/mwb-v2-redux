@@ -14,6 +14,7 @@ import { SearchComponent } from './search.component';
 import { SearchActions } from './search.actions';
 import { SearchResultsModalComponent } from './search-results.modal';
 const x = require('../../../store/selector-helpers/selector-helpers');
+import { Computed } from '../../../store/computed/computed-properties';
 
 const testFiles = [
   { name: 'file1', content: 'xx test xx' },
@@ -23,7 +24,7 @@ const testFiles = [
 
 describe('SearchComponent', () => {
 
-  let mockActions;
+  let mockActions, mockComputed;
   let fixture: ComponentFixture<SearchComponent>,
       searchComponent: SearchComponent,
       location: SpyLocation;
@@ -32,6 +33,7 @@ describe('SearchComponent', () => {
 
     mockActions = jasmine.createSpyObj('mockActions',
       ['resetResults', 'setPage', 'setSearchTerm', 'setResultsSuccess', 'setResultsFailed']);
+    mockComputed = jasmine.createSpyObj('mockComputed', ['visibleFiles$', 'fileCount$']);
 
     TestBed.configureTestingModule({
       imports: [
@@ -46,19 +48,31 @@ describe('SearchComponent', () => {
       providers: [
         {provide: SearchActions, useValue: mockActions},
         {provide: Location, useClass: SpyLocation},
+        {provide: Computed, useValue: mockComputed},
       ],
     }).compileComponents();
 
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(SearchComponent);
     searchComponent = fixture.componentInstance;
+    searchComponent.ngOnInit();
   }));
 
-  it('should create the service', () => {
+  const setLocation = (page) => {
+    location.go(page);
+    searchComponent.ngOnInit();
+  };
+
+  it('should create the component', () => {
     expect(searchComponent).toBeTruthy();
   });
 
   describe('search()', () => {
+
+    beforeEach(() => {
+      setLocation('validations');
+      mockComputed.visibleFiles$.and.returnValue(Observable.of(testFiles));
+    });
 
     it('should reset previous results', () => {
       searchComponent.search('test');
@@ -79,14 +93,18 @@ describe('SearchComponent', () => {
 
   describe('page', () => {
 
+    beforeEach(() => {
+      mockComputed.visibleFiles$.and.returnValue(Observable.of(testFiles));
+    });
+
     it('should get the page from location', () => {
-      location.go('validations');
+      setLocation('validations');
       searchComponent.search('test');
       expect(mockActions.setPage).toHaveBeenCalledWith('validations', true);
     });
 
     it('should not set page if page is not in searchablePages', () => {
-      location.go('notSearchablePage');
+      setLocation('notSearchablePage');
       searchComponent.search('test');
       expect(mockActions.setPage).toHaveBeenCalledWith('notSearchablePage', false);
     });
@@ -95,37 +113,32 @@ describe('SearchComponent', () => {
 
   describe('getResults()', () => {
 
-    it('should set the search results', fakeAsync(() => {
-      setupMockStore(['pages', 'validations', 'visibleFiles'], testFiles);
-      location.go('validations');
+    beforeEach(() => {
+      setLocation('validations');
+      mockComputed.visibleFiles$.and.returnValue(Observable.of(testFiles));
+    });
 
+    it('should set the search results', fakeAsync(() => {
       searchComponent.search('test');
       tick();
       expect(mockActions.setResultsSuccess).toHaveBeenCalledWith(['file1', 'file3']);
     }));
 
     it('should set the search results to "no results" is searchTerm is not found', fakeAsync(() => {
-      setupMockStore(['pages', 'validations', 'visibleFiles'], testFiles);
-      location.go('validations');
-
       searchComponent.search('testStringNotPresent');
       tick();
       expect(mockActions.setResultsFailed).toHaveBeenCalled();
     }));
 
     it('should not set search results page is not in searchablePages', () => {
-      setupMockStore(['pages', 'notSearchablePage', 'visibleFiles'], testFiles);
-      location.go('notSearchablePage');
-
+      setLocation('notSearchablePage');
       searchComponent.search('test');
       expect(mockActions.setResultsSuccess).not.toHaveBeenCalled();
     });
 
     it('should ignore files that have no content', fakeAsync(() => {
       const testFiles2 = [...testFiles,   { name: 'file4', content: null }, null ]
-      setupMockStore(['pages', 'validations', 'visibleFiles'], testFiles2);
-      location.go('validations');
-
+      mockComputed.visibleFiles$.and.returnValue(Observable.of(testFiles2));
       searchComponent.search('test');
       tick();
       expect(mockActions.setResultsSuccess).toHaveBeenCalledWith(['file1', 'file3']);
@@ -136,9 +149,9 @@ describe('SearchComponent', () => {
   describe('OpenModal', () => {
 
     it('should show the SearchResultsModal', () => {
-      setupMockStore(['pages', 'validations', 'visibleFiles'], testFiles);
+      mockComputed.visibleFiles$.and.returnValue(Observable.of(testFiles));
       addtoMockStore(['search'], { searchTerm: 'test', results: testFiles});
-      location.go('validations');
+      setLocation('validations');
 
       const mockSearchResultsModal = jasmine.createSpyObj('mockSearchResultsModal', ['show']);
       searchComponent.searchResultsModal = mockSearchResultsModal;

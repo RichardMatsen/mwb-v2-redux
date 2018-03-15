@@ -7,7 +7,7 @@ export class DashboardPage {
   }
 
   getTitleText(): promise.Promise<string> {
-    return element(by.css('dashboard h1')).getText();
+    return element(by.css('mwb-dashboard h1')).getText();
   }
 
   getDashboardThumbnails(): ElementArrayFinder {

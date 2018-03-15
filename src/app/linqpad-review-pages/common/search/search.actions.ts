@@ -33,6 +33,30 @@ export class SearchActions {
     this.ngRedux.dispatch(this.createResetResults());
   }
 
+  createSetResultsSuccess(results: string[]): SearchActionType {
+    return {
+      type: SearchActions.SET_RESULTS_SUCCESS,
+      payload: {
+        results
+      }
+    };
+  }
+  setResultsSuccess(results: string[]) {
+    this.ngRedux.dispatch(this.createSetResultsSuccess(results));
+  }
+
+  createSetResultsFailed(): SearchActionType {
+    return {
+      type: SearchActions.SET_RESULTS_FAILED,
+      payload: {
+        results: [SearchActions.NO_RESULTS_MESSAGE]
+      }
+    };
+  }
+  setResultsFailed() {
+    this.ngRedux.dispatch(this.createSetResultsFailed());
+  }
+
   createSetPage(page, pageIsSearchable): SearchActionType {
     return {
       type: SearchActions.SET_PAGE,
@@ -58,27 +82,4 @@ export class SearchActions {
     this.ngRedux.dispatch(this.createSetSearchTerm(searchTerm));
   }
 
-  createSetResultsSuccess(results: string[]): SearchActionType {
-    return {
-      type: SearchActions.SET_RESULTS_SUCCESS,
-      payload: {
-        results
-      }
-    };
-  }
-  setResultsSuccess(results: string[]) {
-    this.ngRedux.dispatch(this.createSetResultsSuccess(results));
-  }
-
-  createSetResultsFailed(): SearchActionType {
-    return {
-      type: SearchActions.SET_RESULTS_FAILED,
-      payload: {
-        results: [SearchActions.NO_RESULTS_MESSAGE]
-      }
-    };
-  }
-  setResultsFailed() {
-    this.ngRedux.dispatch(this.createSetResultsFailed());
-  }
 }

@@ -43,8 +43,8 @@ describe('Dashboard Page', () => {
       const expected = [
         {title: 'Code Validations', icon: 'fa-check-square-o', badgeValue: '0', color: 'green'},
         {title: 'Referential Integrity', icon: 'fa-list-ol', badgeValue: '31285', color: 'red'},
-        {title: 'Loading Exceptions', icon: 'fa-exclamation-triangle', badgeValue: '242', color: 'orange'},
         {title: 'Clinic Matching', icon: 'fa-medkit', badgeValue: '99.53%', color: 'green'},
+        {title: 'Loading Exceptions', icon: 'fa-exclamation-triangle', badgeValue: '242', color: 'orange'},
         {title: 'Team Tasks', icon: 'fa-cogs', badgeValue: '23', color: 'blue'},
       ];
       const getText = el => el.textContent.trim()
@@ -52,6 +52,7 @@ describe('Dashboard Page', () => {
       it('should have titles', () => {
         cy.get('.thumbnail .title').then(els => {
           const texts = [...els].map(getText)
+          console.log('titles', texts)
           expect(texts).to.deep.eq(expected.map(x => x.title))
         })
       });

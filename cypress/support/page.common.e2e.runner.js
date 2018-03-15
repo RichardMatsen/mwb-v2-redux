@@ -31,7 +31,7 @@ export function page_common_e2e(testParams, runtimeConfig) {
         });
 
         it('should have a search control', () => {
-          cy.get('app-search').should('be.visible')
+          cy.get('mwb-search').should('be.visible')
         });
       });
         
@@ -166,10 +166,10 @@ export function page_common_e2e(testParams, runtimeConfig) {
 
         describe('search', () => {
           it('should be vertically center-aligned to the page title', () => {
-            areVerticallyCenterAligned({ subjects: ['.pageTitle', 'app-search'], within: '.bannertitle' })
+            areVerticallyCenterAligned({ subjects: ['.pageTitle', 'mwb-search'], within: '.bannertitle' })
           })
           it('should be right-justified', () => {
-            isRightJustified({ subject: 'app-search', relativeTo: '.bannertitle' })
+            isRightJustified({ subject: 'mwb-search', relativeTo: '.bannertitle' })
           })
         })
 

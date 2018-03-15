@@ -14,7 +14,8 @@ import { ClinicsActions } from '../linqpad-review-pages/clinics/services/clinics
 import { freezeState } from './middleware/freeze-state';
 import { HttpMiddleware } from './middleware/http.middleware';
 import { UiMiddleware } from './middleware/ui.middleware';
-import { UiActions } from '../common/ui-actions/ui-actions';
+import { UiActions } from '../common/ui-actions/ui.actions';
+import { Computed } from './computed/computed-properties';
 
 @NgModule({
   imports: [ NgReduxModule ],
@@ -24,6 +25,7 @@ import { UiActions } from '../common/ui-actions/ui-actions';
     ClinicsActions,
     HttpMiddleware,
     UiMiddleware,
+    Computed
   ],
 })
 export class StoreModule {

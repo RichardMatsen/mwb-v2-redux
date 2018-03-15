@@ -18,11 +18,11 @@ export abstract class PageCommon {
   }
 
   searchForm(): ElementFinder {
-    return element(by.css('app-search'));
+    return element(by.css('mwb-search'));
   }
 
   fileList_Title(): promise.Promise<string> {
-    return element(by.css('file-list h4.title')).getText();
+    return element(by.css('mwb-file-list h4.title')).getText();
   }
 
   fileListItems_Count(): promise.Promise<number> {

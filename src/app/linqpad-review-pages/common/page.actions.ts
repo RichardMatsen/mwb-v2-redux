@@ -26,8 +26,6 @@ export abstract class PageActions {
 
   abstract PAGE: string;
 
-  // actionTypePattern = (type) => `[PAGE] ${type} / ${this.PAGE}`;
-
   constructor(
     protected ngRedux: NgRedux<IAppState>,
   ) {}
@@ -52,9 +50,7 @@ export abstract class PageActions {
       payload: {
         files,
         fileInfo: files[0],
-        fileCount: files.length,
         numVisible: numToDisplay,
-        visibleFiles: files.slice(0, numToDisplay),
         lastRefresh: formatAMPM(new Date())
       }
     };
@@ -96,9 +92,7 @@ export abstract class PageActions {
       uiEndLoading: `update_${this.PAGE}_success`,
       payload: {
         files,
-        fileCount: files.length,
         numVisible: numToDisplay,
-        visibleFiles: files.slice(0, numToDisplay),
         lastRefresh: formatAMPM(new Date()),
       },
     };
@@ -155,19 +149,11 @@ export abstract class PageActions {
       subState: this.PAGE,
       payload: {
         numVisible: numToDisplay,
-        visibleFiles: this.calcVisibleFiles(numToDisplay),
       },
     };
   }
   setNumToDisplay(numToDisplay: number) {
     this.ngRedux.dispatch( this.createSetNumToDisplay(numToDisplay) );
-  }
-
-  protected calcVisibleFiles(numToDisplay): IFileInfo[] {
-    const state = this.ngRedux.getState();
-    return state
-      .pages[this.PAGE].files
-        .slice(0, numToDisplay);
   }
 
   createSetLastRefresh(): PageActionType {

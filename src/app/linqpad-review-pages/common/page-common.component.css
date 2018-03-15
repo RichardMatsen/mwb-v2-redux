@@ -56,7 +56,7 @@ div.bannertitle h1 {
   margin: auto;
   margin-left: 0;
 }
-div.bannertitle app-search {
+div.bannertitle mwb-search {
   margin: auto;
   margin-right: 15px;
 }
