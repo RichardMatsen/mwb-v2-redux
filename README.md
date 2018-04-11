@@ -1,5 +1,5 @@
 # Mwb-v2-Redux - Data Migration Workbench
-
+![dashboard](./docs/dashboard.jpg)
 ## **Application Overview**
 
 A web based app for reviewing progress and test results of a data migration project (Healthcare).  
