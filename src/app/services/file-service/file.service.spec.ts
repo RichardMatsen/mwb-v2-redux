@@ -53,7 +53,7 @@ describe('FileService', () => {
       mockBackend = mockBackend_;
   }));
 
-  it('should create the component', () => {
+  it('should create the service', () => {
     expect(fileService).toBeTruthy();
   });
 

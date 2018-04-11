@@ -108,7 +108,7 @@ describe('ObjectShapeComparer', () => {
 
   describe('property order', () => {
 
-    it('should ignore property order when no diifs', () => {
+    it('should ignore property order when no diffs', () => {
       const diffs = comparer.compare(
         {test2: '', test1: ''},
         {test1: 'some text', test2: 'some other text'}

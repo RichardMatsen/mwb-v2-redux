@@ -47,6 +47,7 @@ export class PageCommonComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
+    // Note: bracket notation required due to spreadSelector()
     this['fileInfo$'].take(1).subscribe(fileInfo => {
       this.services.dataService.getContent(fileInfo).subscribe(refreshed => {
         this.services.actions.refresh(refreshed);

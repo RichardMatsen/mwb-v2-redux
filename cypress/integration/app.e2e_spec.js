@@ -2,7 +2,11 @@
 describe('Migration Workbench App Page', () => {
 
   before(function(){
-    cy.visit('localhost:4200')
+    cy.visit('localhost:4200', {
+      onLoad(win) {
+        console.log('loaded', win)
+      }
+    })
   })
 
   it('should have a title', () => {

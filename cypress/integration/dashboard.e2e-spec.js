@@ -8,12 +8,7 @@ describe('Dashboard Page', () => {
 
   before(function(){
     cy.viewport((3000/1.5), (2000/1.5))
-    cy.server()
-    cy.route('/data/filelist.txt').as('filelist')
     cy.visit('localhost:4200')
-    cy.wait('@filelist')
-    // cy.route('/data/*.html').as('files')
-    // cy.wait('@files')
     cy.wait(5000)
   })
 
@@ -52,7 +47,6 @@ describe('Dashboard Page', () => {
       it('should have titles', () => {
         cy.get('.thumbnail .title').then(els => {
           const texts = [...els].map(getText)
-          console.log('titles', texts)
           expect(texts).to.deep.eq(expected.map(x => x.title))
         })
       });
@@ -90,7 +84,6 @@ describe('Dashboard Page', () => {
   
         it('should have badge color rgba values', () => {
           cy.get('.thumbnail .badge').then(els => {
-            console.log(els)
             const colors = [...els].map(getColor_rgba)
             expect(colors).to.deep.eq(expected.map(x => x.color))
           })

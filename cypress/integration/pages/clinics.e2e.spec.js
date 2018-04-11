@@ -1,4 +1,4 @@
-import { page_common_e2e } from '../../support/page.common.e2e.runner'
+import { page_common_e2e } from './page.common.e2e.runner'
 
 const runtimeConfig = require('../../../src/data/migration-workbench.config');
 

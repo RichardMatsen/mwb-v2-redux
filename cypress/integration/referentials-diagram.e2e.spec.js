@@ -5,6 +5,8 @@ import {
   groupCount, groupBy
 } from '../support/svg-helpers'
 
+let svgRef;
+
 describe('Referentials diagram', () => {
 
   before(function(){
@@ -13,9 +15,14 @@ describe('Referentials diagram', () => {
     cy.wait(5000)
     cy.get('mwb-referentials-diagram').click()
     cy.wait(500)
+    // cy.get('svg').as('svgRef')
+    cy.get('svg').then(svg => svgRef = svg)
   })
   
   context('Static', () => {
+
+    // beforeEach(function() { cy.get('@svgRef').then(svgRef => { console.log('static: svgRef', svgRef) }) })
+    beforeEach(function() { console.log('static: svgRef', this.svgRef) })
 
     it('should have an SVG element', () => {
       cy.get('svg')
@@ -77,6 +84,9 @@ describe('Referentials diagram', () => {
   })
 
   context('Layout', () => {
+
+    // beforeEach(function() { cy.get('@svgRef').then(svgRef => { console.log('layout: svgRef', svgRef) }) })
+    beforeEach(function() { console.log('static: svgRef', svgRef) })
 
     beforeEach(() => {
 

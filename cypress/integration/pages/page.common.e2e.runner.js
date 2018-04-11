@@ -2,7 +2,7 @@ import {
   colorMap, getColor_rgba, getColorClass,
   getSelector, elementVerticalCenter, areAligned,
   isLeftJustified, isRightJustified, areVerticallyCenterAligned
-} from '../support/common-utils'
+} from '../../support/common-utils'
 
 export function page_common_e2e(testParams, runtimeConfig) {
 

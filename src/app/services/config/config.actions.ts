@@ -100,7 +100,7 @@ export class ConfigActions {
     }
     results.forEach(result => {
       this.ngRedux.dispatch({
-        type: ConfigActions.INITIALIZE_CONFIG_TEMPLATE_ERROR, // `${action.type.replace('_REQUEST','')}_TEMPLATE_ERROR`,
+        type: ConfigActions.INITIALIZE_CONFIG_TEMPLATE_ERROR,
         data: result,
       });
     });

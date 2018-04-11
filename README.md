@@ -48,8 +48,8 @@ Testing consists of unit tests, e2e tests via karma/protractor and also a siute 
 
 ### **Detail pages**
 
-- [Component DashboardThumbnail](dashboard-thumbnail.md)
-- [Thumbnail Dropdown Panel](narrative-dropdown-panel.md)
+- [DashboardThumbnail component](./docs/dashboard-thumbnail.md)
+- [DashboardThumbnail Dropdown Panel](narrative-dropdown-panel.md)
 - [Scrollbar CSS Adjustments](scrollbar-css-adjustments.md)
 - [Redux Store](redux-store.md)
 - [Redux Middleware](redux-middleware.md)
