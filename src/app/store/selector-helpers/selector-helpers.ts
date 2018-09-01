@@ -23,9 +23,12 @@ export function ifNull<T>(selector$: Observable<T>, fnWhenNoData, fnOnError = nu
     );
 }
 
-export const waitFor$ = function() {
+export const waitFor$ = function<T>(this: Observable<T>, fn = null): Observable<T> {
+  // typings preserve type checking downstream of this operator
+  // otherwise type 'any' is returned and type checking breaks down
+  fn = fn || ((data: T) => !!data);
   return this
-    .filter(data => !!data )
+    .filter(fn)
     .take(1);
 };
 
@@ -33,7 +36,7 @@ export const waitForWithCondition$ = function(predicate = null) {
   return this.filter(data => !!data && (!!predicate ? predicate(data) : true ) ).take(1);
 };
 
-export const ifNull$ = function() {
+export const ifNull$ = function<T>(this: Observable<T>): Observable<T> {
   return this.take(1)
     .filter(data => data === null || data === undefined);
 };

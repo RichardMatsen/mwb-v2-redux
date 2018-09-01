@@ -5,10 +5,10 @@ export function deepClone(state) {
     const newState = [];
     for (let index = 0; index < state.length; index++) {
       const element = state[index];
-        newState[index] = deepClone(element);
+      newState[index] = deepClone(element);
     }
     return newState;
-  };
+  }
   if (typeof state === 'object') {
     const newState = {...state};
     Object.keys(newState).forEach(key => {
@@ -18,7 +18,7 @@ export function deepClone(state) {
       }
     });
     return newState;
-  };
+  }
 
   return state;
-};
+}

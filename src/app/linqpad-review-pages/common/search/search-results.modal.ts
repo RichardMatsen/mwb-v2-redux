@@ -4,7 +4,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 @Component({
   selector: 'search-results-modal',
   template: `
-    <div bsModal #searchResultsModal="bs-modal" class="modal fade" tabindex="-1"
+    <div bsModal #searchResultsModal="bs-modal" class="modal modal-container fade" tabindex="-1"
          role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -21,10 +21,10 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
           </div>
         </div>
       </div>
-    </div>
-  `
+    </div>`
 })
 export class SearchResultsModalComponent {
+  @Input() visible;
   @Input() searchTerm;
   @Input() results;
   @ViewChild('searchResultsModal') searchResultsModal: ModalDirective;

@@ -1,5 +1,5 @@
 
-export function deepFreeze (o) {
+const deepFreeze = function (o) {
   Object.freeze(o);
 
   Object.getOwnPropertyNames(o).forEach((prop) => {
@@ -12,13 +12,18 @@ export function deepFreeze (o) {
   });
 
   return o;
-}
+};
 
-export function freezeState(store) {
+const freezeState = function (store) {
   return (next) => (action) => {
     const result = next(action);
     const state = store.getState();
     deepFreeze(state);
     return result;
   };
-}
+};
+
+export {
+  deepFreeze,
+  freezeState
+};

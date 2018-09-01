@@ -5,7 +5,7 @@ import { KanbanCard } from '../model/kanban-card';
   selector: 'mwb-kanban-card',
   template: `
     <p class="card" draggable="true" (dragstart)="dragStart($event)" id="{{card?.id}}" >
-      #{{card?.id}} - {{card?.description}}
+      #{{card?.id}} - {{card?.description}} <span *ngIf="card?.assignedTo">[{{card?.assignedTo}}]</span>
     </p>
   `,
   styles: [`
@@ -19,8 +19,6 @@ import { KanbanCard } from '../model/kanban-card';
 export class KanbanCardComponent implements OnInit {
 
   @Input() card: KanbanCard;
-
-  // @HostBinding('attr.draggable') true;
 
   constructor() { }
 

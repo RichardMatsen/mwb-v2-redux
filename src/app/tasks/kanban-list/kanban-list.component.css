@@ -22,7 +22,9 @@
 	width: 100%;
 	text-decoration: none;
 }
-
+a.list__newcard {
+  cursor: pointer;
+}
 input{
   width: 245px;
   height: 2em;

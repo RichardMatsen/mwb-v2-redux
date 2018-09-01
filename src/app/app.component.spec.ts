@@ -16,10 +16,11 @@ import { NavBarComponent } from './nav/navbar.component';
 import { AuthService } from './user/auth.service';
 import { APP_BASE_HREF } from '@angular/common';
 import { MigrationWorkBenchCommonModule } from './common/mw.common.module';
-import { ConfigActions } from './services/config/config.actions';
+import { ConfigActions } from './store/actions/config.actions';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AppRoutingModule } from './app-routing.module';
 import { TasksModule } from './tasks/tasks.module';
+import { UserModule } from './user/user.module';
 
 @Component({
   template: ''
@@ -33,7 +34,7 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     mockSearchService = jasmine.createSpyObj('mockSearchService', ['search']);
-    mockAuthService = jasmine.createSpyObj('mockAuthService', ['loginUser', 'isAuthenticated', 'updateCurrentUser']);
+    mockAuthService = jasmine.createSpyObj('mockAuthService', ['loginUser', 'isAuthenticated', 'updateCurrentUser', 'checkLocalStorage']);
 
     TestBed.configureTestingModule({
       imports: [
@@ -48,6 +49,7 @@ describe('AppComponent', () => {
         DashboardModule,
         AppRoutingModule,
         TasksModule,
+        UserModule,
         MigrationWorkBenchCommonModule,
       ],
       declarations: [

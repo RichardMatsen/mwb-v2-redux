@@ -6,10 +6,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthguardService } from './nav/authguard.service';
 import { Error404PageComponent } from './nav/four-0-four/404-component';
 import { TasksComponent } from './tasks/tasks.component';
+import { RoutingHistory } from './nav/routing-history/routing-history.service';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'dashboard',  pathMatch: 'full' },
-  // { path: 'dashboard', canActivate: [AuthguardService], component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'tasks', canActivate: [AuthguardService], component: TasksComponent, data: { toastrPrompt: 'Team Tasks'} },
   { path: '404', component: Error404PageComponent },
@@ -30,7 +30,15 @@ export const appRoutes: Routes = [
   ],
   providers: [
     AuthguardService,
+    RoutingHistory
  ],
 })
 export class AppRoutingModule {
+
+  constructor(
+    private routingHistory: RoutingHistory
+  ) {
+    this.routingHistory.loadRouting();
+  }
+
 }

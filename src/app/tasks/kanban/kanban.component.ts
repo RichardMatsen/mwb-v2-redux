@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 import { KanbanListComponent } from '../kanban-list/kanban-list.component';
 import { KanbanList } from '../model/kanban-list';
 import { waitFor$ } from 'app/store/selector-helpers/selector-helpers';
@@ -15,42 +17,10 @@ export class KanbanComponent implements OnInit {
 
   lists: KanbanList[];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-
-    const unassigned = new KanbanList({
-      name: 'Unassigned',
-      cards: [
-        {
-          id: 1,
-          status: 'Unassigned',
-          description: 'validations',
-          effectiveDate: '2017-06-07',
-        },
-      ]
-    })
-    const inProgress = new KanbanList({
-      name: 'In Progress',
-      cards: [
-        {
-          id: 2,
-          status: 'In Progress',
-          description: 'validations',
-          icon: 'fa-check-square-o',
-          effectiveDate: '2017-06-06',
-          assignedTo: 'Sam'
-        },
-      ]
-    })
-    const waiting = new KanbanList({
-      name: 'Waiting',
-      cards: []
-    })
-    const done = new KanbanList({
-      name: 'Done',
-      cards: []
-    })
-    this.lists = [unassigned, inProgress, waiting, done]
+    this.http.get('data/kanban/kanban.json').take(1)
+      .subscribe((res: any) => this.lists = res.lists);
   }
 }

@@ -3,7 +3,7 @@
 import { async } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 
-import { IFileInfo } from '../../../model/fileinfo.model';
+import { IFileInfo } from 'app/model/fileinfo.model';
 import { ReferentialsFormatService } from './referentials-format.service';
 
 describe('ReferentialsFormatService', () => {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TasksComponent } from './tasks.component';
 import { KanbanComponent } from './kanban/kanban.component';
@@ -8,7 +9,8 @@ import { KanbanCardComponent } from './kanban-card/kanban-card.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   exports: [
   ],

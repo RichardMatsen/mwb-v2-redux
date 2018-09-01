@@ -3,15 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { NgRedux, select } from '@angular-redux/store';
 
-import { ToastrService } from '../common/toastr/toastr.service';
+import { select } from 'app/store/store.service';
+import { ToastrService } from 'app/common/toastr/toastr.service';
 import { IUser } from '../model/user.model';
-import { UserActions } from './user.actions';
-import { waitforFirstNotNull, ifNull } from '../store/selector-helpers/selector-helpers';
-import { UnsubscribeOnDestroy } from '../store/selector-helpers/unsubscribe-on-destroy';
-declare var require
-const x = require('../store/selector-helpers/subscribe-until-dead');
+import { StoreService } from 'app/store/store.service';
+import { waitforFirstNotNull, ifNull } from 'app/store/selector-helpers/selector-helpers';
+import { UnsubscribeOnDestroy } from 'app/store/selector-helpers/unsubscribe-on-destroy';
+import 'app/store/selector-helpers/subscribe-until-dead';
 
 @Component({
   templateUrl: './profile.component.html',
@@ -33,21 +32,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public profileFormGroup: FormGroup;
   public firstName: FormControl;
   public lastName: FormControl;
+  public password: FormControl;
   private sub: Subscription;
 
   constructor(
     private router: Router,
     private toastr: ToastrService,
-    private userActions: UserActions,
+    private store: StoreService
   ) {}
 
   ngOnInit() {
     waitforFirstNotNull(this.currentUser$, (currentUser) => {
       this.firstName = new FormControl(currentUser.firstName, [ Validators.required, Validators.pattern('[a-zA-Z].*') ]);
       this.lastName = new FormControl(currentUser.lastName, Validators.required);
+      this.password = new FormControl(currentUser.password, Validators.required);
       this.profileFormGroup = new FormGroup({
         firstName: this.firstName,
-        lastName: this.lastName
+        lastName: this.lastName,
+        password: this.password
       });
     });
   }
@@ -60,14 +62,25 @@ export class ProfileComponent implements OnInit, OnDestroy {
     return this.lastName.valid || this.lastName.untouched;
   }
 
+  validatePassword() {
+    return this.password.valid || this.password.untouched;
+  }
+
   saveProfile(formValues) {
     if (this.profileFormGroup.valid) {
-      this.userActions.updateCurrentUser(formValues.firstName, formValues.lastName);
+      this.store.actions.userActions.updateCurrentUser(formValues.firstName, formValues.lastName);
       this.toastr.success('Profile saved');
+      this.router.navigate(['/dashboard']);
     }
   }
 
   cancel() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  logout() {
+    this.store.actions.userActions.setCurrentUser(null);
+    localStorage.removeItem('currentUser');
     this.router.navigate(['/dashboard']);
   }
 

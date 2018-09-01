@@ -1,4 +1,4 @@
-import '../../../rxjs-extensions';
+import 'app/rxjs-extensions';
 import { Component, Directive } from '@angular/core';
 import { TestBed, ComponentFixture, async, inject, fakeAsync, tick } from '@angular/core/testing';
 import { Location } from '@angular/common';
@@ -7,14 +7,17 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
 
-import { IFileInfo } from '../../../model/fileinfo.model';
+import { IFileInfo } from 'app/model/fileinfo.model';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 import { setupMockStore, addtoMockStore } from 'testing-helpers/testing-helpers.module.hlpr';
-import { SearchComponent } from './search.component';
-import { SearchActions } from './search.actions';
+import { SearchComponent1 } from './search.component.1';
+import { SearchActions } from '../../../store/actions/search.actions';
+import { SearchService } from './search.service';
 import { SearchResultsModalComponent } from './search-results.modal';
-const x = require('../../../store/selector-helpers/selector-helpers');
-import { Computed } from '../../../store/computed/computed-properties';
+const x = require('app/store/selector-helpers/selector-helpers');
+import { Computed } from 'app/store/computed/computed-properties';
+import { StoreService } from 'app/store/store.service';
+import { TestStoreModule } from 'testing-helpers/ngRedux-testing/test-store.module';
 
 const testFiles = [
   { name: 'file1', content: 'xx test xx' },
@@ -25,10 +28,11 @@ const testFiles = [
 describe('SearchComponent', () => {
 
   let mockActions, mockComputed;
-  let fixture: ComponentFixture<SearchComponent>,
-      searchComponent: SearchComponent,
+  let fixture: ComponentFixture<SearchComponent1>,
+      searchComponent: SearchComponent1,
       location: SpyLocation;
 
+  let store;
   beforeEach(async(() => {
 
     mockActions = jasmine.createSpyObj('mockActions',
@@ -39,21 +43,28 @@ describe('SearchComponent', () => {
       imports: [
         FormsModule,
         NgReduxTestingModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        TestStoreModule
       ],
       declarations: [
-        SearchComponent,
+        SearchComponent1,
         SearchResultsModalComponent,
       ],
       providers: [
         {provide: SearchActions, useValue: mockActions},
+        SearchService,
         {provide: Location, useClass: SpyLocation},
         {provide: Computed, useValue: mockComputed},
+        MockNgRedux,
       ],
     }).compileComponents();
 
+    // Instantiate mock store
+    store = TestBed.get(StoreService);
+    const stub1 = setupMockStore(['search', 'page'], 'validations' );
+
     location = TestBed.get(Location);
-    fixture = TestBed.createComponent(SearchComponent);
+    fixture = TestBed.createComponent(SearchComponent1);
     searchComponent = fixture.componentInstance;
     searchComponent.ngOnInit();
   }));

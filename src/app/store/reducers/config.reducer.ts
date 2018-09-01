@@ -1,6 +1,6 @@
 import { Action, Reducer } from 'redux';
 import { GenericReducerFactory } from './generic.reducer';
-import { ConfigActions } from '../../services/config/config.actions';
+import { ConfigActions } from 'app/store/actions/config.actions';
 
 const factory = new GenericReducerFactory();
 

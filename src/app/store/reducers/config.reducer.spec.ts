@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { configReducer } from './config.reducer';
-import { ConfigActions } from '../../services/config/config.actions';
+import { ConfigActions } from 'app/store/actions/config.actions';
 import { appInitialState } from '../state/AppState';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
 import { runAllReducerTests, ReducerTestConfig } from './generic.reducer.testing.hlpr';

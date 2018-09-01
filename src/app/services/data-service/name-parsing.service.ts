@@ -1,21 +1,21 @@
-import { IFileInfo } from '../../model/fileInfo.model';
+import { IFileInfo } from 'app/model/fileInfo.model';
 
 export class NameParsingService {
 
-  parseFiles(files: Array<string>, prefixes: string[]): Array<IFileInfo> {
+  parseFiles(files: string[], prefixes: string[]): IFileInfo[] {
     return files.map(file => {
       return this.parseFile(file, prefixes);
     });
   }
 
-  parseFile(file: string, prefixes: string[]): IFileInfo {
+  parseFile(fileName: string, prefixes: string[]): IFileInfo {
     const fileInfo = {
-      name: this.parseFileName(file),
+      name: fileName.replace('.html', ''),
       namePrefix: '',
-      baseName: this.getBaseName(file),
+      baseName: this.getBaseName(fileName),
       displayName: '',
-      effectiveDate: this.parseEffectiveDate(file),
-      effectiveTime: this.parseEffectiveTime(file)
+      effectiveDate: this.parseEffectiveDate(fileName),
+      effectiveTime: this.parseEffectiveTime(fileName)
     };
     fileInfo.namePrefix = prefixes.find(pref => fileInfo.name.startsWith(pref));
     fileInfo.displayName = fileInfo.name;
@@ -29,10 +29,6 @@ export class NameParsingService {
     }
     const base = fileName.substr(0, month.pos - 4).trimWithMask( '( ' );
     return base;
-  }
-
-  private parseFileName(fileName: string): string {
-    return fileName.replace('.html', '');
   }
 
   private parseEffectiveDate(fileName: string): Date {
@@ -50,7 +46,6 @@ export class NameParsingService {
     if (!time) {
       return '';
     }
-
     return time[0].replace('.', ':');
   }
 
@@ -71,5 +66,4 @@ export class NameParsingService {
     }
     return month;
   }
-
 }

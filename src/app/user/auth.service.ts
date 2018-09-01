@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { select } from '@angular-redux/store';
 
+import { select } from 'app/store/store.service';
 import { IUser } from '../model/user.model';
-import { UserActions } from './user.actions';
-import { waitforFirstNotNull } from '../store/selector-helpers/selector-helpers';
+import { UserActions } from '../store/actions/user.actions';
+import { waitforFirstNotNull } from 'app/store/selector-helpers/selector-helpers';
 
 @Injectable()
 export class AuthService {
@@ -21,7 +21,20 @@ export class AuthService {
       const userIndex = users.map(user => user.userName).indexOf(name);
       if (userIndex > -1) {
         this.userActions.setCurrentUser(users[userIndex]);
+        localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
       }
     });
+  }
+
+  checkLocalStorage() {
+    try {  // user may not be permitted to use localStorage
+      const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+      if (storedCurrentUser) {
+        this.userActions.setCurrentUser(storedCurrentUser);
+        return true;
+      }
+    } catch {
+    }
+    return false;
   }
 }

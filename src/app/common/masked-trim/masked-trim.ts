@@ -20,5 +20,3 @@ if (!String.prototype.hasOwnProperty('trimWithMask')) {
 interface String {
   trimWithMask: typeof trimWithMask;
 }
-
-// export default trimWithMask

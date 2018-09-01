@@ -2,7 +2,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { NameParsingService } from './name-parsing.service';
-require('../../common/masked-trim/masked-trim');
+require('app/common/masked-trim/masked-trim');
 
 describe('NameParsingService', () => {
 

@@ -1,5 +1,5 @@
 import { Action, Reducer } from 'redux';
-import { ActionWithSubState } from '../actions/actionWithSubState';
+import { ActionWithSubState } from '../actionTypes/actionWithSubState';
 
 // tslint:disable-next-line:interface-over-type-literal
 export type reducerFactoryConfig = {

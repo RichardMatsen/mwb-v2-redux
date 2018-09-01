@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from '@angular-redux/store';
 
-import { IFileInfo } from '../../../model/fileInfo.model';
-import { IAppState } from '../../../store/state/AppState';
-import { IMeasureUpdate } from '../../../model/measure.model';
-import { DataService } from '../../../services/data-service/data.service';
-import { NameParsingService } from '../../../services/data-service/name-parsing.service';
-import { ListFormatterService } from '../../../services/list-formatter.service/list-formatter.service';
-import { FileService } from '../../../services/file-service/file.service';
+import { StoreService, select } from 'app/store/store.service';
+import { IFileInfo } from 'app/model/fileInfo.model';
+import { IAppState } from 'app/store/state/AppState';
+import { IMeasureUpdate } from 'app/model/measure.model';
+import { DataService } from 'app/services/data-service/data.service';
+import { NameParsingService } from 'app/services/data-service/name-parsing.service';
+import { ListFormatterService } from 'app/services/list-formatter.service/list-formatter.service';
+import { FileService } from 'app/services/file-service/file.service';
 import { ClinicsFormatService } from './clinics-format.service';
-import { ClinicsActions } from './clinics.actions';
-import { Logger } from '../../../common/mw.common.module';
-import { waitFor$ } from '../../../store/selector-helpers/selector-helpers';
-declare var require
-require('../../../store/selector-helpers/selector-helpers');
+import { Logger } from 'app/common/mw.common.module';
 
 @Injectable()
 export class ClinicsDataService extends DataService {
@@ -25,9 +21,9 @@ export class ClinicsDataService extends DataService {
 
   protected PAGE = 'clinics';
   protected baseUrl = '/data/';
-  protected filePrefixes;
-  private filesToInit;
-  private filesToDisplay;
+  protected filePrefixes = null;
+  private filesToInit = null;
+  private filesToDisplay = null;
 
   constructor (
     protected formatService: ClinicsFormatService,
@@ -35,16 +31,15 @@ export class ClinicsDataService extends DataService {
     protected listFormatterService: ListFormatterService,
     protected fileService: FileService,
     protected logger: Logger,
-    protected actions: ClinicsActions,
-    private ngRedux: NgRedux<IAppState>,
+    protected store: StoreService
   ) {
-    super(formatService, nameParsingService, listFormatterService, fileService, logger, actions);
+    super(formatService, nameParsingService, listFormatterService, fileService, logger, store.actions.clinicsActions);
   }
 
   public initializeList() {
     this.getConfig$().subscribe(_ =>
-      this.getBaseUrl$().subscribe(__ =>
-        super.initializeList(this.filesToInit, this.filesToDisplay)
+      this.getBaseDataUrl$().subscribe(__ =>
+        super.initializeFileList(this.filesToInit, this.filesToDisplay)
       )
     );
   }
@@ -59,15 +54,16 @@ export class ClinicsDataService extends DataService {
       });
   }
 
-  public getMeasure(): Observable<IMeasureUpdate> {
-    return this.files$
-      .waitFor$()
-      .map(files => {
-        return { id: 'clinics', metric: files[0].metric, color: files[0].badgeColor, history: this.calcHistory(files) };
-      });
+  protected getLatestMeasureFromFiles(files: IFileInfo[]): IMeasureUpdate {
+    return {
+      id: 'clinics',
+      metric: files[0].metric,
+      color: files[0].badgeColor,
+      history: this.calcHistory(files)
+    };
   }
 
-  private calcHistory(files): number[] {
+  protected calcHistory(files): number[] {
     const data = files
       .filter(f => !!f.metric)
       .map(f => (+f.metric.replace('%', '')).toFixed(4));

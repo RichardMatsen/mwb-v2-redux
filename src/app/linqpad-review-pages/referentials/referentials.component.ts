@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
 
-import { ReferentialsActions } from './services/referentials.actions';
+import { select } from 'app/store/store.service';
+import { ReferentialsActions } from 'app/store/actions/referentials.actions';
 import { ReferentialsDataService } from './services/referentials-data.service';
-import { SharedDataService } from '../../services/shared-data.service';
+import { SharedDataService } from 'app/services/shared-data.service';
 
 @Component({
   selector: 'mwb-referentials',
@@ -23,10 +23,9 @@ export class ReferentialsComponent {
   constructor(
     private actions: ReferentialsActions,
     private dataService: ReferentialsDataService,
-    private sharedDataService: SharedDataService,
-  ) {}
-
-  ngOnInit() {
+    private sharedDataService: SharedDataService
+  ) {
+    this.sharedDataService.changePrompt('Relationship Diagram');
   }
 
 }

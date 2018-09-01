@@ -1,7 +1,7 @@
 import { Action, Reducer } from 'redux';
 import { GenericReducerFactory } from './generic.reducer';
 import { PageState, PageStateRoot, pagesInitialState } from '../state/page.state';
-import { PageActions } from '../../linqpad-review-pages/common/page.actions';
+import { PageActions } from 'app/store/actions/page.actions';
 
 const factory = new GenericReducerFactory();
 

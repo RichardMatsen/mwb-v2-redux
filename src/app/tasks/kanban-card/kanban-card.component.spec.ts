@@ -22,8 +22,6 @@ describe('KanbanCardComponent', () => {
   });
 
   it('should create', () => {
-    // component.card = new KanbanCard();
-    // fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 import { Action } from 'redux';
-import { IFileInfo } from '../../model/fileinfo.model';
+import { IFileInfo } from 'app/model/fileinfo.model';
 import { pageReducer } from './page.reducer';
-import { PageActions } from '../../linqpad-review-pages/common/page.actions';
+import { PageActions } from 'app/store/actions/page.actions';
 import { IAppState, appInitialState } from '../state/AppState';
-import { formatAMPM } from '../../common/mw.common.module';
+import { formatAMPM } from 'app/common/mw.common.module';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
 
 class TestPageActions extends PageActions {

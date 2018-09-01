@@ -2,16 +2,16 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { CommonModule } from '@angular/common';
 // import { MaterialModule } from '@angular/material';
 
-import { DataService } from '../../services/data-service/data.service';
+import { DataService } from 'app/services/data-service/data.service';
 import { ValidationsComponent } from './validations.component';
 import { ValidationsResolver } from './services/validations-resolver';
 import { ValidationsDataService } from './services/validations-data.service';
 import { ValidationsFormatService } from './services/validations-format.service';
 import { ValidationsRoutingModule, routedComponents } from './validations.routing';
-import { ListFormatterService } from '../../services/list-formatter.service/list-formatter.service';
-import { ValidationsActions } from './services/validations.actions';
-import { RevieWPagesCommonModule } from '../common/page-common.module';
-import { MigrationWorkBenchCommonModule, Logger } from '../../common/mw.common.module';
+import { ListFormatterService } from 'app/services/list-formatter.service/list-formatter.service';
+import { ValidationsActions } from 'app/store/actions/validations.actions';
+import { ReviewPagesCommonModule } from '../common/page-common.module';
+import { MigrationWorkBenchCommonModule, Logger } from 'app/common/mw.common.module';
 
 export function loggerFactory() {
   return new Logger('Validations', '');
@@ -22,7 +22,7 @@ export function loggerFactory() {
     CommonModule,
     // MaterialModule,
     ValidationsRoutingModule,
-    RevieWPagesCommonModule,
+    ReviewPagesCommonModule,
     MigrationWorkBenchCommonModule,
   ],
   exports: [

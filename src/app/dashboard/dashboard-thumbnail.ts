@@ -16,7 +16,7 @@ import { SparklineComponent } from '../graphs/sparkline/sparkline.component';
           </i>
         </a>
         <div class="filler"></div>
-        <sparkline [id]="measure.id" [history]="measure.history"></sparkline>
+        <sparkline [id]="measure.id" [history]="measure.history" style="padding: 10px"></sparkline>
         <error-badge [item]="measure"></error-badge>
       </div>
 

@@ -1,6 +1,6 @@
 import { deepClone } from '../util/deep-clone';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
-import { ObjectShapeComparer } from '../../common/object-shape-comparer/object-shape-comparer';
+import { ObjectShapeComparer } from 'app/common/object-shape-comparer/object-shape-comparer';
 
 export interface ReducerTestConfig {
   action: object;

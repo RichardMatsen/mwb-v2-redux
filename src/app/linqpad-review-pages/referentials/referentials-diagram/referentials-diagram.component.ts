@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ReferentialsDiagramModal } from '../referentials-diagram/referentials-diagram.modal.component';
-import { SharedDataService } from '../../../services/shared-data.service';
+import { SharedDataService } from 'app/services/shared-data.service';
 
 @Component({
   selector: 'mwb-referentials-diagram',

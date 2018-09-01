@@ -21,7 +21,7 @@ describe('Dashboard Page', () => {
     expect<any>(page.getTitleText()).toEqual('Dashboard');
   });
 
-  it('should have a list of thumnails', () => {
+  it('should have a list of thumbnails', () => {
     expect<any>( page.getDashboardThumbnails().count()).toBe(5);
   });
 

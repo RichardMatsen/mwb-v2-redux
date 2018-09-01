@@ -1,8 +1,8 @@
 import { Action } from 'redux';
-import { IFileInfo } from '../../model/fileinfo.model';
+import { IFileInfo } from 'app/model/fileinfo.model';
 import { pageReducer } from './page.reducer';
-import { PageActions } from '../../linqpad-review-pages/common/page.actions';
-import { PageActionType } from '../actions/pageActionType';
+import { PageActions } from 'app/store/actions/page.actions';
+import { PageActionType } from '../actionTypes/pageActionType';
 import { pagesInitialState } from '../state/page.state';
 import { runAllReducerTests, runReducerTests, ReducerTestConfig } from './generic.reducer.testing.hlpr';
 

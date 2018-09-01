@@ -1,5 +1,5 @@
-import { IFileInfo } from '../../../model/fileInfo.model';
-import { FormatService } from '../../../services/data-service/format.service';
+import { IFileInfo } from 'app/model/fileInfo.model';
+import { FormatService } from 'app/services/data-service/format.service';
 
 export class ClinicsFormatService extends FormatService {
 

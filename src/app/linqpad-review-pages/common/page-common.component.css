@@ -5,6 +5,14 @@ mat-card {
   padding: 0.5em;
 }
 
+div.row.bannertitle {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+h1 { margin: auto; }
+mwb-search { margin: auto; }
+
 div.filelistcontainer { 
   padding: 0; 
 }
@@ -30,8 +38,20 @@ div.result-wrapper {
 
 
 /* Vertically align badge with title */
-.title { display: flex; }
-error-badge { margin: auto; }
+.title { 
+  display: flex; 
+  flex-flow: row;
+  justify-content: flex-start;
+}
+.titleText { 
+  margin: auto 0.5em auto 0;  
+}
+error-badge { 
+  margin: auto 0.5em auto 0;  
+}
+search-indicator { 
+  margin: auto 0.5em auto 0;  
+}
 
 error-badge {
   opacity: 0.7;
@@ -59,4 +79,8 @@ div.bannertitle h1 {
 div.bannertitle mwb-search {
   margin: auto;
   margin-right: 15px;
+}
+
+search-results-modal {
+  z-index: 2000;
 }

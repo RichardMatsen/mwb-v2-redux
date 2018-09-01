@@ -1,4 +1,4 @@
-import { ToastrService } from '../../common/mw.common.module';
+import { ToastrService } from '../mw.common.module';
 
 describe('toastr.service', () => {
 

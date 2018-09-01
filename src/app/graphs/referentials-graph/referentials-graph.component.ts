@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import * as d3 from 'd3';
 import { referentialsGraphModel as graph } from './referentials-graph.model';
 import { ReferentialsGraphDataService } from './services/referentials-graph.data.service';
@@ -19,14 +19,13 @@ import { ReferentialsGraphToggleService } from './services/referentials-graph.to
     ReferentialsGraphToggleService,
   ]
 })
-export class ReferentialsGraphComponent implements OnInit {
+export class ReferentialsGraphComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: ReferentialsGraphDataService,
     private drawService: ReferentialsGraphDrawService,
     private toggleService: ReferentialsGraphToggleService,
-    private changeRef: ChangeDetectorRef,
-    private ngZone: NgZone,
+    private changeRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -55,12 +54,15 @@ export class ReferentialsGraphComponent implements OnInit {
   }
 
   private initSvgInTemplate() {
-    graph.svg = d3.select('.d3-graph')
+    const svg = d3.select('svg');
+    if (svg.empty()) {
+      graph.svg = d3.select('.d3-graph')
       .append('svg')
       .attr('width', graph.width)
       .attr('height', graph.height)
       .append('g')
       .attr('transform', 'translate(' + graph.margins.bottom + ',' + graph.margins.top + ')');
+    }
   }
 
   private initTreeMap() {
@@ -83,10 +85,15 @@ export class ReferentialsGraphComponent implements OnInit {
   private diagonal(source, target) {
     // Creates a curved (diagonal) path from parent to the child nodes
     const path = `M ${source.y} ${source.x}
-            C ${(source.y + target.y) / 2} ${source.x},
-              ${(source.y + target.y) / 2} ${target.x},
-              ${target.y} ${target.x}`;
+      C ${(source.y + target.y) / 2} ${source.x},
+        ${(source.y + target.y) / 2} ${target.x},
+        ${target.y} ${target.x}`;
     return path;
+  }
+
+  ngOnDestroy() {
+    d3.select('svg').remove();
+    graph.svg = null;
   }
 
 }

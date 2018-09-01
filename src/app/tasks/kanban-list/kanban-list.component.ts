@@ -9,6 +9,7 @@ import { KanbanList } from '../model/kanban-list';
 export class KanbanListComponent implements OnInit {
 
   @ViewChild('addcard') addCardInputCtrl: ElementRef;
+  @ViewChild('cards') cardsCtrl: ElementRef;
   @Input() list: KanbanList;
   displayAddCard = false;
 
@@ -16,10 +17,6 @@ export class KanbanListComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // dragStart(ev) {
-  //   ev.dataTransfer.setData('text', ev.target.id);
-  // }
 
   showNewCard() {
     this.displayAddCard = true;
@@ -49,29 +46,24 @@ export class KanbanListComponent implements OnInit {
   drop($event) {
     $event.preventDefault();
     const data = $event.dataTransfer.getData('text');
-
-    let target = $event.target;
-    const targetClassName = target.className;
-
-    while ( target.className !== 'list') {
-      target = target.parentNode;
-    }
-    target = target.querySelector('.cards');
-
     const cardToMove = document.getElementById(data).parentElement; // move the KanbanCard element
+    const cards = this.cardsCtrl.nativeElement;
+    this.dropAtPosition($event.target, cards, cardToMove);
+  }
 
-    if (targetClassName === 'card') {
-      $event.target.parentNode.insertBefore(cardToMove, $event.target);
-    } else if (targetClassName === 'list_title') {
-      if (target.children.length) {
-        target.insertBefore(cardToMove, target.children[0]);
-      }else {
-        target.appendChild(cardToMove);
-      }
-    } else {
-      target.appendChild(cardToMove);
+  private dropAtPosition(target, cards, cardToMove) {
+    if (target.className === 'card') {
+      cards.insertBefore(cardToMove, target.parentNode);  // drop before selected card
     }
-
+    if (target.className === 'list_title' && cards.children.length) {
+      cards.insertBefore(cardToMove, cards.children[0]);  // drop at top of list
+    }
+    if (target.className === 'list_title' && !cards.children.length) {
+      cards.appendChild(cardToMove);  // append to end of list
+    }
+    if (target.className !== 'card' && target.className !== 'list_title') {
+      cards.appendChild(cardToMove);  // append to end of list
+    }
   }
 
 }

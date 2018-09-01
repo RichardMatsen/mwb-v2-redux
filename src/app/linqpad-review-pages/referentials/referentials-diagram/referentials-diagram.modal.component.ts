@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ModalDirective, ModalModule } from 'ngx-bootstrap';
-import { ReferentialsGraphComponent } from '../../../graphs/referentials-graph/referentials-graph.component';
-import { SharedDataService } from '../../../services/shared-data.service';
+import { ReferentialsGraphComponent } from 'app/graphs/referentials-graph/referentials-graph.component';
+import { SharedDataService } from 'app/services/shared-data.service';
 
 @Component({
   selector: 'mwb-referentials-diagram-modal',

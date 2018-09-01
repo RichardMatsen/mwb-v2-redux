@@ -1,8 +1,9 @@
 // tslint:disable:interface-over-type-literal
 
-import { IFileInfo } from '../../model/fileInfo.model';
+import { IFileInfo } from 'app/model/fileInfo.model';
 
 export type PageStateRoot = {
+  currentPage?: string,
   validations?: PageState;
   referentials?: PageState;
   clinics?: PageState;

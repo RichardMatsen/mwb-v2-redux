@@ -44,7 +44,7 @@ function compareArrays(actuals, expecteds): any {
     if (result !== 'pass') {
       return result;
     }
-  };
+  }
 
   return 'pass';
 }
@@ -53,7 +53,7 @@ function compareArrays(actuals, expecteds): any {
   Compares objects irrespective of the property ordering
   and only compares those properties supplied in 'expected'
   Saves a bit of refactoring in tests when 'actual' property order changes,
-  or new properties are added that are irrelevent to the test
+  or new properties are added that are irrelevant to the test
 */
 function compareProperties(actual, expected, idx): any {
 

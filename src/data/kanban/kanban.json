@@ -1,0 +1,100 @@
+{
+  "lists": [
+    {
+      "name": "Unassigned",
+      "cards": [
+        {
+          "id": 1,
+          "status": "Unassigned",
+          "description": "Validations",
+          "effectiveDate": "2017-06-07"
+        }
+      ]
+    },
+    {
+      "name": "In Progress",
+      "cards": [
+        {
+          "id": 2,
+          "status": "In Progress",
+          "description": "Validations",
+          "effectiveDate": "2017-06-06",
+          "assignedTo": "Jim"
+        },
+        {
+          "id": 4,
+          "status": "In Progress",
+          "description": "Clinics",
+          "effectiveDate": "2017-06-07",
+          "assignedTo": "John"
+        },
+        {
+          "id": 3,
+          "status": "In Progress",
+          "description": "Validations",
+          "effectiveDate": "2017-06-05",
+          "assignedTo": "Jack"
+        }
+      ]
+    },
+    {
+      "name": "Waiting",
+      "cards": [
+        {
+          "id": 5,
+          "status": "Waiting",
+          "description": "Clinics",
+          "effectiveDate": "2017-06-06",
+          "assignedTo": "Kyle"
+        },
+        {
+          "id": 6,
+          "status": "Waiting",
+          "description": "Clinics",
+          "effectiveDate": "2017-06-05",
+          "assignedTo": "Kim"
+        }
+      ]
+    },
+    {
+      "name": "Done",
+      "cards": [
+        {
+          "id": 8,
+          "status": "Done",
+          "description": "Clinics",
+          "effectiveDate": "2017-06-03",
+          "assignedTo": "Luke"
+        },
+        {
+          "id": 9,
+          "status": "Done",
+          "description": "Referentials",
+          "effectiveDate": "2017-06-05",
+          "assignedTo": "Lucky"
+        },
+        {
+          "id": 10,
+          "status": "Done",
+          "description": "Validations",
+          "effectiveDate": "2017-06-04",
+          "assignedTo": "Levi"
+        },
+        {
+          "id": 11,
+          "status": "Done",
+          "description": "Validations",
+          "effectiveDate": "2017-06-03",
+          "assignedTo": "Larry"
+        },
+        {
+          "id": 12,
+          "status": "Done",
+          "description": "Validations",
+          "effectiveDate": "2017-06-02",
+          "assignedTo": "Lance"
+        }
+      ]
+    }
+  ]
+}

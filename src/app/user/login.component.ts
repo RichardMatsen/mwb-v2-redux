@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from '@angular-redux/store';
 
+import { select } from 'app/store/store.service';
 import { AuthService } from './auth.service';
 import { IUser } from '../model/user.model';
-import { UserActions } from './user.actions';
+import { StoreService } from 'app/store/store.service';
 import { ifNull } from '../store/selector-helpers/selector-helpers';
 
 @Component({
@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private userActions: UserActions,
+    private store: StoreService
   ) {}
 
   ngOnInit() {
     ifNull(this.users$, () => {
-      this.userActions.initializeUsersRequest();
+      this.store.actions.userActions.initializeUsersRequest();
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }

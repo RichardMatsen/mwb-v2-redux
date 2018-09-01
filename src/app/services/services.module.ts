@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { FileService } from './file-service/file.service';
+import { FileActions } from 'app/store/actions/file.actions';
 import { DataService } from './data-service/data.service';
 import { FormatService } from './data-service/format.service';
 import { NameParsingService } from './data-service/name-parsing.service';
@@ -17,6 +18,7 @@ import { InMemUsersService } from './in-memory-db/in-memory-db';
   providers: [
     NameParsingService,
     FileService,
+    FileActions,
     ListFormatterService,
   ],
 })

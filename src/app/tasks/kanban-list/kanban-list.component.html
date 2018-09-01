@@ -2,7 +2,7 @@
 
   <p class="list_title"><strong>{{list?.name}}</strong></p>
 
-  <div class="cards">
+  <div #cards class="cards">
 		<mwb-kanban-card *ngFor="let card of list?.cards" [card]="card" ></mwb-kanban-card>
 	</div>
 	

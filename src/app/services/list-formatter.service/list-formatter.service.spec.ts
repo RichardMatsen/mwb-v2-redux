@@ -6,7 +6,7 @@ describe('ListFormatterService', () => {
 
   describe('fileInfoComparer', () => {
 
-    const fileInfoComparer = ListFormatterService.fileInfoComparer;
+    const fileInfoComparer = listFormatterService.fileInfoComparer;
 
     describe('checking for valid effectiveDates', () => {
 

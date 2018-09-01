@@ -1,7 +1,7 @@
 import { Action, Reducer } from 'redux';
 import { MeasureState } from '../state/measure.state';
-import { IMeasure } from '../../model/measure.model';
-import { MeasureActions } from '../../dashboard/measure.actions';
+import { IMeasure } from 'app/model/measure.model';
+import { MeasureActions } from 'app/store/actions/measure.actions';
 import { GenericReducerFactory } from './generic.reducer';
 
 const initialState: IMeasure[] = [];

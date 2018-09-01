@@ -1,7 +1,7 @@
 import { Action } from 'redux';
-import { IUser } from '../../model/user.model';
+import { IUser } from 'app/model/user.model';
 import { userReducer } from './user.reducer';
-import { UserActions } from '../../user/user.actions';
+import { UserActions } from 'app/store/actions/user.actions';
 import { userInitialState } from '../state/user.state';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
 import { HttpMiddleware } from '../middleware/http.middleware';

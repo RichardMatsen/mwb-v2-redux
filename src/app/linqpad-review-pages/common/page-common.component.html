@@ -3,7 +3,7 @@
     <div class="row bannertitle">
       <h1 class="pageTitle">{{config?.pageTitle}}</h1>
       <ng-content select="[banner-button]"></ng-content>
-      <mwb-search class="bordered"></mwb-search>
+      <mwb-search></mwb-search>
     </div>
     <span class="pageDescription">{{config?.pageDescription}}</span>
     <hr/>
@@ -24,6 +24,9 @@
           <h3 class="title">
             <span class="titleText">{{(fileInfo$ | async)?.name}}</span>
             <error-badge #errorbadge [item]="fileInfo$ | async" [units]="config?.badgeUnits"></error-badge>
+            <search-indicator *ngIf="(searchCount$ | async)" class="search-indicator pull-right" 
+              [count]="(searchCount$ | async)">
+            </search-indicator>
           </h3>
           <h6>
             <span>Last modified: {{(fileInfo$ | async)?.lastModified}}</span>

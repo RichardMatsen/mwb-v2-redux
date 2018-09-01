@@ -1,16 +1,16 @@
-import '../../rxjs-extensions';
+import 'app/rxjs-extensions';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BaseRequestOptions, Http, HttpModule, Response, ResponseOptions, ResponseType, Headers, RequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
-import { UiActions } from '../../common/ui-actions/ui.actions';
-import { ConfigActions } from '../../services/config/config.actions';
+import { UiActions } from 'app/store/actions/ui.actions';
+import { ConfigActions } from 'app/store/actions/config.actions';
 import { HttpMiddleware } from '../middleware/http.middleware';
 import { DummyAppComponent, DummyTargetComponent, setupMockStore,
          MockError, MockResponse } from 'testing-helpers/testing-helpers.module.hlpr';
-import { ObjectShapeComparer } from '../../common/object-shape-comparer/object-shape-comparer';
+import { ObjectShapeComparer } from 'app/common/object-shape-comparer/object-shape-comparer';
 
 describe('httpMiddleware', () => {
 

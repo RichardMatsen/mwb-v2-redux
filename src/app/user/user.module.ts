@@ -7,12 +7,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InMemoryWebApiModule, InMemoryBackendConfigArgs } from 'angular-in-memory-web-api';
 
 import { userRoutes } from './user.routes';
-import { UserActions } from './user.actions';
+import { UserActions } from 'app/store/actions/user.actions';
 import { ProfileComponent } from './profile.component';
 import { LoginComponent } from './login.component';
 import { AuthService } from './auth.service';
-import { ToastrService } from '../common/toastr/toastr.service';
-import { InMemUsersService } from '../services/in-memory-db/in-memory-db';
+import { ToastrService } from 'app/common/toastr/toastr.service';
+import { InMemUsersService } from 'app/services/in-memory-db/in-memory-db';
 
 @NgModule({
   imports: [
@@ -44,6 +44,7 @@ export class UserModule {
     return {
       ngModule: UserModule,
       providers: [
+        UserActions,
         AuthService,
         ToastrService
       ]

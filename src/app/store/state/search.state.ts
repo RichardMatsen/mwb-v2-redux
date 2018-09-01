@@ -4,12 +4,14 @@ export type SearchState = {
   page?: string,
   pageIsSearchable?: boolean,
   searchTerm?: string,
-  results?: string[]
+  results?: string[],
+  searchCount?: number
 };
 
 export const searchInitialState: SearchState = {
   page: null,
   pageIsSearchable: false,
   searchTerm: null,
-  results: []
+  results: [],
+  searchCount: 0
 };

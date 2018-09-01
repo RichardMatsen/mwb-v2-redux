@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { IFileInfo } from '../../model/fileInfo.model';
-
-declare var require
-const x = require('./list-formatter-observable-extensions');
+import { IFileInfo } from 'app/model/fileInfo.model';
 
 @Injectable()
 export class ListFormatterService {
 
-  public static fileInfoComparer(a: IFileInfo, b: IFileInfo): number {
+  public process(files$: Observable<IFileInfo[]>): Observable<IFileInfo[]> {
+    return files$
+      .map(files => files.sort(this.fileInfoComparer))
+      .map(files => this.applySequence(files));
+  }
+
+  fileInfoComparer(a: IFileInfo, b: IFileInfo): number {
     if (!a.effectiveDate || !b.effectiveDate) {
       throw new Error('Effective dates not valid. a: ' + a + ', b: ' + b);
     }
@@ -21,10 +24,12 @@ export class ListFormatterService {
                     a.effectiveTime < b.effectiveTime ? 1 : 0;
   }
 
-  public process(filesOnDisk: Observable<IFileInfo>): Observable<IFileInfo> {
-    return filesOnDisk
-      .sort$(ListFormatterService.fileInfoComparer)
-      .sequenceDisplay$(this.sequencer);
+  applySequence = (files: IFileInfo[]): IFileInfo[] => {
+    return files.reduce((acc, current) => {
+      const previous = acc[acc.length - 1];
+      const sequenced = this.sequencer(previous, current);
+      return [...acc, sequenced];
+    }, []);
   }
 
   sequencer = (previous: IFileInfo, current: IFileInfo): IFileInfo => {
@@ -45,7 +50,7 @@ export class ListFormatterService {
 
   hasSameFileNameAndDate(previous: IFileInfo, current: IFileInfo): boolean {
     return previous.baseName === current.baseName &&
-           previous.effectiveDate.getTime() === current.effectiveDate.getTime();
+      previous.effectiveDate.getTime() === current.effectiveDate.getTime();
   }
 
   setDisplayName = (fileInfo: IFileInfo) => {

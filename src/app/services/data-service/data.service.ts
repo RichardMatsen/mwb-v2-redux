@@ -1,31 +1,33 @@
-import '../../rxjs-extensions';
+import 'app/rxjs-extensions';
 
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { NgRedux, select } from '@angular-redux/store';
 
-import { IAppState } from '../../store/state/AppState';
-import { IFileInfo } from '../../model/fileInfo.model';
+import { select } from 'app/store/store.service';
+import { IAppState } from 'app/store/state/AppState';
+import { IFileInfo } from 'app/model/fileInfo.model';
 import { FormatService } from './format.service';
 import { NameParsingService } from './name-parsing.service';
 import { ListFormatterService } from '../list-formatter.service/list-formatter.service';
 import { FileService } from '../file-service/file.service';
-import { MigrationWorkBenchCommonModule, ToastrService, Logger, maskedTrim } from '../../common/mw.common.module';
-import { IMeasureUpdate } from '../../model/measure.model';
-import { PageActions } from '../../linqpad-review-pages/common/page.actions';
+import { MigrationWorkBenchCommonModule, ToastrService, Logger, maskedTrim } from 'app/common/mw.common.module';
+import { IMeasureUpdate } from 'app/model/measure.model';
+import { PageActions } from 'app/store/actions/page.actions';
 
 @Injectable()
 export abstract class DataService {
 
   @select(['config', 'baseDataUrl']) baseDataUrl$: Observable<string>;
+  @select(['file', 'fileList', 'files']) fileNames$: Observable<string[]>;
   public abstract config$: Observable<any>;
   public abstract files$: Observable<IFileInfo[]>;
 
-  protected abstract PAGE;
-  protected baseUrl;
-  protected filePrefixes;
+  protected abstract PAGE: string;
+  protected baseUrl: string;
+  protected filePrefixes: string[];
 
   constructor (
     protected formatService: FormatService,
@@ -36,9 +38,17 @@ export abstract class DataService {
     protected pageActions: PageActions,
   ) {}
 
-  public abstract getMeasure(): Observable<IMeasureUpdate>;
+  protected abstract getLatestMeasureFromFiles(files: IFileInfo[]): IMeasureUpdate;
+  protected abstract calcHistory(files: IFileInfo[]): number[];
 
-  protected getBaseUrl$() {
+  public getMeasure(): Observable<IMeasureUpdate> {
+    return this.files$
+      .waitFor$(data => data.length)
+      .map(files => files.filter(file => file.content))  // exclude any file not yet read or not found on disk
+      .map(this.getLatestMeasureFromFiles.bind(this));   // use bind to change method's context
+  }
+
+  protected getBaseDataUrl$() {
     return this.baseDataUrl$
       .waitFor$()
       .do(baseUrl => {
@@ -46,43 +56,55 @@ export abstract class DataService {
       });
   }
 
-  public initializeList(numToInitialize, numToDisplay) {
+  public initializeFileList(numToInitialize, numToDisplay) {
     this.pageActions.initializeListRequest();
-    const source$ = this.getFileListFromFolder();
-    const ordered$ = this.listFormatterService.process(source$);
-    this.withContent$(ordered$, numToInitialize)
-      .subscribe(
-        (files) => { this.pageActions.initializeListSuccess(files, numToDisplay); },
-        (error) => { this.pageActions.initializeListFailed(error); }
-      );
+    this.fileService.getFileList(this.baseUrl);
+    const parsed$ = this.parsed$(this.filesOfType$);
+    const ordered$ = this.listFormatterService.process(parsed$);
+    const withContent$ = this.withContent$(ordered$, numToInitialize);
+    withContent$.subscribe(
+      (files) => { this.pageActions.initializeListSuccess(files, numToDisplay); },
+      (error) => { this.pageActions.initializeListFailed(error); }
+    );
+  }
+
+  get filesOfType$(): Observable<string[]> {
+    return this.fileNames$
+      .waitFor$()  // ensures can move between Observable<fileInfo> and Observable<fileIno[]> with .toArray()
+      .map(files => files.filter(file =>
+        this.filePrefixes.some(value => file.startsWith(value))
+      ));
+  }
+
+  protected parsed$(files$: Observable<string[]>): Observable<IFileInfo[]> {
+    return files$.map(files =>
+      this.nameParsingService.parseFiles(files, this.filePrefixes)
+    );
   }
 
   public updateList(numToDisplay: number) {
     this.pageActions.updateListRequest();
-
-    const source$ = this.files$
-      .take(1)                           // ensure it completes - first value is the complete list
-      .mergeMap(files => files);         // convert to observable of list items
-
-    this.withContent$(source$, numToDisplay)
+    const files$ = this.files$.take(1);  // read once - otherwise, endlessly loops due to self update
+    this.withContent$(files$, numToDisplay)
       .subscribe(
         (files) => { this.pageActions.updateListSuccess(files, numToDisplay); },
         (error) => { this.pageActions.updateListFailed(error); }
       );
   }
 
-  private withContent$(source$: Observable<IFileInfo>, numToInitialize: number): Observable<IFileInfo[]> {
-    const withContent$ = source$
-      .concatMap((file, index) =>                   // Use concatMap to preserve ordering
-        file.content || index >= numToInitialize
+  private withContent$(files$: Observable<IFileInfo[]>, numToInitialize: number): Observable<IFileInfo[]> {
+    return files$.concatMap(files => {
+      const withContent$ = files.map((file, index) => {
+        return file.content || index >= numToInitialize
           ? Observable.of(file)
-          : this.getContent(file)
-      )
-      .catch(error => this.handleError(error, 'getContentForList$'));
-    return withContent$.toArray();
+          : this.getContent(file);
+      });
+      return forkJoin(...withContent$);
+    })
+    .catch(error => this.handleError(error, 'withContent$'));
   }
 
-  private getContent(fileInfo: IFileInfo): Observable<IFileInfo> {
+  public getContent(fileInfo: IFileInfo): Observable<IFileInfo> {
     const url = this.baseUrl + fileInfo.name + '.html';
     return this.fileService.getFile(url)
       .map((res: Response) => {
@@ -93,12 +115,6 @@ export abstract class DataService {
         return this.formatService.processContent(content, newFileInfo);
       })
       .catch(error => this.handleError(error, 'getContent'));
-  }
-
-  public getFileListFromFolder(): Observable<IFileInfo> {
-    return this.fileService.getFileList(this.baseUrl, this.filePrefixes)
-      .map(file => this.nameParsingService.parseFile(file, this.filePrefixes))
-      .catch(error => this.handleError(error, 'getFileListFromFolder'));
   }
 
   protected filesByDate(files) {

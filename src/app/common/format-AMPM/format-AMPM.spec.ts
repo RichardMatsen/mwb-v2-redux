@@ -3,7 +3,7 @@ import { formatAMPM } from './format-AMPM';
 describe('format-AMPM', () => {
 
   const tests = [
-    { input: new Date(0), output: '1:00:00 pm'},
+    { input: new Date(0), output: '12:00:00 pm'},
     { input: new Date(2016, 6, 4, 6, 54, 33), output: '6:54:33 am'},
     { input: new Date(2016, 6, 4, 18, 54, 33), output: '6:54:33 pm'},
     { input: null, output: null},

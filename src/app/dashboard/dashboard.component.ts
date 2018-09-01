@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { select } from '@angular-redux/store';
 
-import { IMeasure } from '../model/measure.model';
-import { StyleWithLess } from '../common/mw.common.module';
+import { select } from 'app/store/store.service';
+
+import { IMeasure } from 'app/model/measure.model';
+import { StyleWithLess } from 'app/common/mw.common.module';
 import { MeasureService } from './measure.service';
 
 @StyleWithLess({
@@ -36,8 +37,9 @@ import { MeasureService } from './measure.service';
   `,
   // STANDARD ANGULAR STYLES DECLARATION - replaced by LESS format above
   // styles: [
+  //   'mat-card { margin-top: .8em; }',
   //   'div.dashboard { padding-left: .8em; }',
-  //   'mat-card { margin-top: .8em; }'
+  //   'div.dashboard h1 { margin-top: 10px; font-size: 2.5em }',
   //   ]
 })
 export class DashboardComponent implements OnInit {
@@ -45,7 +47,7 @@ export class DashboardComponent implements OnInit {
   @select('measures') measures$: Observable<IMeasure[]>;
 
   constructor(
-    private measureService: MeasureService,
+    private measureService: MeasureService
   ) {}
 
   ngOnInit() {

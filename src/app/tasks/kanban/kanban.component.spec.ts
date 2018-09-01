@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TasksModule } from '../tasks.module';
 import { KanbanComponent } from './kanban.component';
-// import { KanbanListComponent } from '../kanban-list/kanban-list.component';
 
 describe('KanbanComponent', () => {
   let component: KanbanComponent;

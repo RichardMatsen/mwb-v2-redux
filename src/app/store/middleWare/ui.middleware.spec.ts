@@ -1,10 +1,10 @@
-import '../../rxjs-extensions';
+import 'app/rxjs-extensions';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
-import { UiActions } from '../../common/ui-actions/ui.actions';
+import { UiActions } from 'app/store/actions/ui.actions';
 import { UiMiddleware } from '../middleware/ui.middleware';
-import { ToastrService } from '../../common/mw.common.module';
+import { ToastrService } from 'app/common/mw.common.module';
 
 describe('uiMiddleware', () => {
 
@@ -35,7 +35,7 @@ describe('uiMiddleware', () => {
   );
 
   describe('when action has uiStartLoading property', () => {
-    it('should call uiActions.incementLoading()', () => {
+    it('should call uiActions.incrementLoading()', () => {
       const action = { type: 'NOP', uiStartLoading: 'test action' };
       const middleware = uiMiddleware.uiMiddlewareFactory();
       const spy = spyOn(uiActions, 'incrementLoading');

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { MatCardModule } from '@angular/material';
-import { RouterModule } from '@angular/router';
+// import { RouterModule } from '@angular/router';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
@@ -15,7 +15,7 @@ import { LinqpadPagesModule } from './linqpad-review-pages/linqpad-pages.module'
 import { StoreModule } from './store/store.module';
 import { UserModule } from './user/user.module';
 import { NavModule } from './nav/nav.module';
-import { MigrationWorkBenchCommonModule, Logger, loggerFactory, SpinnerComponent } from './common/mw.common.module';
+import { MigrationWorkBenchCommonModule, Logger, loggerFactory } from './common/mw.common.module';
 import { AppRoutingModule } from './app-routing.module';
 import { TasksModule } from './tasks/tasks.module';
 import { SharedDataService } from './services/shared-data.service';
@@ -49,7 +49,10 @@ import { SharedDataService } from './services/shared-data.service';
     AppComponent,
   ],
   providers: [
-    { provide: Logger, useFactory: loggerFactory },
+    {
+      provide: Logger,
+      useFactory: loggerFactory
+    },
     SharedDataService,
  ],
   bootstrap: [AppComponent]

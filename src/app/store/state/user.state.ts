@@ -1,6 +1,6 @@
 // tslint:disable:interface-over-type-literal
 
-import { IUser } from '../../model/user.model';
+import { IUser } from 'app/model/user.model';
 
 export type UserState = {
   currentUser?: IUser,

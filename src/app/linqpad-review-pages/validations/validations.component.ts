@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
 
-import { ValidationsActions } from './services/validations.actions';
+import { select } from 'app/store/store.service';
+import { ValidationsActions } from 'app/store/actions/validations.actions';
 import { ValidationsDataService } from './services/validations-data.service';
 
 @Component({

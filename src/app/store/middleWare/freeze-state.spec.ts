@@ -1,5 +1,5 @@
-import '../../rxjs-extensions';
-import { freezeState, deepFreeze } from './freeze-state';
+import 'app/rxjs-extensions';
+import { freezeState, deepFreeze } from 'app/store/middleware/freeze-state';
 
 describe('freezeState', () => {
 

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, SimpleChange } from '@angular/core';
 
 @Component({
-  selector: 'list-limiter',
+  selector: 'mwb-list-limiter',
   template: `
   <li>
     <span class="moreChevron" [ngClass]="{'disabled' : !isMore}">

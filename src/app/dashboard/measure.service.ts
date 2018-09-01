@@ -2,15 +2,15 @@ import '../rxjs-extensions';
 import { Injectable} from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select, select$ } from '@angular-redux/store';
 
+import { StoreService, select } from 'app/store/store.service';
 import { IMeasure, IMeasureUpdate } from '../model/measure.model';
 import { IAppState } from '../store/state/AppState';
 import { ValidationsDataService } from '../linqpad-review-pages/validations/services/validations-data.service';
 import { ReferentialsDataService } from '../linqpad-review-pages/referentials/services/referentials-data.service';
 import { ClinicsDataService } from '../linqpad-review-pages/clinics/services/clinics-data.service';
 import { ifNull } from '../store/selector-helpers/selector-helpers';
-import { MeasureActions } from './measure.actions';
+import { IFileInfo } from '../model/fileInfo.model';
 
 @Injectable()
 export class MeasureService {
@@ -21,20 +21,19 @@ export class MeasureService {
 
   constructor(
     private http: Http,
-    private ngRedux: NgRedux<IAppState>,
     private validationsDataService: ValidationsDataService,
     private referentialsDataService: ReferentialsDataService,
     private clinicsDataService: ClinicsDataService,
-    private measureActions: MeasureActions,
+    private store: StoreService
   ) {}
 
   public initializeMeasures() {
     ifNull(this.measures$, () => {
-      this.measureActions.initializeMeasuresRequest();
+      this.store.actions.measureActions.initializeMeasuresRequest();
       this.getMeasures()
         .subscribe(
-          (measures) => { this.measureActions.initializeMeasuresSuccess(measures); },
-          (error) => { this.measureActions.initializeMeasuresFailed(error); },
+          (measures) => { this.store.actions.measureActions.initializeMeasuresSuccess(measures); },
+          (error) => { this.store.actions.measureActions.initializeMeasuresFailed(error); },
         );
     });
   }
@@ -57,7 +56,7 @@ export class MeasureService {
         this.getAllMeasureUpdates()
           .subscribe(measureUpdate => {
             if (this.hasChanged(measures, measureUpdate)) {
-              this.measureActions.updateMeasure(measureUpdate);
+              this.store.actions.measureActions.updateMeasure(measureUpdate);
             }
           });
       });
@@ -76,7 +75,7 @@ export class MeasureService {
   }
 
   private getMeasure(measureId, dataService): Observable<IMeasureUpdate> {
-    const filesSelector$ = this.ngRedux.select(['pages', measureId, 'files']);
+    const filesSelector$ = this.store.select<IFileInfo[]>(['pages', measureId, 'files']);
     ifNull(filesSelector$, () => {
       dataService.initializeList();
     });

@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from '@angular-redux/store';
 
-import { IFileInfo } from '../../model/fileInfo.model';
-import { IAppState } from '../../store/state/AppState';
-import { spreadSelector } from '../../store/selector-helpers/spread-selector';
-import { Computed } from '../../store/computed/computed-properties';
+import { StoreService, select } from 'app/store/store.service';
+import { IFileInfo } from 'app/model/fileInfo.model';
+import { IAppState } from 'app/store/state/AppState';
+import { spreadSelector } from 'app/store/selector-helpers/spread-selector';
+import { SearchResultsModalComponent } from './search/search-results.modal';
 
 @Component({
   selector: 'mwb-page-common',
@@ -13,6 +13,8 @@ import { Computed } from '../../store/computed/computed-properties';
   styleUrls: ['./page-common.component.css']
 })
 export class PageCommonComponent implements OnInit, OnDestroy {
+
+  @ViewChild(SearchResultsModalComponent) searchResultsModal: SearchResultsModalComponent;
 
   @Input() config;
   @Input() PAGE;
@@ -23,19 +25,20 @@ export class PageCommonComponent implements OnInit, OnDestroy {
   numVisible$;
   lastRefresh$;
 
+  searchCount$ = this.store.select(['search', 'searchCount']);
+
   // Computed state
   fileCount$;
   visibleFiles$;
 
   constructor(
-    private ngRedux: NgRedux<IAppState>,
-    private computed: Computed
+    private store: StoreService
   ) {}
 
   ngOnInit() {
-    this.services.page = spreadSelector({self: this}, ['pages', this.PAGE]);
-    this.visibleFiles$ = this.computed.visibleFiles$(this.PAGE);
-    this.fileCount$ = this.computed.fileCount$(this.PAGE);
+    spreadSelector({self: this, baseSelector: ['pages', this.PAGE]});
+    this.visibleFiles$ = this.store.computed.visibleFiles$(this.PAGE);
+    this.fileCount$ = this.store.computed.fileCount$(this.PAGE);
   }
 
   handleFileChange(fileInfo: IFileInfo) {
@@ -47,8 +50,7 @@ export class PageCommonComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    // Note: bracket notation required due to spreadSelector()
-    this['fileInfo$'].take(1).subscribe(fileInfo => {
+    this.fileInfo$.take(1).subscribe(fileInfo => {
       this.services.dataService.getContent(fileInfo).subscribe(refreshed => {
         this.services.actions.refresh(refreshed);
       });
@@ -56,7 +58,6 @@ export class PageCommonComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.services.page.unsubscribe();
   }
 
 }

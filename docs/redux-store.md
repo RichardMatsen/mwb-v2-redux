@@ -1,5 +1,4 @@
-
-# Redux Store
+## Redux Store
 
 Here are some notes about implementing redux.
 
@@ -14,16 +13,18 @@ On the other hand, @Inputs and @Outputs more explicitly show the coupling betwee
 Using redux state instead of an Angular service to share data gives a cleaner application. The shared service must be injected, and must be provided in the appropriate place in the injector tree. Mistakes in injector placement can lead to different instances being used.  
 For example, in this app, we want to cache files read from disk so they can be used on the Dashboard or on the detail pages. Without Redux, the cache is implemented in a service provided at the app level and injected into each page.
 
+### Redux described
 
-## Redux described
 Redux moves state out of components and into a central store object. State updates are carried out by issuing actions, and state usage is via subcription to observables of parts of the overall state. State changes occur in reducer functions, which preserve the previous state.  
 
 **The primary advantages are:**
+
 * clearer state management, particularly when more than one component uses the same state
 * automatic audit trail, and nice debugging tool with the chrome devtool
 * separation of state update code makes it more testable
 
 **Disadvantages are:**
+
 * State access via subscriptions means more complex usage expressions
   * Async pipe is required in templates
   * Code access requires subscription  
@@ -38,11 +39,14 @@ Redux moves state out of components and into a central store object. State updat
   * therefore, it is easiest to make state branches nullable
   * subscriptions on nullable brances may return null (until initialized), and therefore need additional guard code at the point of use. See section below on **selector-helpers**.
 
-## The library
-Redux state store was implemented with [angular-redux/store](https://github.com/angular-redux/store). This library is relatively unopinionated, so is a good choice if you want to work from basic principles.  
+### The library
+
+Redux state store was implemented with [angular-redux/store](https://github.com/angular-redux/store). This library is relatively un-opinionated, so is a good choice if you want to work from basic principles.  
 
 This library provides:
+
 * an injectable reference to the store, mainly used to access the `dispatch()` function
+
 ```javascript
   import { NgRedux } from '@angular-redux/store';
   import { IAppState } from '../store/state/AppState';
@@ -54,18 +58,21 @@ This library provides:
 ```
 
 * an observable decorator for component properties
+
 ```javascript
   import { select } from '@angular-redux/store';
 
   @select('measures') measures$: Observable<IMeasure[]>
 ```
 
-### Steps to implement
+#### Steps to implement
 
 1. **Initilize the store.** The common pattern is to use `createStore()` or `configureStore()` in the root app module. A slightly better approach is the do this work in a StoreModule and import it into the root app module.
-Ref: ['angular-redux/example-app/src/app/store/store.module.ts'](https://github.com/angular-redux/example-app/blob/master/src/app/store/store.module.ts)  
 
-    _app.module.ts_
+  Ref: ['angular-redux/example-app/src/app/store/store.module.ts'](https://github.com/angular-redux/example-app/blob/master/src/app/store/store.module.ts)  
+
+    - _app.module.ts_  
+  
     ```javascript
       import { StoreModule } from './store/store.module';
       ...
@@ -80,7 +87,9 @@ Ref: ['angular-redux/example-app/src/app/store/store.module.ts'](https://github.
       export class AppModule {}
 
     ```
-    _store.module.ts (simplified)_
+
+    - _store.module.ts (simplified)_
+  
     ```javascript
     import { NgReduxModule, NgRedux, DevToolsExtension } from '@angular-redux/store';
     import { reduxLogger, createLogger } from 'redux-logger';
@@ -109,7 +118,9 @@ Ref: ['angular-redux/example-app/src/app/store/store.module.ts'](https://github.
       }
     }
     ```
-2. **Create actions.** Actions are simple declarative notification of events. As in all event based patterns, the benefits for extra effort are:
+
+1. **Create actions.** Actions are simple declarative notification of events. As in all event based patterns, the benefits for extra effort are:
+
     * Separation of event cause from event handling, so easier testing (less mocking).
     * Cross-cutting concerns (logging, async calls) implemented in middleware, part of the pipeline.
     * An easy hook to log the events, along with a great tool to review (redux chrome devtool). 

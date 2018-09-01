@@ -1,4 +1,4 @@
-# Redux Middleware
+## Redux Middleware
 
 ### **freezeState**
 
@@ -36,6 +36,7 @@ this.ngRedux.configureStore(
 ```
 
 Testing the `freezeState` function
+
 ```javascript
 const state = { x: 1 };
 const mockStore = jasmine.createSpyObj('mockStore', ['dispatch', 'getState']);
@@ -49,12 +50,14 @@ it('should freeze state', () => {
   expect(() => { state.x = 2; }).toThrow( new TypeError("Cannot assign to read only property 'x' of object '[object Object]'"));
 });
 ```
+
 -------------------
 
 ### **httpMiddleware**
 
 This provides common code for http get requests initiated via actions.  
 The middleware is triggered if the action has a property `httpRequest`.
+
 - maps to success action or failure action
 - validation of response (optional)
 - triggers and removes UI loading indicator
@@ -90,10 +93,11 @@ export class SpinnerComponent {
   @select(['ui', 'activeRequests']) activeRequests$: number;
 }
 ```
+
 When a service wants to flag a long-running process, it dispatches an action with the `uiStartLoading` property.  
 It then signals completion by dispatching another action with the `uiEndLoading` property.
 
-For example, when measures are calculated there is formatting and aggregation taking place that is long enough to justify spinner display. 
+For example, when measures are calculated there is formatting and aggregation taking place that is long enough to justify spinner display.
 
 ```javascript
 export class MeasureActions {
@@ -129,7 +133,7 @@ export class MeasureActions {
 
 Note that the ui state `activeRequests` property allows for multiple concurrent triggers (the spinner is shown as long as activeRequests > 0).
 
-#### UI middleware type and factory 
+### UI middleware type and factory
 
 ```javascript
 export type UiActionType = {
@@ -144,11 +148,11 @@ uiMiddlewareFactory() {
   const vm = this;
   return function uiMiddleware(store) {
     return (next) => (action) => {
-      if (!!action.uiStartLoading) {
-        vm.uiActions.incrementLoading(action.uiStartLoading);
+      if (action.uiStartLoading) {
+        vm.uiActions.incrementLoading(action.type);
       }
-      if (!!action.uiEndLoading) {
-        vm.uiActions.decrementLoading(action.uiEndLoading);
+      if (action.uiEndLoading) {
+        vm.uiActions.decrementLoading(action.type);
       }
       if (!!action.toastr) {
         vm.toastr.info(action.toastr);

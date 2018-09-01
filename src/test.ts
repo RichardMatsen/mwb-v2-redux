@@ -26,59 +26,71 @@ getTestBed().initTestEnvironment(
 );
 // Then we find all the tests.
 const context = require.context('./', true, /\.spec\.ts$/);
+// const context = require.context('./', true, /\data.service.spec\.ts$/);
 
 /* Services */
-// let context = require.context('./', true, /data.service.base\.spec\.ts/);
-// let context = require.context('./', true, /clinics-data.service\.spec\.ts/);
-// let context = require.context('./', true, /referentials-data.service\.spec\.ts/);
-// let context = require.context('./', true, /validations-data.service\.spec\.ts/);
-// let context = require.context('./', true, /measure.service\.spec\.ts/);
-// let context = require.context('./', true, /file.service\.spec\.ts/);
-// let context = require.context('./', true, /name-parsing.service\.spec\.ts/);
-// let context = require.context('./', true, /format.service\.spec\.ts/);
-// let context = require.context('./', true, /validations-format.service\.spec\.ts/);
-// let context = require.context('./', true, /clinics-format.service\.spec\.ts/);
-// let context = require.context('./', true, /referentials-format.service\.spec\.ts/);
-// let context = require.context('./', true, /auth.service.spec\.ts/);
-// let context = require.context('./', true, /list-formatter-observable-extensions\.spec\.ts/);
+// context.keys = () => [
+//   // './app/services/data-service/data.service.base.spec.ts',
+//   // './app/linqpad-review-pages/clinics/services/clinics-data.service.spec.ts',
+//   // './app/linqpad-review-pages/referentials/services/referentials-data.service.spec.ts',
+//   // './app/linqpad-review-pages/validations/services/validations-data.service.spec.ts',
+//   // './app/dashboard/measure.service.spec.ts',
+//   // './app/services/file-service/file.service.spec.ts',
+//   // './app/services/data-service/name-parsing.service.spec.ts',
+//   // './app/services/data-service/format.service.spec.ts',
+//   // './app/linqpad-review-pages/validations/services/validations-format.service.spec.ts',
+//   // './app/linqpad-review-pages/clinics/services/clinics-format.service.spec.ts',
+//   // './app/linqpad-review-pages/referentials/services/referentials-format.service.spec.ts',
+//   // './app/user/auth.service.spec.ts',
+//   // './app/nav/routing-history/routing-history.service.spec.ts',
+// ];
 
 /* Redux store */
-// let context = require.context('./', true, /measure.actions\.spec\.ts/);
-// let context = require.context('./', true, /config.actions\.spec\.ts/);
-// let context = require.context('./', true, /page.actions\.spec\.ts/);
-// let context = require.context('./', true, /user.actions\.spec\.ts/);
-
-// let context = require.context('./', true, /root.reducer\.spec\.ts/);
-// let context = require.context('./', true, /page.reducer\.spec\.ts/);
-// let context = require.context('./', true, /page.reducer.verbose\.spec\.ts/);
-// let context = require.context('./', true, /search.reducer.spec.ts/);
-// let context = require.context('./', true, /config.reducer.spec.ts/);
-// let context = require.context('./', true, /user.reducer.spec.ts/);
-// let context = require.context('./', true, /ui.reducer.spec.ts/);
-// let context = require.context('./', true, /measure.reducer.spec.ts/);
-
-// let context = require.context('./', true, /deep-clone.spec.ts/);
-// let context = require.context('./', true, /freeze-state.spec.ts/);
-// let context = require.context('./', true, /http.middleware.spec.ts/);
-// let context = require.context('./', true, /ui.middleware.spec.ts/);
-// let context = require.context('./', true, /selector-helpers\.spec\.ts/);
-// let context = require.context('./', true, /selector-helpers.observable\.spec\.ts/);
+// context.keys = () => [
+//   './app/dashboard/measure.actions.spec.ts',
+//   './app/services/config/config.actions.spec.ts',
+//   './app/linqpad-review-pages/common/page.actions.spec.ts',
+//   './app/user/user.actions.spec.ts',
+//   './app/store/reducers/root.reducer.spec.ts',
+//   './app/store/reducers/page.reducer.spec.ts',
+//   './app/store/reducers/page.reducer.verbose.spec.ts',
+//   './app/store/reducers/search.reducer.spec.ts',
+//   './app/store/reducers/config.reducer.spec.ts',
+//   './app/store/reducers/user.reducer.spec.ts',
+//   './app/store/reducers/ui.reducer.spec.ts',
+//   './app/store/reducers/measure.reducer.spec.ts',
+//   './app/store/util/deep-clone.spec.ts',
+//   './app/store/middleWare/freeze-state.spec.ts',
+//   './app/store/middleWare/http.middleware.spec.ts',
+//   './app/store/middleWare/ui.middleware.spec.ts',
+//   './app/store/selector-helpers/selector-helpers.spec.ts',
+//   './app/store/selector-helpers/selector-helpers.observable.spec.ts',
+//   './app/store/computed/computed-properties.spec.ts',
+// ];
 
 /* Components */
-// let context = require.context('./', true, /app.component\.spec\.ts/);
-// let context = require.context('./', true, /dashboard.component\.spec\.ts/);
-// let context = require.context('./', true, /search.component\.spec\.ts/);
+// context.keys = () => [
+//   './app/app.component.spec.ts',
+//   './app/nav/navbar.component.spec.ts',
+//   // './app/nav/four-0-four/404.component.spec.ts',
+//   './app/dashboard/dashboard.component.spec.ts',
+//   './app/linqpad-review-pages/common/search/search.component.spec.ts',
+//   // './app/login/login.component.spec.ts',
+//   './app/tasks/kanban/kanban.component.spec.ts',
+//   './app/tasks/kanban-list/kanban-list.component.spec.ts',
+//   './app/tasks/kanban-card/kanban-card.component.spec.ts',
+//   './app/common/list-limiter/list-limiter.component.spec.ts',
+//   './app/graphs/sparkline/sparkline.component.spec.ts',
+// ];
 
 /* Common */
-// let context = require.context('./', true, /object-shape-comparer\.spec\.ts/);
-// let context = require.context('./', true, /marble-testing\.spec\.ts/);
-// let context = require.context('./', true, /format-AMPM\.spec\.ts/);
-// let context = require.context('./', true, /subscribeAndExpect.hlpr.spec.ts/);
-// let context = require.context('./', true, /sparkline.component.spec.ts/);
-// let context = require.context('./', true, /logger.spec.ts/);
-
-
-
+// context.keys = () => [
+//   './app/common/object-shape-comparer/object-shape-comparer.spec.ts',
+//   './app/common/format-AMPM/format-AMPM.spec.ts',
+//   './testing-helpers/marble-testing/marble-testing.spec.ts',
+//   './testing-helpers/subscribeAndExpect/subscribeAndExpect.hlpr.spec.ts',
+//   './app/common/logger/logger.spec.ts',
+// ];
 
 // And load the modules.
 context.keys().map(context);

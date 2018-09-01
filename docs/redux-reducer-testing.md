@@ -1,11 +1,11 @@
+## Simplifying Reducer Testing
 
-# Simplifying Reducer Testing
-
-Reducers are pure functions, so testing them is fairly straight forward, just input exisiting state and action, and check the returned state.  
+Reducers are pure functions, so testing them is fairly straight forward, just input existing state and action, and check the returned state.  
 
 However, as more state is added to the store, the standard test format [Redux - Writing Tests](https://redux.js.org/recipes/writing-tests#reducers) leads to a lot of verbose boiler plate and tests which are brittle when refactoring state.  
 
-## Shaping actions and reducers for better tests.
+### Shaping actions and reducers for better tests
+
 The effort in testing reducers can be dramatically reduced by adopting certain **conventions**:  
 
 - The action payload should have the same shape / properties as the state slice being updated.  
@@ -13,6 +13,7 @@ The effort in testing reducers can be dramatically reduced by adopting certain *
 - Reducer code should be dumb. Any logic in the reducer (translating property name, deriving property values) should be moved to the action.
 
 - Actions should have two methods - one that creates the action (for use in tests), and another that dispatches the action (called from application code).
+
   ```javascript
   createChangeFile(fileInfo: IFileInfo): ActionType { // test this
     return {
@@ -26,16 +27,18 @@ The effort in testing reducers can be dramatically reduced by adopting certain *
     this.ngRedux.dispatch( this.createChangeFile(fileInfo) );
   }
   ```
-- Reducer and action creater should be tested together. Steps are     
+
+- Reducer and action creator should be tested together. Steps are
   - set up prior state
   - call an action creator
   - pass state and action to the reducer
   - test that the new state is as expected
 
-<hr/>
+---------------------------------------
 
-## Generic action handler  
-With the convention of 'dumb reducer', the only work required in the reducer function is the assigment of action.payload properties to corresopnding state properties.   
+### Generic action handler
+
+With the convention of 'dumb reducer', the only work required in the reducer function is the assigment of action.payload properties to corresponding state properties.
 
 ```javascript
 export function genericActionHandler(state, action) {
@@ -47,11 +50,12 @@ export function genericActionHandler(state, action) {
   return updated;
 }
 ```
-<hr/>
+
+---------------------------------------
 
 ## Typical reducer test format
 
-Tests are data driven. The cofiguration object has `action` and `state` properties, equating to the reducer parameters and optionally `payloadExpectedShape`.
+Tests are data driven. The configuration object has `action` and `state` properties, equating to the reducer parameters and optionally `payloadExpectedShape`.
 
 ```typescript
 export interface ReducerTestConfig {
@@ -99,7 +103,8 @@ describe('searchReducer', () => {
 
 });
 ```
-<hr/>
+
+---------------------------------------
 
 ## Generic reducer tests
 
@@ -107,6 +112,7 @@ The `runAllReducerTests` function applies a generic set of tests to each action/
 These tests include the standard before/after state test performed in a standard reducer test, but can be performed generically because of the convention that payload == state.  
 
 In addition, it will run  
+
 - test for unknown action (NOP action)
 - tests for immutability  
 - sub-state invariance (see below)
@@ -135,20 +141,25 @@ export function runReducerTests(state, reducer, action, expectedShape= null) {
   });
 }
 ```
-<hr/>
 
-## Reducer sub-state   
+---------------------------------------
+
+## Reducer sub-state
+
 Some additional functionality comes into play in this application's **page-reducer**.   
 Since page-reducer's code is common to the validations, referentials, and clinics pages, we pass it the state slice below and the action contains the page name to be changed in **action.subState**.  
 Only that sub-state of the reducer's state slice is updated.
+
 ```typescript
 export interface IPageStateRoot {
   validations?: IPageState;
   referentials?: IPageState;
   clinics?: IPageState;
 }
-```  
-Therefore, in the test spec an additonal check ensures that other page data remains unchanged, and are in fact the same object references.  
+```
+
+Therefore, in the test spec an additional check ensures that other page data remains unchanged, and are in fact the same object references.  
+
 ```javascript
 function check_SubState_OtherStateIsUnchanged(inputState, afterState, action) {
   if (!action.subState) {
@@ -162,7 +173,8 @@ function check_SubState_OtherStateIsUnchanged(inputState, afterState, action) {
     });
 }
 ```
-<hr/>
+
+---------------------------------------
 
 ## Type safety in actions
 
@@ -171,6 +183,7 @@ One remaining source of bugs not covered by the test is invalid properties in th
 To avoid this, we define types for each state slice and use them in both the state definition and in action creators.
 
 **In the State definition:**
+
 ```typescript
 export type PageState = {
   files?: IFileInfo[],
@@ -193,15 +206,19 @@ export interface IAppState {
   ...
 }
 ```
+
 **In the Action Type definition:**
+
 ```typescript
 export type PageActionType = {
   type: string,
   payload?: PageState,  // Constrain the payload properties to match state
   ...
-} 
+}
 ```
+
 **In the Action Creators:**
+
 ```typescript
 createChangeFile(fileInfo: IFileInfo): PageActionType {
   return {

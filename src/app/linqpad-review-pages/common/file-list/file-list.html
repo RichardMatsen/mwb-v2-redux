@@ -5,13 +5,14 @@
       <ul #scrollingList [scrollTop]="scrollingList.scrollHeight">
         <li class="file-list-item" *ngFor="let item of visibleFiles">
           <a (click)=selectFile(item)>
+            <search-indicator class="search-indicator" *ngIf="(searchFound$(item) | async)"></search-indicator>
             <span class="title">{{item.displayName}}</span>
             <error-badge class="pull-right" [item]="item"></error-badge>
             <span class="effectiveTime pull-right">{{item.effectiveTime}}</span>
           </a>
         </li>
-        <list-limiter #limiter [listCount]="fileCount" [tooltip]="'Show older dates'"
-          [numToDisplay]="numToDisplay" (numDisplayed)=setNumDisplayed($event)></list-limiter>
+        <mwb-list-limiter #limiter [listCount]="fileCount" [tooltip]="'Show older dates'"
+          [numToDisplay]="numToDisplay" (numDisplayed)=setNumDisplayed($event)></mwb-list-limiter>
       </ul>
     </div>
   </div>

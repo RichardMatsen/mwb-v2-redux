@@ -1,16 +1,16 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DataService } from '../../services/data-service/data.service';
+import { DataService } from 'app/services/data-service/data.service';
 import { ClinicsComponent } from './clinics.component';
 import { ClinicsResolver } from './services/clinics-resolver';
 import { ClinicsDataService } from './services/clinics-data.service';
 import { ClinicsFormatService } from './services/clinics-format.service';
 import { ClinicsRoutingModule, routedComponents } from './clinics.routing';
-import { ListFormatterService } from '../../services/list-formatter.service/list-formatter.service';
-import { ClinicsActions } from './services/clinics.actions';
-import { RevieWPagesCommonModule } from '../common/page-common.module';
-import { MigrationWorkBenchCommonModule, Logger } from '../../common/mw.common.module';
+import { ListFormatterService } from 'app/services/list-formatter.service/list-formatter.service';
+import { ClinicsActions } from 'app/store/actions/clinics.actions';
+import { ReviewPagesCommonModule } from '../common/page-common.module';
+import { MigrationWorkBenchCommonModule, Logger } from 'app/common/mw.common.module';
 
 export function loggerFactory() {
   return new Logger('Clinics', '');
@@ -20,7 +20,7 @@ export function loggerFactory() {
   imports: [
     CommonModule,
     ClinicsRoutingModule,
-    RevieWPagesCommonModule,
+    ReviewPagesCommonModule,
     MigrationWorkBenchCommonModule
   ],
   exports: [

@@ -12,13 +12,14 @@ import { MeasureService } from './measure.service';
 import { ValidationsDataService } from '../linqpad-review-pages/validations/services/validations-data.service';
 import { ReferentialsDataService } from '../linqpad-review-pages/referentials/services/referentials-data.service';
 import { ClinicsDataService } from '../linqpad-review-pages/clinics/services/clinics-data.service';
-import { ValidationsActions } from '../linqpad-review-pages/validations/services/validations.actions';
-import { ReferentialsActions } from '../linqpad-review-pages/referentials/services/referentials.actions';
-import { ClinicsActions } from '../linqpad-review-pages/clinics/services/clinics.actions';
+import { ValidationsActions } from '../store/actions/validations.actions';
+import { ReferentialsActions } from '../store/actions/referentials.actions';
+import { ClinicsActions } from 'app/store/actions/clinics.actions';
 import { Logger } from '../common/mw.common.module';
 import { setupMockStore, addtoMockStore, mockFactory } from 'testing-helpers/testing-helpers.module.hlpr';
-import { MeasureActions } from './measure.actions';
-import { PageActions } from '../linqpad-review-pages/common/page.actions';
+import { MeasureActions } from 'app/store/actions/measure.actions';
+import { PageActions } from '../store/actions/page.actions';
+import { TestStoreModule } from 'testing-helpers/ngRedux-testing/test-store.module';
 
 describe('MeasureService', () => {
 
@@ -39,6 +40,7 @@ describe('MeasureService', () => {
       imports: [
         HttpModule,
         NgReduxTestingModule,
+        TestStoreModule
       ],
       providers: [
         MockBackend,
@@ -58,6 +60,7 @@ describe('MeasureService', () => {
         {provide: ClinicsActions, useValue: mockPageActions},
         {provide: MeasureActions, useValue: mockMeasureActions},
         MeasureService,
+        MockNgRedux
       ],
     });
   });
@@ -130,6 +133,7 @@ describe('MeasureService', () => {
         mockBackend.connections.subscribe(conn => {
           conn.mockError(error);
         });
+
         measureService.initializeMeasures();
         expect(mockMeasureActions.initializeMeasuresFailed).toHaveBeenCalledWith(error);
       });

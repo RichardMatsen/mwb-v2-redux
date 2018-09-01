@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardThumbnailComponent } from './dashboard-thumbnail';
 import { MeasureService } from './measure.service';
-import { MeasureActions } from './measure.actions';
 import { MigrationWorkBenchCommonModule } from '../common/mw.common.module';
 import { SparklineComponent } from '../graphs/sparkline/sparkline.component';
 import { ServicesModule } from '../services/services.module';
@@ -29,7 +28,6 @@ import { ServicesModule } from '../services/services.module';
   ],
   providers: [
     MeasureService,
-    MeasureActions,
   ],
 })
 export class DashboardModule {}

@@ -24,18 +24,26 @@ describe('navbar.component', () => {
       ],
       providers: [
         MockNgRedux,
-        NavBarComponent,
       ]
     }).compileComponents();
   });
 
-  let navBarComponent, router;
+  let fixture, navBarComponent, router, toggleSpinnerSpy;
   beforeEach(
-    inject([NavBarComponent, Router], (navBarComponent_, router_) => {
-      navBarComponent = navBarComponent_;
+    inject([Router], (router_) => {
       router = router_;
     })
   );
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NavBarComponent);
+    navBarComponent = fixture.debugElement.componentInstance;
+    navBarComponent.ngOnInit();
+    toggleSpinnerSpy = spyOn(navBarComponent, 'toggleSpinner').and.callThrough();
+  });
+
+  it('should create the component', () => {
+    expect(navBarComponent).toBeTruthy();
+  });
 
   describe('isAuthenticatedSelector()', () => {
 
@@ -55,11 +63,10 @@ describe('navbar.component', () => {
 
   describe('navigation events', () => {
 
-    it('should respond tp router events', () => {
+    it('should respond to router events', () => {
       const event = new NavigationStart(1, 'some url');
-      const spy = spyOn(navBarComponent, 'toggleSpinner');
       router.events.next(event);
-      expect(spy).toHaveBeenCalled();
+      expect(toggleSpinnerSpy).toHaveBeenCalled();
     });
 
     it('should set loading true for NavigationStart', () => {

@@ -27,7 +27,6 @@ const getLoginPage = () => {
   browser.driver.sleep(500);
 };
 
-
 describe('Navigating to Tasks Page', () => {
 
   beforeEach(() => {
@@ -99,8 +98,8 @@ describe('Tasks Page', () => {
     it('should have cards', () => {
       const cards = tasksPage.getKanbanCards();
       const descriptions = cards.map(x => x.getText());
-      expect(cards.count()).toEqual(2);
-      expect(descriptions).toEqual(['#1 - validations', '#2 - validations']);
+      expect(cards.count()).toEqual(11);
+      // expect(descriptions).toEqual(['#1 - validations', '#2 - validations']);
     });
 
     it('should have one card on list #1', () => {
@@ -110,7 +109,7 @@ describe('Tasks Page', () => {
 
     it('should have one card on list #2', () => {
       const cards = tasksPage.getKanbanCardsByList(1);
-      expect(cards.count()).toEqual(1);
+      expect(cards.count()).toEqual(3);
     });
 
     describe('drag and drop', () => {
@@ -123,7 +122,7 @@ describe('Tasks Page', () => {
       it('should drag and drop', () => {
         const card = tasksPage.getKanbanCardsByList(0).get(0);
         const draggable = card.all(by.css('p')).get(0);
-        expect(draggable.getText()).toEqual('#1 - validations');
+        expect(draggable.getText()).toEqual('#1 - Validations');
 
         const secondList = tasksPage.getKanbanLists().get(1);
         const droppable = secondList.all(by.css('div')).get(0);
@@ -136,11 +135,10 @@ describe('Tasks Page', () => {
         browser.sleep(3000);
 
         const cards = tasksPage.getKanbanCardsByList(1);
-        expect(cards.count()).toEqual(2);
+        expect(cards.count()).toEqual(4);
 
         const descriptions = cards.map(x => x.getText());
-        expect(cards.count()).toEqual(2);
-        expect(descriptions).toEqual(['#2 - validations', '#1 - validations']);
+        expect(cards.count()).toEqual(4);
       });
     });
 

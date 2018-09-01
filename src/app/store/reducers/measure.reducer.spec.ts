@@ -1,7 +1,7 @@
 import { Action } from 'redux';
-import { IMeasure, IMeasureUpdate } from '../../model/measure.model';
+import { IMeasure, IMeasureUpdate } from 'app/model/measure.model';
 import { measureReducer } from './measure.reducer';
-import { MeasureActions } from '../../dashboard/measure.actions';
+import { MeasureActions } from 'app/store/actions/measure.actions';
 import { MeasureState, measureInitialState } from '../state/measure.state';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
 import { runAllReducerTests } from './generic.reducer.testing.hlpr';

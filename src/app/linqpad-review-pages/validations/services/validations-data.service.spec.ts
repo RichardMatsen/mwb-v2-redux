@@ -1,31 +1,28 @@
 /* tslint:disable:max-line-length */
 
-import '../../../rxjs-extensions';
+import 'app/rxjs-extensions';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
 import { NgRedux, select } from '@angular-redux/store';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
-import { IFileInfo } from '../../../model/fileinfo.model';
+import { IFileInfo } from 'app/model/fileinfo.model';
 import { ValidationsDataService } from './validations-data.service';
 import { ValidationsFormatService } from './validations-format.service';
-import { DataService } from '../../../services/data-service/data.service';
-import { NameParsingService } from '../../../services/data-service/name-parsing.service';
-import { FileService } from '../../../services/file-service/file.service';
-import { ListFormatterService } from '../../../services/list-formatter.service/list-formatter.service';
-import { Logger } from '../../../common/mw.common.module';
-import { ValidationsActions } from './validations.actions';
-require('../../../store/selector-helpers/selector-helpers');
-
-import { setupMockStore, addtoMockStore,
-         setupMockFormatService, setupMockFileService
-       } from 'testing-helpers/testing-helpers.module.hlpr';
+import { DataService } from 'app/services/data-service/data.service';
+import { NameParsingService } from 'app/services/data-service/name-parsing.service';
+import { FileService } from 'app/services/file-service/file.service';
+import { ListFormatterService } from 'app/services/list-formatter.service/list-formatter.service';
+import { Logger } from 'app/common/mw.common.module';
+import { setupMockStore, addtoMockStore, setupMockFileService } from 'testing-helpers/testing-helpers.module.hlpr';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
+import { mockFactory } from 'testing-helpers/testing-helpers.module.hlpr';
+import { StoreService } from 'app/store/store.service';
+import { TestStoreModule } from 'testing-helpers/ngRedux-testing/test-store.module';
 
 describe('ValidationDataService', () => {
 
-  let mockLogger, mockFileService;
-
+  let mockLogger, mockFileService, store;
   beforeEach(() => {
     mockFileService = setupMockFileService();
     mockLogger = jasmine.createSpyObj('mockLogger', ['log', 'error']);
@@ -33,6 +30,7 @@ describe('ValidationDataService', () => {
     TestBed.configureTestingModule({
       imports: [
         NgReduxTestingModule,
+        TestStoreModule
       ],
       providers: [
         NameParsingService,
@@ -41,11 +39,11 @@ describe('ValidationDataService', () => {
         { provide: Logger, useValue: mockLogger },
         ValidationsFormatService,
         ValidationsDataService,
-        ValidationsActions,
+        MockNgRedux,
       ],
     });
     TestBed.compileComponents();
-
+    store = TestBed.get(StoreService)
     const files: IFileInfo[] = [
       { name: 'tester6 06 Jun 2016', effectiveDate: new Date('2016-06-06T12:03:00Z'), content: 'some content', metric: 1, badgeColor: 'orange' },
       { name: 'tester5 06 Jun 2016', effectiveDate: new Date('2016-06-06T12:02:00Z'), content: 'some content', metric: 2, badgeColor: 'red' },
@@ -66,6 +64,10 @@ describe('ValidationDataService', () => {
     })
   );
 
+  beforeEach( () => {
+    jasmine.addMatchers(toHavePropertiesMatcher);
+  });
+
   it('should be instantiated', () => {
     expect(validationsDataService).toBeTruthy();
   });
@@ -74,7 +76,7 @@ describe('ValidationDataService', () => {
     it('should get config', () => {
       const testFiles: string[] = [ 'file1 01 Jun 2016.html', 'file2 01 Jun 2016.html', 'file3 01 Jun 2016.html'];
       mockFileService.getFileList.and.returnValue(Observable.from(testFiles));
-      const spy_super_InitilizeList = spyOn( DataService.prototype, 'initializeList' );
+      const spy_super_InitilizeList = spyOn( DataService.prototype, 'initializeFileList' );
 
       validationsDataService.initializeList();
       expect(validationsDataService.filePrefixes).toBeDefined('filePrefixes');
@@ -84,11 +86,8 @@ describe('ValidationDataService', () => {
     });
   });
 
-  describe('getMeasureCount()', () => {
+  describe('getMeasure()', () => {
 
-    beforeEach( () => {
-      jasmine.addMatchers(toHavePropertiesMatcher);
-    });
 
     it('should return metric and color of the latest file', () => {
       let flag = false;

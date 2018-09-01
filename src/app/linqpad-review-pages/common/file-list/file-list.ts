@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 
-import { IFileInfo } from '../../../model/fileInfo.model';
+import { select } from 'app/store/store.service';
+import { IFileInfo } from 'app/model/fileInfo.model';
 
 // REF for scrolling to the bottom of the list:
 //      http://plnkr.co/edit/7yz2DUttPjI5GVJkvr5h?open=app%2Fapp.component.ts
@@ -23,6 +23,8 @@ export class FileListComponent {
   @Output() fileSelected = new EventEmitter();
   @Output() numDisplayedChanged = new EventEmitter();
 
+  @select(['search', 'results']) searchResults$;
+
   selectFile(file: IFileInfo) {
     this.fileSelected.emit(file);
   }
@@ -30,6 +32,10 @@ export class FileListComponent {
   setNumDisplayed(numDisplayed: number) {
     this.numToDisplay = numDisplayed;
     this.numDisplayedChanged.emit(numDisplayed);
+  }
+
+  searchFound$(item) {
+    return this.searchResults$.map(results => results.some(result => result === item.name));
   }
 
 }

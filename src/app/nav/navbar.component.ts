@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from '@angular-redux/store';
+import { Subscription } from 'rxjs/Subscription';
 
+import { select } from 'app/store/store.service';
 import { IUser } from '../model/user.model';
 
 export function isAuthenticatedSelector(state) {
   return state.user.currentUser !== null;
-};
+}
 
 @Component({
   selector: 'mwb-nav-bar',
@@ -18,11 +19,12 @@ export function isAuthenticatedSelector(state) {
   `
   ]
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit, OnDestroy {
 
   public isCollapsed = true;
-  loading = true;
+  loading = false;
   version = 'v 2.0.0';
+  userPrompt = 'try to login';
 
   @select(['user', 'currentUser']) currentUser$: Observable<IUser>;
 
@@ -30,10 +32,14 @@ export class NavBarComponent {
   // @select((state) => state.user.currentUser !== null) isAuthenticated$: Observable<boolean>;
   @select(isAuthenticatedSelector) isAuthenticated$: Observable<boolean>;
 
+  private routerSubscription: Subscription;
+
   constructor(
     private router: Router,
-  ) {
-    router.events.subscribe((event: RouterEvent) => {
+  ) {}
+
+  ngOnInit() {
+    this.routerSubscription = this.router.events.subscribe((event: RouterEvent) => {
       this.toggleSpinner(event);
     });
   }
@@ -46,4 +52,9 @@ export class NavBarComponent {
     );
   }
 
+  ngOnDestroy() {
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
+  }
 }

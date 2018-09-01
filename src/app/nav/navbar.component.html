@@ -14,7 +14,7 @@
 
     <div class="collapse navbar-collapse" id="myNavbar" >
 
-      <!-- Page navigaion -->
+      <!-- Page navigation -->
       <ul class="nav navbar-nav">
         <li><a routerLink="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Dashboard</a></li>
         <li><a routerLink="validations" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Validations</a></li>
@@ -26,7 +26,7 @@
       <!-- User functions -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a *ngIf="!(isAuthenticated$ | async)" [routerLink]="['user/login']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >
+          <a *ngIf="!(isAuthenticated$ | async)" routerLink="user/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >
             <span class="fa fa-lg fa-sign-in"></span> Login</a>
           <a  *ngIf="(isAuthenticated$ | async)" [routerLink]="['user/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
             <span class="fa fa-lg fa-user"></span> {{ (currentUser$ | async)?.firstName}}</a>
