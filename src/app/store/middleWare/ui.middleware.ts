@@ -25,7 +25,7 @@ export class UiMiddleware {
           vm.uiActions.incrementLoading(trigger);
         }
         if (action.uiEndLoading) {
-          const trigger = typeof action.uiStartLoading === 'string' ? action.uiStartLoading : action.type;
+          const trigger = typeof action.uiEndLoading === 'string' ? action.uiEndLoading : action.type;
           vm.uiActions.decrementLoading(trigger);
         }
         if (action.toastr) {
