@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { NgRedux, select } from '@angular-redux/store';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
-import { IFileInfo } from 'app/model/fileinfo.model';
+import { IFileInfo } from '../../../model/fileinfo.model';
 import { ClinicsDataService } from './clinics-data.service';
 import { ClinicsFormatService } from './clinics-format.service';
 import { DataService } from 'app/services/data-service/data.service';
