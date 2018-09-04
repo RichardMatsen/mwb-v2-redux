@@ -3,8 +3,4 @@ node_js:
   - "8.9.4"
 before_script:
   - yarn
-<<<<<<< HEAD
 script: npm run unit
-=======
-script: npm run test
->>>>>>> f9121a6d3e83f1de300a35a11e3f3860083f293a
