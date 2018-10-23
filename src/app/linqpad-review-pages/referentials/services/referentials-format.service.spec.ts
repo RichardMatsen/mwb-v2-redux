@@ -1,9 +1,6 @@
 /* tslint:disable:no-unused-variable */
-
 import { async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
 
-import { IFileInfo } from 'app/model/fileinfo.model';
 import { ReferentialsFormatService } from './referentials-format.service';
 
 describe('ReferentialsFormatService', () => {

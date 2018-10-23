@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { StoreService, select } from 'app/store/store.service';
 import { IFileInfo } from 'app/model/fileInfo.model';
-import { IAppState } from 'app/store/state/AppState';
 import { IMeasureUpdate } from 'app/model/measure.model';
 import { DataService } from 'app/services/data-service/data.service';
 import { NameParsingService } from 'app/services/data-service/name-parsing.service';
@@ -11,7 +10,6 @@ import { ListFormatterService } from 'app/services/list-formatter.service/list-f
 import { FileService } from 'app/services/file-service/file.service';
 import { ValidationsFormatService } from './validations-format.service';
 import { Logger } from 'app/common/mw.common.module';
-import { waitFor$ } from 'app/store/selector-helpers/selector-helpers';
 
 @Injectable()
 export class ValidationsDataService extends DataService {

@@ -1,19 +1,17 @@
 import 'app/rxjs-extensions';
 
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { select } from 'app/store/store.service';
-import { IAppState } from 'app/store/state/AppState';
 import { IFileInfo } from 'app/model/fileInfo.model';
 import { FormatService } from './format.service';
 import { NameParsingService } from './name-parsing.service';
 import { ListFormatterService } from '../list-formatter.service/list-formatter.service';
 import { FileService } from '../file-service/file.service';
-import { MigrationWorkBenchCommonModule, ToastrService, Logger, maskedTrim } from 'app/common/mw.common.module';
+import { Logger } from 'app/common/mw.common.module';
 import { IMeasureUpdate } from 'app/model/measure.model';
 import { PageActions } from 'app/store/actions/page.actions';
 

@@ -2,9 +2,9 @@
   "ignoreTestFiles": ["example_spec.js"],
   "baseUrl": "http://localhost:4200/",
   "videoRecording": false,
-  "reporter": "mochawesome",
+  "reporter": "mocha-simple-html-reporter",
   "reporterOptions": {
-    "mochaFile": "results/spec2.md",
-    "toConsole": true
+    "toConsole": true,
+    "output": "cypress-tests.html"
   }
 }

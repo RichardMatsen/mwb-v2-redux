@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run -s ./cypress/integration/app.e2e.spec.js",
+    "cypress:run": "cypress run  --browser chrome --reporter mocha-simple-html-reporter",
     "cypress:run2": "cypress run --headed",
     "cypress:open:dev": "CYPRESS_BASE_URL=http://localhost:4200 cypress open"
   },
@@ -14,6 +14,9 @@
   "license": "ISC",
   "devDependencies": {
     "chai-style": "^1.0.3",
-    "cypress": "^2.1.0"
+    "cypress": "^2.1.0",
+    "mocha": "^5.2.0",
+    "mocha-simple-html-reporter": "^1.1.0",
+    "mochawesome": "^3.0.3"
   }
 }

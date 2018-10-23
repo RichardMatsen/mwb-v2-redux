@@ -3,7 +3,6 @@
 import 'app/rxjs-extensions';
 import { TestBed, async, inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from '@angular-redux/store';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 
 import { IFileInfo } from 'app/model/fileinfo.model';
@@ -16,7 +15,6 @@ import { ListFormatterService } from 'app/services/list-formatter.service/list-f
 import { Logger } from 'app/common/mw.common.module';
 import { setupMockStore, addtoMockStore, setupMockFileService } from 'testing-helpers/testing-helpers.module.hlpr';
 import { toHavePropertiesMatcher } from 'testing-helpers/jasmine-matchers/to-have-properties.matcher';
-import { mockFactory } from 'testing-helpers/testing-helpers.module.hlpr';
 import { StoreService } from 'app/store/store.service';
 import { TestStoreModule } from 'testing-helpers/ngRedux-testing/test-store.module';
 
@@ -58,6 +56,7 @@ describe('ValidationDataService', () => {
   });
 
   let validationsDataService;
+
   beforeEach(
     inject([ValidationsDataService], (validationsDataService_) => {
       validationsDataService = validationsDataService_;

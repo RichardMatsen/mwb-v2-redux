@@ -1,6 +1,4 @@
 /* tslint:disable:no-unused-variable */
-import { TestBed, async } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
 import { NameParsingService } from './name-parsing.service';
 require('app/common/masked-trim/masked-trim');
 

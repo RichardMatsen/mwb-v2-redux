@@ -73,8 +73,8 @@ export const getCirclesForPaths = (paths, circles) => {
     const cStart = circles.filter(c => c.center.x == path.vector.start.x && c.center.y == path.vector.start.y )
     const cEnd = circles.filter(c => c.center.x == path.vector.end.x && c.center.y == path.vector.end.y )
     path.nodes = { 
-      start: cStart.length ? cStart[0] : null,
-      end: cEnd.length ? cEnd[0] : null
+      start: cStart.length ? cStart[0].center : null,
+      end: cEnd.length ? cEnd[0].center : null
     } 
   })
 }

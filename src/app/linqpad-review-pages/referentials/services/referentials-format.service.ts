@@ -1,4 +1,3 @@
-import { IFileInfo } from 'app/model/fileInfo.model';
 import { FormatService } from 'app/services/data-service/format.service';
 
 export class ReferentialsFormatService extends FormatService {

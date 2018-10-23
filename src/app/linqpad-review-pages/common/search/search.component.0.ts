@@ -15,7 +15,7 @@ import 'app/store/selector-helpers/selector-helpers';
     <form id="searchForm" #searchForm="ngForm" (ngSubmit)="search(searchTerm)" novalidate class="form-horizontal" role="form">
 
       <div class="input-group">
-        <input name="searchTerm" id="searchTerm" required type="text" 
+        <input name="searchTerm" id="searchTerm" required type="text"
           class="form-control input-sm"
           [(ngModel)]="searchTerm"
           (input)="onSearchChange($event.target.value)"
@@ -83,7 +83,7 @@ export class SearchComponent0 implements OnInit {
     public location: Location,
     private searchService: SearchService,
     private store: StoreService
-  ) {}
+  ) { }
 
   ngOnInit() {
     const pageType = this.getPage();
@@ -113,11 +113,11 @@ export class SearchComponent0 implements OnInit {
     return this.searchDisabled || !this.searchTerm;
   }
 
-  private getPage(): { page: string, isSearchable: boolean} {
+  private getPage(): { page: string, isSearchable: boolean } {
     const page = this.location.path().replace('/', '');
     const isSearchable = this.searchablePages.indexOf(page) > -1;
     this.store.actions.searchActions.setPage(page, isSearchable);
-    return {page, isSearchable};
+    return { page, isSearchable };
   }
 
   private openModal() {

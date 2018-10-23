@@ -3,10 +3,10 @@
 
 import 'app/rxjs-extensions';
 import { Injectable } from '@angular/core';
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, inject } from '@angular/core/testing';
 import { Observable } from 'rxjs/Observable';
-import { NgRedux, select } from '@angular-redux/store';
-import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
+import { select } from '@angular-redux/store';
+import { NgReduxTestingModule } from '@angular-redux/store/testing';
 
 import { IFileInfo } from 'app/model/fileinfo.model';
 import { IMeasureUpdate } from 'app/model/measure.model';
@@ -20,7 +20,6 @@ import { PageActions } from 'app/store/actions/page.actions';
 import { StoreService } from 'app/store/store.service';
 import {
   setupMockStore, addtoMockStore,
-  subscribeAndExpectAllValues, subscribeAndExpectValue,
   setupMockFormatService, setupMockFileService, setupMockPageActions
 } from 'testing-helpers/testing-helpers.module.hlpr';
 

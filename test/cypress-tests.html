@@ -1,0 +1,863 @@
+
+<html>
+    <head>
+        <title>Mocha</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style type="text/css">
+        @charset "utf-8";
+
+body {
+  margin:0;
+}
+
+#mocha {
+  font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 60px 50px;
+}
+
+#mocha ul,
+#mocha li {
+  margin: 0;
+  padding: 0;
+}
+
+#mocha ul {
+  list-style: none;
+}
+
+#mocha h1,
+#mocha h2 {
+  margin: 0;
+}
+
+#mocha h1 {
+  margin-top: 15px;
+  font-size: 1em;
+  font-weight: 200;
+}
+
+#mocha h1 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mocha h1 a:hover {
+  text-decoration: underline;
+}
+
+#mocha .suite .suite h1 {
+  margin-top: 0;
+  font-size: .8em;
+}
+
+#mocha .hidden {
+  display: none;
+}
+
+#mocha h2 {
+  font-size: 12px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+#mocha .suite {
+  margin-left: 15px;
+}
+
+#mocha .test {
+  margin-left: 15px;
+  overflow: hidden;
+}
+
+#mocha .test.pending:hover h2::after {
+  content: '(pending)';
+  font-family: arial, sans-serif;
+}
+
+#mocha .test.pass.medium .duration {
+  background: #c09853;
+}
+
+#mocha .test.pass.slow .duration {
+  background: #b94a48;
+}
+
+#mocha .test.pass::before {
+  content: '✓';
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  color: #00d6b2;
+}
+
+#mocha .test.pass .duration {
+  font-size: 9px;
+  margin-left: 5px;
+  padding: 2px 5px;
+  color: #fff;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#mocha .test.pass.fast .duration {
+  display: none;
+}
+
+#mocha .test.pending {
+  color: #0b97c4;
+}
+
+#mocha .test.pending::before {
+  content: '◦';
+  color: #0b97c4;
+}
+
+#mocha .test.fail {
+  color: #c00;
+}
+
+#mocha .test.fail pre {
+  color: black;
+}
+
+#mocha .test.fail::before {
+  content: '✖';
+  font-size: 12px;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  color: #c00;
+}
+
+#mocha .test pre.error {
+  color: #c00;
+  max-height: 300px;
+  overflow: auto;
+}
+
+#mocha .test .html-error {
+  overflow: auto;
+  color: black;
+  line-height: 1.5;
+  display: block;
+  float: left;
+  clear: left;
+  font: 12px/1.5 monaco, monospace;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #eee;
+  max-width: 85%; /*(1)*/
+  max-width: -webkit-calc(100% - 42px);
+  max-width: -moz-calc(100% - 42px);
+  max-width: calc(100% - 42px); /*(2)*/
+  max-height: 300px;
+  word-wrap: break-word;
+  border-bottom-color: #ddd;
+  -webkit-box-shadow: 0 1px 3px #eee;
+  -moz-box-shadow: 0 1px 3px #eee;
+  box-shadow: 0 1px 3px #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#mocha .test .html-error pre.error {
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-box-shadow: 0;
+  -moz-box-shadow: 0;
+  box-shadow: 0;
+  padding: 0;
+  margin: 0;
+  margin-top: 18px;
+  max-height: none;
+}
+
+/**
+ * (1): approximate for browsers not supporting calc
+ * (2): 42 = 2*15 + 2*10 + 2*1 (padding + margin + border)
+ *      ^^ seriously
+ */
+#mocha .test pre {
+  display: block;
+  float: left;
+  clear: left;
+  font: 12px/1.5 monaco, monospace;
+  margin: 5px;
+  padding: 15px;
+  border: 1px solid #eee;
+  max-width: 85%; /*(1)*/
+  max-width: -webkit-calc(100% - 42px);
+  max-width: -moz-calc(100% - 42px);
+  max-width: calc(100% - 42px); /*(2)*/
+  word-wrap: break-word;
+  border-bottom-color: #ddd;
+  -webkit-box-shadow: 0 1px 3px #eee;
+  -moz-box-shadow: 0 1px 3px #eee;
+  box-shadow: 0 1px 3px #eee;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+#mocha .test h2 {
+  position: relative;
+}
+
+#mocha .test a.replay {
+  position: absolute;
+  top: 3px;
+  right: 0;
+  text-decoration: none;
+  vertical-align: middle;
+  display: block;
+  width: 15px;
+  height: 15px;
+  line-height: 15px;
+  text-align: center;
+  background: #eee;
+  font-size: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-transition:opacity 200ms;
+  -moz-transition:opacity 200ms;
+  -o-transition:opacity 200ms;
+  transition: opacity 200ms;
+  opacity: 0.3;
+  color: #888;
+}
+
+#mocha .test:hover a.replay {
+  opacity: 1;
+}
+
+#mocha-report.pass .test.fail {
+  display: none;
+}
+
+#mocha-report.fail .test.pass {
+  display: none;
+}
+
+#mocha-report.pending .test.pass,
+#mocha-report.pending .test.fail {
+  display: none;
+}
+#mocha-report.pending .test.pass.pending {
+  display: block;
+}
+
+#mocha-error {
+  color: #c00;
+  font-size: 1.5em;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+#mocha-stats {
+  position: fixed;
+  top: 15px;
+  right: 10px;
+  font-size: 12px;
+  margin: 0;
+  color: #888;
+  z-index: 1;
+}
+
+#mocha-stats .progress {
+  float: right;
+  padding-top: 0;
+
+  /**
+   * Set safe initial values, so mochas .progress does not inherit these
+   * properties from Bootstrap .progress (which causes .progress height to
+   * equal line height set in Bootstrap).
+   */
+  height: auto;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  background-color: initial;
+}
+
+#mocha-stats em {
+  color: black;
+}
+
+#mocha-stats a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mocha-stats a:hover {
+  border-bottom: 1px solid #eee;
+}
+
+#mocha-stats li {
+  display: inline-block;
+  margin: 0 5px;
+  list-style: none;
+  padding-top: 11px;
+}
+
+#mocha-stats canvas {
+  width: 40px;
+  height: 40px;
+}
+
+#mocha code .comment { color: #ddd; }
+#mocha code .init { color: #2f6fad; }
+#mocha code .string { color: #5890ad; }
+#mocha code .keyword { color: #8a6343; }
+#mocha code .number { color: #2f6fad; }
+
+@media screen and (max-device-width: 480px) {
+  #mocha {
+    margin: 60px 0px;
+  }
+
+  #mocha #stats {
+    position: absolute;
+  }
+}
+#mocha .test.pass pre {
+    display: none;
+}
+
+#mocha .test.fail pre {
+    display: none;
+}
+
+#mocha .test pre.error {
+    display: block;
+}
+
+#mocha .test .html-error pre.error {
+    box-shadow: none;
+}
+
+#mocha .test:hover h2:after {
+    color: #888888;
+    content: "(view source)";
+    font-family: arial;
+    font-size: 12px;
+    position: relative;
+    right: -10px;
+    top: 0;
+}
+
+#mocha .test.pass.pending h2 {
+    cursor: auto;
+}
+
+#mocha .mocha-header {
+    right: 30px;
+    position: fixed;
+    top: 15px;
+    font-size: 14px;
+    margin: 0;
+    color: #888;
+    z-index: 1;
+}
+
+#mocha .mocha-header em {
+    font-style: normal;
+    color: black;
+}
+
+#mocha .mocha-header ul {
+    display: inline-block;
+}
+
+#mocha .mocha-stats li {
+    display: inline-block;
+    margin: 0 5px;
+    list-style: none;
+    padding-top: 11px;
+}
+
+#mocha .mocha-menu {
+    margin-right: 10px;
+}
+
+#mocha .mocha-menu li {
+    display: inline-block;
+    margin-left: 10px;
+    list-style: none;
+}
+
+#mocha .mocha-menu li span {
+    display: inline-block;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    padding: 3px 7px 2px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2);
+    border-radius: 5px;
+    user-select: none;
+}
+
+#mocha .mocha-menu li span.checked {
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,.2);
+}
+
+#mocha .toggle-passes {
+    background: #b94a48;
+}
+
+        </style>
+    </head>
+    <body>
+        <div id="mocha">
+            <div class="mocha-header">
+                <ul class="mocha-menu">
+                    <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
+                </ul>
+                <ul class="mocha-stats">
+                    <li class="passes">passes: <em>169</em></li>
+                    <li class="pending">pending: <em>0</em></li>
+                    <li class="failures">failures: <em>0</em></li>
+                    <li class="duration">duration: <em>2m 51.1s</em></li>
+                </ul>
+            </div>
+            <ul id="report"><li class="suite"><h1>Migration Workbench App Page</h1><ul><li class="test pass medium"><h2>should have a title<span class="duration">43ms</span></h2><pre><code>cy.title().should(&#x27;contain&#x27;, &#x27;MwbV2Redux&#x27;);</code></pre></li><li class="suite"><h1>Navigation</h1><ul><li class="test pass fast"><h2>should have a navbar<span class="duration">29ms</span></h2><pre><code>cy.get(&#x27;.navbar&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li><li class="test pass fast"><h2>should have a navigation brand<span class="duration">16ms</span></h2><pre><code>cy.get(&#x27;.navbar-brand&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li><li class="test pass medium"><h2>should have navigation menu items<span class="duration">40ms</span></h2><pre><code>var menuItems = [&#x27;Dashboard&#x27;, &#x27;Validations&#x27;, &#x27;Referential Integrity&#x27;, &#x27;Clinics&#x27;, &#x27;Team Tasks&#x27;, &#x27;Login&#x27;];
+cy.get(&#x27;.navbar&#x27;).get(&#x27;li&#x27;).then(function (values) {
+  var texts = [].concat(_toConsumableArray(values)).map(function (val) {
+    return val.textContent.trim();
+  });
+  expect(texts).to.deep.eq(menuItems);
+});</code></pre></li></ul></li></ul></li><li class="suite"><h1>Dashboard Page</h1><ul><li class="suite"><h1>static features</h1><ul><li class="suite"><h1>Dashboard</h1><ul><li class="test pass fast"><h2>should display Dashboard title<span class="duration">33ms</span></h2><pre><code>cy.get(&#x27;.dashboard&#x3E;h1&#x27;).should(&#x27;contain&#x27;, &#x27;Dashboard&#x27;);</code></pre></li><li class="test pass fast"><h2>should display sub title<span class="duration">11ms</span></h2><pre><code>cy.get(&#x27;.dashboard&#x3E;span&#x27;).should(&#x27;contain&#x27;, &#x27;Summary of&#x27;);</code></pre></li><li class="test pass fast"><h2>should display a horizontal rule<span class="duration">10ms</span></h2><pre><code>cy.get(&#x27;.dashboard&#x3E;hr&#x27;);</code></pre></li><li class="test pass fast"><h2>should have a list of thumbnails<span class="duration">30ms</span></h2><pre><code>cy.get(&#x27;.thumbnail&#x27;).should(&#x27;have.length&#x27;, 5);</code></pre></li></ul></li><li class="suite"><h1>thumbnails</h1><ul><li class="test pass medium"><h2>should have titles<span class="duration">41ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .title&#x27;).then(function (els) {
+  var texts = [].concat(_toConsumableArray(els)).map(getText);
+  expect(texts).to.deep.eq(expected.map(function (x) {
+    return x.title;
+  }));
+});</code></pre></li><li class="test pass medium"><h2>should have icons<span class="duration">61ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .measure-icon&#x27;).then(function (els) {
+  var icons = [].concat(_toConsumableArray(els)).map(getIcon);
+  expect(icons).to.deep.eq(expected.map(function (x) {
+    return x.icon;
+  }));
+});</code></pre></li><li class="test pass medium"><h2>should have sparklines<span class="duration">42ms</span></h2><pre><code>cy.get(&#x27;.thumbnail sparkline&#x27;).should(&#x27;have.length&#x27;, 5);</code></pre></li><li class="test pass slow"><h2>should have badges<span class="duration">88ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .badge&#x27;).should(&#x27;have.length&#x27;, 5);</code></pre></li><li class="suite"><h1>sparklines</h1><ul><li class="test pass slow"><h2>should have polyline<span class="duration">85ms</span></h2><pre><code>cy.get(&#x27;.thumbnail sparkline svg polyline&#x27;).should(&#x27;have.length&#x27;, 5);</code></pre></li><li class="test pass slow"><h2>should have points<span class="duration">81ms</span></h2><pre><code>cy.get(&#x27;.thumbnail sparkline svg polyline&#x27;).then(function (polylines) {
+  var points = [].concat(_toConsumableArray(polylines)).map(function (p) {
+    return p.points;
+  });
+  expect(points.map(function (p) {
+    return p.length;
+  })).to.deep.eq([9, 3, 6, 7, 0]);
+});</code></pre></li><li class="test pass slow"><h2>should have polyline points with x-scale 0 to 100<span class="duration">79ms</span></h2><pre><code>cy.get(&#x27;.thumbnail svg polyline&#x27;).then(function (polylines) {
+  [].concat(_toConsumableArray(polylines)).forEach(function (polyline, index) {
+    if (polyline.points.length) {
+      expect(polyline.points[0].x).to.eq(0);
+      expect(polyline.points[polyline.points.length - 1].x).to.eq(100);
+    }
+  });
+});</code></pre></li></ul></li><li class="suite"><h1>badges</h1><ul><li class="test pass medium"><h2>should have badge value<span class="duration">45ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .badge&#x27;).then(function (els) {
+  var badges = [].concat(_toConsumableArray(els)).map(getText);
+  expect(badges).to.deep.eq(expected.map(function (x) {
+    return x.badgeValue;
+  }));
+});</code></pre></li><li class="test pass medium"><h2>should have badge color css values<span class="duration">39ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(_color.getColorClass);
+  expect(colors).to.deep.eq(expected.map(function (x) {
+    return x.color;
+  }));
+});</code></pre></li><li class="test pass medium"><h2>should have badge color rgba values<span class="duration">39ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(_color.getColor_rgba);
+  expect(colors).to.deep.eq(expected.map(function (x) {
+    return x.color;
+  }));
+});</code></pre></li></ul></li><li class="suite"><h1>narrative dropdown</h1><ul><li class="test pass medium"><h2>should have dropdown icons<span class="duration">56ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-icon&#x27;).should(&#x27;have.length&#x27;, 4);</code></pre></li><li class="test pass fast"><h2>should display the open icon<span class="duration">30ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-icon&#x27;).then(function (els) {
+  var icons = [].concat(_toConsumableArray(els)).map(getIcon);
+  expect(icons).to.deep.eq(Array(4).fill(&#x27;fa-chevron-down&#x27;));
+});</code></pre></li><li class="test pass medium"><h2>should not initially display the narrative text<span class="duration">46ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-text&#x27;).each(function (el, i) {
+  cy.wrap(el).should(&#x27;not.be.visible&#x27;);
+});</code></pre></li></ul></li></ul></li></ul></li><li class="suite"><h1>layout</h1><ul><li class="suite"><h1>Dashboard page content</h1><ul><li class="test pass medium"><h2>should be in correct order<span class="duration">72ms</span></h2><pre><code>cy.get(&#x27;.dashboard&#x27;).selectorsAreOrdered(selectors);</code></pre></li></ul></li><li class="suite"><h1>Thumbnail content</h1><ul><li class="test pass slow"><h2>should display thumbnail contents in order<span class="duration">203ms</span></h2><pre><code>cy.get(&#x27;.thumbnail&#x27;).each(function (el) {
+  cy.wrap(el).selectorsAreOrdered(selectors);
+});</code></pre></li><li class="test pass slow"><h2>should vertically align to center the thumbnail contents<span class="duration">166ms</span></h2><pre><code>cy.get(&#x27;.thumbnail&#x27;).each(function (el) {
+  cy.wrap(el).find(selectors.join(&#x27;, &#x27;)).then(function (children) {
+    var sortedSelectors = [].concat(_toConsumableArray(children)).map(function (el) {
+      return (0, _layout.getSelector)(el, selectors);
+    });
+    var vcs = [].concat(_toConsumableArray(children)).map(function (child) {
+      return (0, _layout.elementVerticalCenter)(child);
+    });
+    expect((0, _layout.areAligned)(vcs)).to.be.true;
+  });
+});</code></pre></li><li class="test pass slow"><h2>should left and right justify thumbnail contents<span class="duration">177ms</span></h2><pre><code>cy.get(&#x27;.thumbnail&#x27;).each(function (el) {
+  cy.wrap(el).find(selectors.join(&#x27;, &#x27;)).then(function (children) {
+    var lrbounds = [].concat(_toConsumableArray(children)).map(function (child) {
+      return { left: child.offsetLeft, right: child.offsetLeft + child.offsetWidth };
+    });
+    var gaps = lrbounds.map(function (bounds, i) {
+      return i === 0 ? bounds.left : Math.floor(bounds.left - lrbounds[i - 1].right);
+    });
+    expect(gaps.every(function (gap) {
+      return gap &#x3C; 50;
+    })).to.be.true;
+    var fillerWidth = [].concat(_toConsumableArray(children))[selectors.indexOf(&#x27;.filler&#x27;)].offsetWidth;
+    expect(fillerWidth).to.be.greaterThan(500);
+  });
+});</code></pre></li></ul></li></ul></li><li class="suite"><h1>actions</h1><ul><li class="suite"><h1>narrative dropdown</h1><ul><li class="suite"><h1>when narrative chevron down is clicked</h1><ul><li class="test pass slow"><h2>should display the narrative text<span class="duration">1370ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-button&#x27;).each(function (button, i) {
+  checkNth(&#x27;.thumbnail .narrative-text&#x27;, i, &#x27;not.be.visible&#x27;);
+  cy.wrap(button).click();
+  checkNth(&#x27;.thumbnail .narrative-text&#x27;, i, &#x27;be.visible&#x27;);
+});</code></pre></li><li class="test pass fast"><h2>should display the close icon<span class="duration">31ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-icon&#x27;).then(function (els) {
+  var icons = [].concat(_toConsumableArray(els)).map(getIcon);
+  expect(icons).to.deep.eq(Array(4).fill(&#x27;fa-chevron-up&#x27;));
+});</code></pre></li></ul></li><li class="suite"><h1>when narrative chevron up is clicked</h1><ul><li class="test pass slow"><h2>should hide the narrative text<span class="duration">1559ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-button&#x27;).each(function (button, i) {
+  checkNth(&#x27;.thumbnail .narrative-text&#x27;, i, &#x27;be.visible&#x27;);
+  cy.wrap(button).click();
+  checkNth(&#x27;.thumbnail .narrative-text&#x27;, i, &#x27;not.be.visible&#x27;);
+});</code></pre></li><li class="test pass fast"><h2>should display the dropdown icon<span class="duration">22ms</span></h2><pre><code>cy.get(&#x27;.thumbnail .narrative-icon&#x27;).then(function (els) {
+  var icons = [].concat(_toConsumableArray(els)).map(getIcon);
+  expect(icons).to.deep.eq(Array(4).fill(&#x27;fa-chevron-down&#x27;));
+});</code></pre></li></ul></li></ul></li><li class="suite"><h1>thumbnail navigation</h1><ul><li class="test pass slow"><h2>should navigate to &#x27;validations&#x27;<span class="duration">519ms</span></h2><pre><code>cy.get(&#x27;.thumbnail a.measure&#x27;).eq(index).click();
+cy.location().should(function (loc) {
+  expect(loc.href).to.eq(Cypress.config(&#x27;baseUrl&#x27;) + &#x27;/&#x27; + page);
+});
+cy.go(&#x27;back&#x27;);</code></pre></li><li class="test pass slow"><h2>should navigate to &#x27;referentials&#x27;<span class="duration">523ms</span></h2><pre><code>cy.get(&#x27;.thumbnail a.measure&#x27;).eq(index).click();
+cy.location().should(function (loc) {
+  expect(loc.href).to.eq(Cypress.config(&#x27;baseUrl&#x27;) + &#x27;/&#x27; + page);
+});
+cy.go(&#x27;back&#x27;);</code></pre></li><li class="test pass slow"><h2>should navigate to &#x27;clinics&#x27;<span class="duration">749ms</span></h2><pre><code>cy.get(&#x27;.thumbnail a.measure&#x27;).eq(index).click();
+cy.location().should(function (loc) {
+  expect(loc.href).to.eq(Cypress.config(&#x27;baseUrl&#x27;) + &#x27;/&#x27; + page);
+});
+cy.go(&#x27;back&#x27;);</code></pre></li></ul></li></ul></li></ul></li><li class="suite"><h1>Login Page</h1><ul><li class="suite"><h1>clicking login from the home page</h1><ul><li class="test pass slow"><h2>should go to the login page<span class="duration">4187ms</span></h2><pre><code>cy.visit(&#x27;/&#x27;);
+cy.get(&#x27;a[href*=&#x22;login&#x22;]&#x27;).contains(&#x27;Login&#x27;).click();
+cy.get(&#x27;h1&#x27;).contains(&#x27;Login&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>Clinics Page</h1><ul><li class="suite"><h1>static features</h1><ul><li class="suite"><h1>title area</h1><ul><li class="test pass medium"><h2>should have a main title text<span class="duration">64ms</span></h2><pre><code>cy.get(&#x27;.pageTitle&#x27;).should(&#x27;contain&#x27;, testParams.config.page.pageTitle);</code></pre></li><li class="test pass fast"><h2>should have a sub title text<span class="duration">16ms</span></h2><pre><code>cy.get(&#x27;.pageDescription&#x27;).should(&#x27;contain&#x27;, testParams.config.page.pageDescription);</code></pre></li><li class="test pass fast"><h2>should have a search control<span class="duration">26ms</span></h2><pre><code>cy.get(&#x27;mwb-search&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li></ul></li><li class="suite"><h1>file list</h1><ul><li class="test pass fast"><h2>should have title text<span class="duration">16ms</span></h2><pre><code>cy.get(&#x27;mwb-file-list h4.title&#x27;).should(&#x27;contain&#x27;, testParams.config.page.listTitle);</code></pre></li><li class="test pass medium"><h2>should have a list of files<span class="duration">45ms</span></h2><pre><code>cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countFilelist);</code></pre></li></ul></li><li class="suite"><h1>file list items</h1><ul><li class="test pass medium"><h2>should have file title text<span class="duration">52ms</span></h2><pre><code>cy.get(&#x27;.file-list-item span.title&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.title;
+}));</code></pre></li><li class="test pass medium"><h2>should have file time text<span class="duration">73ms</span></h2><pre><code>cy.get(&#x27;.file-list-item span.effectiveTime&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.time;
+}));</code></pre></li><li class="test pass fast"><h2>should have metric badge<span class="duration">32ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.badgeValue;
+}));</code></pre></li><li class="test pass fast"><h2>should have metric badge color css values<span class="duration">33ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(_color.getColorClass);
+  expect(colors).to.deep.eq(testParams.expected.map(function (ex) {
+    return ex.color;
+  }));
+});</code></pre></li><li class="test pass fast"><h2>should have badge color rgba values<span class="duration">27ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(function (el) {
+    return (0, _color.getColor_rgba)(el, _color.colorMap);
+  });
+  expect(colors).to.deep.eq(testParams.expected.map(function (x) {
+    return x.color;
+  }));
+});</code></pre></li></ul></li><li class="suite"><h1>file list limiter</h1><ul><li class="test pass medium"><h2>should show a limited list of files<span class="duration">40ms</span></h2><pre><code>cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countFilelist);</code></pre></li><li class="test pass fast"><h2>should have a show-more icon to display more items<span class="duration">19ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li><li class="test pass fast"><h2>the show-more icon should be enabled<span class="duration">34ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;not.be.disabled&#x27;);</code></pre></li></ul></li><li class="suite"><h1>file display</h1><ul><li class="suite"><h1>header</h1><ul><li class="test pass fast"><h2>should have a title<span class="duration">24ms</span></h2><pre><code>cy.get(&#x27;div.result .titleText&#x27;).should(&#x27;contain&#x27;, testParams.fileInitiallyLoaded.title);</code></pre></li><li class="test pass fast"><h2>should have metric badge<span class="duration">19ms</span></h2><pre><code>cy.get(&#x27;div.result error-badge span.badge&#x27;).should(&#x27;contain&#x27;, testParams.fileInitiallyLoaded.badgeText);</code></pre></li><li class="test pass fast"><h2>should have metric badge of color<span class="duration">13ms</span></h2><pre><code>cy.get(&#x27;div.result error-badge span.badge&#x27;).then(function (els) {
+  var color = (0, _color.getColor_rgba)(els[0], _color.colorMap);
+  expect(color).to.eq(testParams.fileInitiallyLoaded.badgeColor);
+});</code></pre></li></ul></li><li class="suite"><h1>refresh button</h1><ul><li class="test pass fast"><h2>should have a refresh button<span class="duration">4ms</span></h2><pre><code>cy.get(&#x27;div.result a.refresh-page-button&#x27;);</code></pre></li><li class="test pass fast"><h2>should have last refreshed text<span class="duration">25ms</span></h2><pre><code>cy.get(&#x27;div.result .last-refresh-label&#x27;).should(&#x27;contain&#x27;, &#x27;Refreshed&#x27;).should(function ($el) {
+  expect($el[0].innerText.length).to.be.greaterThan(9);
+});</code></pre></li></ul></li><li class="suite"><h1>content</h1><ul><li class="test pass fast"><h2>should have content<span class="duration">11ms</span></h2><pre><code>cy.get(&#x27;#dataContainer&#x27;);</code></pre></li><li class="test pass fast"><h2>should zoom content to 85%;<span class="duration">17ms</span></h2><pre><code>cy.get(&#x27;#dataContainer&#x27;).should(&#x27;have.attr&#x27;, &#x27;style&#x27;, &#x27;zoom: &#x27; + testParams.fileInitiallyLoaded.zoom);</code></pre></li></ul></li></ul></li></ul></li><li class="suite"><h1>layout</h1><ul><li class="suite"><h1>title area</h1><ul><li class="suite"><h1>pageTitle</h1><ul><li class="test pass fast"><h2>should be left-justified<span class="duration">24ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;.pageTitle&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li><li class="suite"><h1>pageDescription</h1><ul><li class="test pass fast"><h2>should be below title<span class="duration">18ms</span></h2><pre><code>var selectors = [&#x27;.pageTitle&#x27;, &#x27;.pageDescription&#x27;];
+cy.get(&#x27;body&#x27;).selectorsAreOrdered(selectors);</code></pre></li><li class="test pass fast"><h2>should be left-justified<span class="duration">17ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;.pageDescription&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li><li class="suite"><h1>search</h1><ul><li class="test pass medium"><h2>should be vertically center-aligned to the page title<span class="duration">49ms</span></h2><pre><code>(0, _layout.areVerticallyCenterAligned)({ subjects: [&#x27;.pageTitle&#x27;, &#x27;mwb-search&#x27;], within: &#x27;.bannertitle&#x27; });</code></pre></li><li class="test pass fast"><h2>should be right-justified<span class="duration">17ms</span></h2><pre><code>(0, _layout.isRightJustified)({ subject: &#x27;mwb-search&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li></ul></li><li class="suite"><h1>file list</h1><ul><li class="test pass fast"><h2>should be left-justified<span class="duration">9ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;mwb-file-list&#x27;, relativeTo: &#x27;.filecontent&#x27; });</code></pre></li></ul></li><li class="suite"><h1>result</h1><ul><li class="test pass fast"><h2>should be right-justified<span class="duration">22ms</span></h2><pre><code>(0, _layout.isRightJustified)({ subject: &#x27;.result&#x27;, relativeTo: &#x27;.filecontent&#x27; });</code></pre></li></ul></li></ul></li><li class="suite"><h1>actions</h1><ul><li class="suite"><h1>file list limiter</h1><ul><li class="suite"><h1>when show-more icon is clicked</h1><ul><li class="test pass slow"><h2>should display more items<span class="duration">911ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;).click();
+cy.wait(300);
+cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countAfterMoreChevronClick);</code></pre></li></ul></li><li class="suite"><h1>when there are no more items to display</h1><ul><li class="test pass slow"><h2>should disable the show-more icon<span class="duration">603ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;not.be.disabled&#x27;);
+var i;
+for (i = 0; i &#x3C; testParams.timesToClickUntilAllDisplayed; i++) {
+  cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;).click();
+  cy.wait(100);
+}
+cy.get(&#x27;span.moreChevron.disabled&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>file display</h1><ul><li class="suite"><h1>when refresh button is clicked</h1><ul><li class="test pass slow"><h2>should update last refreshed text<span class="duration">1491ms</span></h2><pre><code>cy.get(&#x27;.lastRefreshTime&#x27;).then(function (spans) {
+  var before = spans[0].textContent;
+  expect(before.length).to.be.above(0);
+  cy.wait(1000);
+  cy.get(&#x27;.refresh-page-button i&#x27;).click();
+  cy.get(&#x27;.last-refresh-label span.lastRefreshTime&#x27;).then(function (spans) {
+    var after = spans[0].textContent;
+    expect(after.length).to.be.above(0);
+    expect(before).not.to.eq(after);
+  });
+});</code></pre></li></ul></li></ul></li></ul></li></ul></li><li class="suite"><h1>Referentials Page</h1><ul><li class="suite"><h1>static features</h1><ul><li class="suite"><h1>title area</h1><ul><li class="test pass medium"><h2>should have a main title text<span class="duration">42ms</span></h2><pre><code>cy.get(&#x27;.pageTitle&#x27;).should(&#x27;contain&#x27;, testParams.config.page.pageTitle);</code></pre></li><li class="test pass fast"><h2>should have a sub title text<span class="duration">21ms</span></h2><pre><code>cy.get(&#x27;.pageDescription&#x27;).should(&#x27;contain&#x27;, testParams.config.page.pageDescription);</code></pre></li><li class="test pass fast"><h2>should have a search control<span class="duration">20ms</span></h2><pre><code>cy.get(&#x27;mwb-search&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li></ul></li><li class="suite"><h1>file list</h1><ul><li class="test pass fast"><h2>should have title text<span class="duration">15ms</span></h2><pre><code>cy.get(&#x27;mwb-file-list h4.title&#x27;).should(&#x27;contain&#x27;, testParams.config.page.listTitle);</code></pre></li><li class="test pass slow"><h2>should have a list of files<span class="duration">92ms</span></h2><pre><code>cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countFilelist);</code></pre></li></ul></li><li class="suite"><h1>file list items</h1><ul><li class="test pass medium"><h2>should have file title text<span class="duration">75ms</span></h2><pre><code>cy.get(&#x27;.file-list-item span.title&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.title;
+}));</code></pre></li><li class="test pass medium"><h2>should have file time text<span class="duration">64ms</span></h2><pre><code>cy.get(&#x27;.file-list-item span.effectiveTime&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.time;
+}));</code></pre></li><li class="test pass slow"><h2>should have metric badge<span class="duration">103ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.badgeValue;
+}));</code></pre></li><li class="test pass slow"><h2>should have metric badge color css values<span class="duration">80ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(_color.getColorClass);
+  expect(colors).to.deep.eq(testParams.expected.map(function (ex) {
+    return ex.color;
+  }));
+});</code></pre></li><li class="test pass slow"><h2>should have badge color rgba values<span class="duration">117ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(function (el) {
+    return (0, _color.getColor_rgba)(el, _color.colorMap);
+  });
+  expect(colors).to.deep.eq(testParams.expected.map(function (x) {
+    return x.color;
+  }));
+});</code></pre></li></ul></li><li class="suite"><h1>file list limiter</h1><ul><li class="test pass medium"><h2>should show a limited list of files<span class="duration">71ms</span></h2><pre><code>cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countFilelist);</code></pre></li><li class="test pass fast"><h2>should have a show-more icon to display more items<span class="duration">16ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li><li class="test pass fast"><h2>the show-more icon should be enabled<span class="duration">17ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;not.be.disabled&#x27;);</code></pre></li></ul></li><li class="suite"><h1>file display</h1><ul><li class="suite"><h1>header</h1><ul><li class="test pass fast"><h2>should have a title<span class="duration">16ms</span></h2><pre><code>cy.get(&#x27;div.result .titleText&#x27;).should(&#x27;contain&#x27;, testParams.fileInitiallyLoaded.title);</code></pre></li><li class="test pass fast"><h2>should have metric badge<span class="duration">18ms</span></h2><pre><code>cy.get(&#x27;div.result error-badge span.badge&#x27;).should(&#x27;contain&#x27;, testParams.fileInitiallyLoaded.badgeText);</code></pre></li><li class="test pass fast"><h2>should have metric badge of color<span class="duration">21ms</span></h2><pre><code>cy.get(&#x27;div.result error-badge span.badge&#x27;).then(function (els) {
+  var color = (0, _color.getColor_rgba)(els[0], _color.colorMap);
+  expect(color).to.eq(testParams.fileInitiallyLoaded.badgeColor);
+});</code></pre></li></ul></li><li class="suite"><h1>refresh button</h1><ul><li class="test pass fast"><h2>should have a refresh button<span class="duration">4ms</span></h2><pre><code>cy.get(&#x27;div.result a.refresh-page-button&#x27;);</code></pre></li><li class="test pass fast"><h2>should have last refreshed text<span class="duration">12ms</span></h2><pre><code>cy.get(&#x27;div.result .last-refresh-label&#x27;).should(&#x27;contain&#x27;, &#x27;Refreshed&#x27;).should(function ($el) {
+  expect($el[0].innerText.length).to.be.greaterThan(9);
+});</code></pre></li></ul></li><li class="suite"><h1>content</h1><ul><li class="test pass fast"><h2>should have content<span class="duration">10ms</span></h2><pre><code>cy.get(&#x27;#dataContainer&#x27;);</code></pre></li><li class="test pass fast"><h2>should zoom content to 100%;<span class="duration">19ms</span></h2><pre><code>cy.get(&#x27;#dataContainer&#x27;).should(&#x27;have.attr&#x27;, &#x27;style&#x27;, &#x27;zoom: &#x27; + testParams.fileInitiallyLoaded.zoom);</code></pre></li></ul></li></ul></li></ul></li><li class="suite"><h1>layout</h1><ul><li class="suite"><h1>title area</h1><ul><li class="suite"><h1>pageTitle</h1><ul><li class="test pass fast"><h2>should be left-justified<span class="duration">18ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;.pageTitle&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li><li class="suite"><h1>pageDescription</h1><ul><li class="test pass fast"><h2>should be below title<span class="duration">19ms</span></h2><pre><code>var selectors = [&#x27;.pageTitle&#x27;, &#x27;.pageDescription&#x27;];
+cy.get(&#x27;body&#x27;).selectorsAreOrdered(selectors);</code></pre></li><li class="test pass fast"><h2>should be left-justified<span class="duration">17ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;.pageDescription&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li><li class="suite"><h1>search</h1><ul><li class="test pass medium"><h2>should be vertically center-aligned to the page title<span class="duration">51ms</span></h2><pre><code>(0, _layout.areVerticallyCenterAligned)({ subjects: [&#x27;.pageTitle&#x27;, &#x27;mwb-search&#x27;], within: &#x27;.bannertitle&#x27; });</code></pre></li><li class="test pass fast"><h2>should be right-justified<span class="duration">13ms</span></h2><pre><code>(0, _layout.isRightJustified)({ subject: &#x27;mwb-search&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li></ul></li><li class="suite"><h1>file list</h1><ul><li class="test pass fast"><h2>should be left-justified<span class="duration">9ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;mwb-file-list&#x27;, relativeTo: &#x27;.filecontent&#x27; });</code></pre></li></ul></li><li class="suite"><h1>result</h1><ul><li class="test pass fast"><h2>should be right-justified<span class="duration">13ms</span></h2><pre><code>(0, _layout.isRightJustified)({ subject: &#x27;.result&#x27;, relativeTo: &#x27;.filecontent&#x27; });</code></pre></li></ul></li></ul></li><li class="suite"><h1>actions</h1><ul><li class="suite"><h1>file list limiter</h1><ul><li class="suite"><h1>when show-more icon is clicked</h1><ul><li class="test pass slow"><h2>should display more items<span class="duration">845ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;).click();
+cy.wait(300);
+cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countAfterMoreChevronClick);</code></pre></li></ul></li><li class="suite"><h1>when there are no more items to display</h1><ul><li class="test pass slow"><h2>should disable the show-more icon<span class="duration">2083ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;not.be.disabled&#x27;);
+var i;
+for (i = 0; i &#x3C; testParams.timesToClickUntilAllDisplayed; i++) {
+  cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;).click();
+  cy.wait(100);
+}
+cy.get(&#x27;span.moreChevron.disabled&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>file display</h1><ul><li class="suite"><h1>when refresh button is clicked</h1><ul><li class="test pass slow"><h2>should update last refreshed text<span class="duration">1378ms</span></h2><pre><code>cy.get(&#x27;.lastRefreshTime&#x27;).then(function (spans) {
+  var before = spans[0].textContent;
+  expect(before.length).to.be.above(0);
+  cy.wait(1000);
+  cy.get(&#x27;.refresh-page-button i&#x27;).click();
+  cy.get(&#x27;.last-refresh-label span.lastRefreshTime&#x27;).then(function (spans) {
+    var after = spans[0].textContent;
+    expect(after.length).to.be.above(0);
+    expect(before).not.to.eq(after);
+  });
+});</code></pre></li></ul></li></ul></li></ul></li></ul></li><li class="suite"><h1>Referentials extra features</h1><ul><li class="suite"><h1>Referentials diagram button</h1><ul><li class="test pass slow"><h2>should hide referentials-diagram-modal<span class="duration">121ms</span></h2><pre><code>cy.get(&#x27;referentials-diagram-modal &#x3E; .modal&#x27;).should(&#x27;not.be.visible&#x27;);</code></pre></li><li class="test pass slow"><h2>should have a referentials diagram button<span class="duration">414ms</span></h2><pre><code>cy.get(&#x27;mwb-referentials-diagram&#x27;).click();
+cy.get(&#x27;mwb-referentials-diagram-modal &#x3E; .modal&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>Validations Page</h1><ul><li class="suite"><h1>static features</h1><ul><li class="suite"><h1>title area</h1><ul><li class="test pass slow"><h2>should have a main title text<span class="duration">114ms</span></h2><pre><code>cy.get(&#x27;.pageTitle&#x27;).should(&#x27;contain&#x27;, testParams.config.page.pageTitle);</code></pre></li><li class="test pass fast"><h2>should have a sub title text<span class="duration">29ms</span></h2><pre><code>cy.get(&#x27;.pageDescription&#x27;).should(&#x27;contain&#x27;, testParams.config.page.pageDescription);</code></pre></li><li class="test pass fast"><h2>should have a search control<span class="duration">13ms</span></h2><pre><code>cy.get(&#x27;mwb-search&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li></ul></li><li class="suite"><h1>file list</h1><ul><li class="test pass fast"><h2>should have title text<span class="duration">19ms</span></h2><pre><code>cy.get(&#x27;mwb-file-list h4.title&#x27;).should(&#x27;contain&#x27;, testParams.config.page.listTitle);</code></pre></li><li class="test pass medium"><h2>should have a list of files<span class="duration">57ms</span></h2><pre><code>cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countFilelist);</code></pre></li></ul></li><li class="suite"><h1>file list items</h1><ul><li class="test pass slow"><h2>should have file title text<span class="duration">204ms</span></h2><pre><code>cy.get(&#x27;.file-list-item span.title&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.title;
+}));</code></pre></li><li class="test pass medium"><h2>should have file time text<span class="duration">62ms</span></h2><pre><code>cy.get(&#x27;.file-list-item span.effectiveTime&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.time;
+}));</code></pre></li><li class="test pass medium"><h2>should have metric badge<span class="duration">48ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).arrayContains(testParams.expected.map(function (ex) {
+  return ex.badgeValue;
+}));</code></pre></li><li class="test pass medium"><h2>should have metric badge color css values<span class="duration">57ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(_color.getColorClass);
+  expect(colors).to.deep.eq(testParams.expected.map(function (ex) {
+    return ex.color;
+  }));
+});</code></pre></li><li class="test pass medium"><h2>should have badge color rgba values<span class="duration">45ms</span></h2><pre><code>cy.get(&#x27;.file-list-item error-badge span.badge&#x27;).then(function (els) {
+  var colors = [].concat(_toConsumableArray(els)).map(function (el) {
+    return (0, _color.getColor_rgba)(el, _color.colorMap);
+  });
+  expect(colors).to.deep.eq(testParams.expected.map(function (x) {
+    return x.color;
+  }));
+});</code></pre></li></ul></li><li class="suite"><h1>file list limiter</h1><ul><li class="test pass medium"><h2>should show a limited list of files<span class="duration">63ms</span></h2><pre><code>cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countFilelist);</code></pre></li><li class="test pass medium"><h2>should have a show-more icon to display more items<span class="duration">44ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;);</code></pre></li><li class="test pass medium"><h2>the show-more icon should be enabled<span class="duration">40ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;not.be.disabled&#x27;);</code></pre></li></ul></li><li class="suite"><h1>file display</h1><ul><li class="suite"><h1>header</h1><ul><li class="test pass fast"><h2>should have a title<span class="duration">14ms</span></h2><pre><code>cy.get(&#x27;div.result .titleText&#x27;).should(&#x27;contain&#x27;, testParams.fileInitiallyLoaded.title);</code></pre></li><li class="test pass fast"><h2>should have metric badge<span class="duration">20ms</span></h2><pre><code>cy.get(&#x27;div.result error-badge span.badge&#x27;).should(&#x27;contain&#x27;, testParams.fileInitiallyLoaded.badgeText);</code></pre></li><li class="test pass fast"><h2>should have metric badge of color<span class="duration">12ms</span></h2><pre><code>cy.get(&#x27;div.result error-badge span.badge&#x27;).then(function (els) {
+  var color = (0, _color.getColor_rgba)(els[0], _color.colorMap);
+  expect(color).to.eq(testParams.fileInitiallyLoaded.badgeColor);
+});</code></pre></li></ul></li><li class="suite"><h1>refresh button</h1><ul><li class="test pass fast"><h2>should have a refresh button<span class="duration">14ms</span></h2><pre><code>cy.get(&#x27;div.result a.refresh-page-button&#x27;);</code></pre></li><li class="test pass fast"><h2>should have last refreshed text<span class="duration">21ms</span></h2><pre><code>cy.get(&#x27;div.result .last-refresh-label&#x27;).should(&#x27;contain&#x27;, &#x27;Refreshed&#x27;).should(function ($el) {
+  expect($el[0].innerText.length).to.be.greaterThan(9);
+});</code></pre></li></ul></li><li class="suite"><h1>content</h1><ul><li class="test pass fast"><h2>should have content<span class="duration">9ms</span></h2><pre><code>cy.get(&#x27;#dataContainer&#x27;);</code></pre></li><li class="test pass fast"><h2>should zoom content to 100%;<span class="duration">21ms</span></h2><pre><code>cy.get(&#x27;#dataContainer&#x27;).should(&#x27;have.attr&#x27;, &#x27;style&#x27;, &#x27;zoom: &#x27; + testParams.fileInitiallyLoaded.zoom);</code></pre></li></ul></li></ul></li></ul></li><li class="suite"><h1>layout</h1><ul><li class="suite"><h1>title area</h1><ul><li class="suite"><h1>pageTitle</h1><ul><li class="test pass fast"><h2>should be left-justified<span class="duration">16ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;.pageTitle&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li><li class="suite"><h1>pageDescription</h1><ul><li class="test pass medium"><h2>should be below title<span class="duration">59ms</span></h2><pre><code>var selectors = [&#x27;.pageTitle&#x27;, &#x27;.pageDescription&#x27;];
+cy.get(&#x27;body&#x27;).selectorsAreOrdered(selectors);</code></pre></li><li class="test pass medium"><h2>should be left-justified<span class="duration">50ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;.pageDescription&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li><li class="suite"><h1>search</h1><ul><li class="test pass medium"><h2>should be vertically center-aligned to the page title<span class="duration">57ms</span></h2><pre><code>(0, _layout.areVerticallyCenterAligned)({ subjects: [&#x27;.pageTitle&#x27;, &#x27;mwb-search&#x27;], within: &#x27;.bannertitle&#x27; });</code></pre></li><li class="test pass fast"><h2>should be right-justified<span class="duration">17ms</span></h2><pre><code>(0, _layout.isRightJustified)({ subject: &#x27;mwb-search&#x27;, relativeTo: &#x27;.bannertitle&#x27; });</code></pre></li></ul></li></ul></li><li class="suite"><h1>file list</h1><ul><li class="test pass fast"><h2>should be left-justified<span class="duration">20ms</span></h2><pre><code>(0, _layout.isLeftJustified)({ subject: &#x27;mwb-file-list&#x27;, relativeTo: &#x27;.filecontent&#x27; });</code></pre></li></ul></li><li class="suite"><h1>result</h1><ul><li class="test pass fast"><h2>should be right-justified<span class="duration">30ms</span></h2><pre><code>(0, _layout.isRightJustified)({ subject: &#x27;.result&#x27;, relativeTo: &#x27;.filecontent&#x27; });</code></pre></li></ul></li></ul></li><li class="suite"><h1>actions</h1><ul><li class="suite"><h1>file list limiter</h1><ul><li class="suite"><h1>when show-more icon is clicked</h1><ul><li class="test pass slow"><h2>should display more items<span class="duration">816ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;).click();
+cy.wait(300);
+cy.get(&#x27;.file-list-item&#x27;).should(&#x27;have.length&#x27;, testParams.countAfterMoreChevronClick);</code></pre></li></ul></li><li class="suite"><h1>when there are no more items to display</h1><ul><li class="test pass slow"><h2>should disable the show-more icon<span class="duration">2448ms</span></h2><pre><code>cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;not.be.disabled&#x27;);
+var i;
+for (i = 0; i &#x3C; testParams.timesToClickUntilAllDisplayed; i++) {
+  cy.get(&#x27;span.moreChevron&#x27;).should(&#x27;be.visible&#x27;).click();
+  cy.wait(100);
+}
+cy.get(&#x27;span.moreChevron.disabled&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>file display</h1><ul><li class="suite"><h1>when refresh button is clicked</h1><ul><li class="test pass slow"><h2>should update last refreshed text<span class="duration">1451ms</span></h2><pre><code>cy.get(&#x27;.lastRefreshTime&#x27;).then(function (spans) {
+  var before = spans[0].textContent;
+  expect(before.length).to.be.above(0);
+  cy.wait(1000);
+  cy.get(&#x27;.refresh-page-button i&#x27;).click();
+  cy.get(&#x27;.last-refresh-label span.lastRefreshTime&#x27;).then(function (spans) {
+    var after = spans[0].textContent;
+    expect(after.length).to.be.above(0);
+    expect(before).not.to.eq(after);
+  });
+});</code></pre></li></ul></li></ul></li></ul></li></ul></li><li class="suite"><h1>Navigating to Profile Page</h1><ul><li class="suite"><h1>navigating to, when user is logged in</h1><ul><li class="test pass slow"><h2>should go to tasks page<span class="duration">4956ms</span></h2><pre><code>cy.setCurrentUser();
+cy.visit(&#x27;/&#x27;);
+cy.get(&#x27;a[href*=&#x22;profile&#x22;]&#x27;).contains(&#x27;Admin&#x27;).click();
+cy.get(&#x27;h1&#x27;).contains(&#x27;Profile&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>Profile Page</h1><ul><li class="test pass fast"><h2>should have a title<span class="duration">35ms</span></h2><pre><code>cy.get(&#x27;.profile h1&#x27;).contains(&#x27;Profile&#x27;);</code></pre></li><li class="suite"><h1>edit form and save data</h1><ul><li class="test pass slow"><h2>should have a first name input<span class="duration">705ms</span></h2><pre><code>cy.get(&#x27;input&#x27;).eq(0).type(&#x27;{selectall}&#x27;).type(&#x27;{del}&#x27;).type(&#x27;Sammy&#x27;);
+cy.get(&#x27;input&#x27;).eq(0).then(function (x) {
+  return console.log(&#x27;x&#x27;, x);
+});
+cy.get(&#x27;input&#x27;).should(&#x27;have.value&#x27;, &#x27;Sammy&#x27;);</code></pre></li><li class="test pass slow"><h2>should have a last name input<span class="duration">799ms</span></h2><pre><code>cy.get(&#x27;input&#x27;).eq(1).type(&#x27;{selectall}&#x27;).type(&#x27;{del}&#x27;).type(&#x27;Smithson&#x27;);
+cy.get(&#x27;input&#x27;).eq(1).should(&#x27;have.value&#x27;, &#x27;Smithson&#x27;);</code></pre></li><li class="test pass slow"><h2>should have a password input<span class="duration">994ms</span></h2><pre><code>cy.get(&#x27;input&#x27;).eq(2).type(&#x27;{selectall}&#x27;).type(&#x27;{del}&#x27;).type(&#x27;another password&#x27;);
+cy.get(&#x27;input&#x27;).eq(2).should(&#x27;have.value&#x27;, &#x27;another password&#x27;);</code></pre></li><li class="test pass slow"><h2>should save the new data and display Toastr<span class="duration">565ms</span></h2><pre><code>cy.get(&#x27;button&#x27;).eq(2).contains(&#x27;Save&#x27;).click();
+cy.get(&#x27;div.toast-message&#x27;).should(&#x27;exist&#x27;);
+cy.wait(200);
+cy.get(&#x27;a[href*=&#x22;profile&#x22;]&#x27;).contains(&#x27;Sammy&#x27;);</code></pre></li><li class="test pass fast"><h2>returns to the Dashboard page<span class="duration">9ms</span></h2><pre><code>cy.url().should(&#x27;eq&#x27;, Cypress.config(&#x27;baseUrl&#x27;) + &#x27;/dashboard&#x27;);</code></pre></li></ul></li><li class="suite"><h1>edit form and cancel</h1><ul><li class="test pass slow"><h2>should have a first name input<span class="duration">946ms</span></h2><pre><code>cy.get(&#x27;input&#x27;).eq(0).type(&#x27;{selectall}&#x27;).type(&#x27;{del}&#x27;).type(&#x27;Johnny&#x27;);</code></pre></li><li class="test pass slow"><h2>should save the new data<span class="duration">601ms</span></h2><pre><code>cy.get(&#x27;button&#x27;).eq(3).contains(&#x27;Cancel&#x27;).click();
+cy.wait(200);
+cy.get(&#x27;a[href*=&#x22;profile&#x22;]&#x27;).contains(&#x27;Sammy&#x27;);</code></pre></li><li class="test pass fast"><h2>returns to the Dashboard page<span class="duration">8ms</span></h2><pre><code>cy.url().should(&#x27;eq&#x27;, Cypress.config(&#x27;baseUrl&#x27;) + &#x27;/dashboard&#x27;);</code></pre></li></ul></li><li class="suite"><h1>logout button</h1><ul><li class="test pass slow"><h2>should logout<span class="duration">829ms</span></h2><pre><code>cy.get(&#x27;button&#x27;).eq(1).contains(&#x27;Logout&#x27;).click();
+cy.wait(200);
+cy.get(&#x27;a[href*=&#x22;login&#x22;]&#x27;).contains(&#x27;Login&#x27;);</code></pre></li><li class="test pass fast"><h2>returns to the Dashboard page<span class="duration">8ms</span></h2><pre><code>cy.url().should(&#x27;eq&#x27;, Cypress.config(&#x27;baseUrl&#x27;) + &#x27;/dashboard&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>Referentials diagram</h1><ul><li class="suite"><h1>Static</h1><ul><li class="test pass medium"><h2>should have an SVG element<span class="duration">74ms</span></h2><pre><code>cy.get(&#x27;svg&#x27;);</code></pre></li><li class="test pass fast"><h2>should have a title<span class="duration">28ms</span></h2><pre><code>cy.get(&#x27;div#footer h2&#x27;).contains(&#x27;Extract Referential Integrity&#x27;);</code></pre></li><li class="test pass fast"><h2>should have hint text<span class="duration">23ms</span></h2><pre><code>cy.get(&#x27;div#footer div.hint p&#x27;).contains(&#x27;Green: ok, Red: errors, Orange: child has errors&#x27;);</code></pre></li><li class="test pass slow"><h2>should have circles<span class="duration">265ms</span></h2><pre><code>cy.get(&#x27;svg circle&#x27;).count(42);</code></pre></li><li class="test pass slow"><h2>circles should have color<span class="duration">270ms</span></h2><pre><code>cy.get(&#x27;svg circle&#x27;).then(function (circles) {
+  var circleData = [].concat(_toConsumableArray(circles)).map(_svgHelpers.getCircleData);
+  var colorGroups = (0, _svgHelpers.groupCount)((0, _svgHelpers.groupBy)(circleData, function (circle) {
+    return circle.fill;
+  }));
+  expect(colorGroups).to.deep.eq({ white: 1, blue: 29, green: 7, red: 2, orange: 3 });
+});</code></pre></li><li class="test pass slow"><h2>should have paths<span class="duration">257ms</span></h2><pre><code>cy.get(&#x27;svg path&#x27;).count(41);</code></pre></li><li class="test pass slow"><h2>should have texts<span class="duration">551ms</span></h2><pre><code>cy.get(&#x27;svg text&#x27;).count(83);</code></pre></li><li class="test pass slow"><h2>should have 42 texts grouped with circles<span class="duration">483ms</span></h2><pre><code>cy.get(&#x27;svg text&#x27;).then(function (texts) {
+  var data = [].concat(_toConsumableArray(texts)).map(_svgHelpers.getTextData);
+  expect(data.filter(function (d) {
+    return d.groupedWith === &#x27;circle&#x27;;
+  }).length).to.eq(42);
+});</code></pre></li><li class="test pass slow"><h2>should have 41 texts grouped with paths<span class="duration">496ms</span></h2><pre><code>cy.get(&#x27;svg text&#x27;).then(function (texts) {
+  var data = [].concat(_toConsumableArray(texts)).map(_svgHelpers.getTextData);
+  expect(data.filter(function (d) {
+    return d.groupedWith === &#x27;path&#x27;;
+  }).length).to.eq(41);
+});</code></pre></li><li class="test pass slow"><h2>should have textPaths<span class="duration">253ms</span></h2><pre><code>cy.get(&#x27;svg textPath&#x27;).count(41);</code></pre></li><li class="test pass slow"><h2>textPaths should not be visible<span class="duration">293ms</span></h2><pre><code>cy.get(&#x27;svg textPath&#x27;).then(function (textPaths) {
+  var data = [].concat(_toConsumableArray(textPaths)).map(_svgHelpers.getTextPathData);
+  expect(data.map(function (tp) {
+    return tp.fillOpacity;
+  }).every(function (fo) {
+    return fo &#x3C; 0.01;
+  })).to.eq(true);
+});</code></pre></li></ul></li><li class="suite"><h1>Layout</h1><ul><li class="suite"><h1>Levels</h1><ul><li class="test pass fast"><h2>should have 5 horizontal levels<span class="duration">5ms</span></h2><pre><code>cy.get(&#x27;@levels&#x27;).then(function (levels) {
+  return expect(levels.length).to.eq(5);
+});</code></pre></li><li class="test pass fast"><h2>should have 150px level spacing<span class="duration">11ms</span></h2><pre><code>cy.get(&#x27;@levels&#x27;).then(function (levels) {
+  var spacing = levels.reduce(function (acc, item, index, array) {
+    return index === 0 ? acc : acc.concat(item.x - array[index - 1].x);
+  }, []);
+  expect(spacing.every(function (space) {
+    return space === 150;
+  })).to.eq(true);
+});</code></pre></li><li class="test pass fast"><h2>should have nodeCounts [1, 5, 9, 23, 4]<span class="duration">10ms</span></h2><pre><code>cy.get(&#x27;@levels&#x27;).then(function (levels) {
+  return expect(levels.map(function (l) {
+    return l.nodeCount;
+  })).to.deep.eq([1, 5, 9, 23, 4]);
+});</code></pre></li></ul></li><li class="suite"><h1>Connections</h1><ul><li class="test pass fast"><h2>paths should start and end at nodes<span class="duration">19ms</span></h2><pre><code>cy.get(&#x27;@circles&#x27;).then(function (circles) {
+  cy.get(&#x27;@paths&#x27;).then(function (paths) {
+    (0, _svgHelpers.getCirclesForPaths)(paths, circles);
+    expect(paths.every(function (path) {
+      return path.nodes.start &#x26;&#x26; path.nodes.end;
+    })).to.eq(true);
+  });
+});</code></pre></li><li class="test pass fast"><h2>circles should have 1 root, 14 middle and 27 leaf nodes<span class="duration">17ms</span></h2><pre><code>cy.get(&#x27;@circles&#x27;).then(function (circles) {
+  cy.get(&#x27;@paths&#x27;).then(function (paths) {
+    (0, _svgHelpers.getPathsForCircles)(paths, circles);
+    expect(circles.filter(function (c) {
+      return c.pathOrder.isRoot;
+    }).length).to.eq(1);
+    expect(circles.filter(function (c) {
+      return !c.pathOrder.isRoot &#x26;&#x26; !c.pathOrder.isLeaf;
+    }).length).to.eq(14);
+    expect(circles.filter(function (c) {
+      return c.pathOrder.isLeaf;
+    }).length).to.eq(27);
+  });
+});</code></pre></li></ul></li></ul></li></ul></li><li class="suite"><h1>Search</h1><ul><li class="suite"><h1>when search term is typed</h1><ul><li class="test pass slow"><h2>should display the search indicator in the header<span class="duration">1201ms</span></h2><pre><code>cy.get(&#x27;#searchTerm&#x27;).type(&#x27;diagnosis&#x27;);
+cy.get(&#x27;.search-indicator&#x27;).should(&#x27;be.visible&#x27;);
+cy.get(&#x27;.search-indicator&#x27;).contains(&#x27;2&#x27;);</code></pre></li><li class="test pass slow"><h2>should mark the searchterm in content<span class="duration">441ms</span></h2><pre><code>cy.get(&#x27;#searchTerm&#x27;).type(&#x27;diagnosis&#x27;);
+cy.get(&#x27;mark.markSearch&#x27;).should(&#x27;have.length&#x27;, 2);</code></pre></li></ul></li><li class="suite"><h1>when search term is cleared</h1><ul><li class="test pass slow"><h2>should hide the search indicator in the header<span class="duration">499ms</span></h2><pre><code>cy.get(&#x27;.reset&#x27;).click();
+cy.wait(100);
+cy.get(&#x27;.search-indicator&#x27;).should(&#x27;not.be.visible&#x27;);</code></pre></li><li class="test pass slow"><h2>should unmark the searchterm in content<span class="duration">296ms</span></h2><pre><code>cy.get(&#x27;.reset&#x27;).click();
+cy.get(&#x27;mark.markSearch&#x27;).should(&#x27;have.length&#x27;, 0);</code></pre></li></ul></li><li class="suite"><h1>when search button is clicked</h1><ul><li class="test pass slow"><h2>should display the results modal<span class="duration">1270ms</span></h2><pre><code>cy.get(&#x27;div.modal-container&#x27;).should(&#x27;be.visible&#x27;);
+cy.get(&#x27;a.list-group-item&#x27;).should(&#x27;have.length&#x27;, 2);
+cy.get(&#x27;button.close&#x27;).click();
+cy.get(&#x27;#searchTerm&#x27;).clear();</code></pre></li><li class="test pass slow"><h2>should display icons in the file list where match is found<span class="duration">454ms</span></h2><pre><code>cy.get(&#x27;mwb-file-list li.file-list-item&#x27;).should(&#x27;have.length&#x27;, 5);
+cy.get(&#x27;button.close&#x27;).click();
+cy.get(&#x27;mwb-file-list search-indicator&#x27;).should(&#x27;have.length&#x27;, 2);</code></pre></li></ul></li></ul></li><li class="suite"><h1>Navigating to Tasks Page</h1><ul><li class="suite"><h1>navigating to, when user is not logged in</h1><ul><li class="test pass slow"><h2>should redirect to login page<span class="duration">4709ms</span></h2><pre><code>cy.visit(&#x27;/&#x27;);
+cy.get(&#x27;a[href*=&#x22;login&#x22;]&#x27;).contains(&#x27;Login&#x27;).click();
+cy.get(&#x27;h1&#x27;).contains(&#x27;Login&#x27;);</code></pre></li></ul></li><li class="suite"><h1>navigating to, when user is logged in</h1><ul><li class="test pass slow"><h2>should go to tasks page<span class="duration">4802ms</span></h2><pre><code>cy.visit(&#x27;/login&#x27;);
+cy.get(&#x27;#userName&#x27;).type(&#x27;Smith&#x27;);
+cy.get(&#x27;button.btn.btn-primary&#x27;).click();
+cy.get(&#x27;a[href*=&#x22;tasks&#x22;]&#x27;).contains(&#x27;Team Tasks&#x27;).click();
+cy.get(&#x27;h1&#x27;).contains(&#x27;Tasks&#x27;);</code></pre></li></ul></li></ul></li><li class="suite"><h1>Tasks Page</h1><ul><li class="test pass medium"><h2>should have a title<span class="duration">43ms</span></h2><pre><code>cy.get(&#x27;mwb-tasks h1&#x27;).contains(&#x27;Tasks&#x27;);</code></pre></li><li class="suite"><h1>Kanban lists</h1><ul><li class="test pass slow"><h2>should have four Kanban lists<span class="duration">1551ms</span></h2><pre><code>cy.get(&#x27;mwb-kanban-list&#x27;).count(4);</code></pre></li><li class="test pass fast"><h2>should have titles<span class="duration">16ms</span></h2><pre><code>cy.get(&#x27;.list_title&#x27;).arrayContains([&#x27;Unassigned&#x27;, &#x27;In Progress&#x27;, &#x27;Waiting&#x27;, &#x27;Done&#x27;]);</code></pre></li><li class="test pass fast"><h2>should have new card links<span class="duration">30ms</span></h2><pre><code>cy.get(&#x27;.list__newcard&#x27;).count(4);</code></pre></li><li class="test pass fast"><h2>should have cards<span class="duration">25ms</span></h2><pre><code>cy.get(&#x27;mwb-kanban-card&#x27;).count(11);
+cy.get(&#x27;mwb-kanban-card&#x27;).eq(0).arrayContains([&#x27;#1 - Validations&#x27;]);
+cy.get(&#x27;mwb-kanban-card&#x27;).eq(1).arrayContains([&#x27;#2 - Validations [Jim]&#x27;]);</code></pre></li><li class="test pass fast"><h2>should have one card on list #1<span class="duration">26ms</span></h2><pre><code>cy.get(&#x27;mwb-kanban-list&#x27;).eq(0).within(function () {
+  cy.root().get(&#x27;mwb-kanban-card&#x27;).count(1).contains(&#x27;#1 - Validations&#x27;);
+});</code></pre></li><li class="test pass fast"><h2>should have three cards on list #2<span class="duration">24ms</span></h2><pre><code>cy.get(&#x27;mwb-kanban-list&#x27;).eq(1).within(function (els) {
+  cy.root().get(&#x27;mwb-kanban-card&#x27;).count(3).contains(&#x27;#2 - Validations [Jim]&#x27;);
+});</code></pre></li><li class="suite"><h1>drag and drop</h1><ul><li class="test pass slow"><h2>should drag and drop<span class="duration">238ms</span></h2><pre><code>// Draggable
+        cy.get(&#x27;mwb-kanban-list&#x27;).eq(0).within(function (els) {
+          cy.root().get(&#x27;p.card[draggable]&#x27;).count(1).contains(&#x27;#1 - Validations&#x27;).as(&#x27;draggable&#x27;);
+        });
+        cy.get(&#x27;@draggable&#x27;).should(&#x27;have.attr&#x27;, &#x27;draggable&#x27;, &#x27;true&#x27;);
+        // Droppable
+        cy.get(&#x27;mwb-kanban-list&#x27;).eq(1).as(&#x27;droppable&#x27;);
+        // cy.get(&#x27;@droppable&#x27;).then(els =&#x3E; { console.log(&#x27;droppable&#x27;,els) })
+        /*
+          Drag and drop test.
+          ------------------
+          Ref: https://github.com/cypress-io/cypress/issues/845#issuecomment-353087850
+            The component uses native HTML5 Drag and Drop, Ref: https://www.w3schools.com/HTML/html5_draganddrop.asp
+          This utilizes an object with dataTransfer property to communicate between draggable and droppable components
+          so we need to mock this object.
+          Using this mock, just invoke the dragstart and drop events.
+            This is essentially doing the same thing as the &#x27;html-dnd&#x27; library used in the Karma spec
+          Ref: https://github.com/Kuniwak/html-dnd/blob/b45d6e40e864a70094fa4a062e8b36ebb1d21536/src/html_dnd.ts
+          */
+        var dt = {
+          types: [],
+          setData: function setData(prop, val) {
+            this[prop] = val;
+          },
+          getData: function getData(prop) {
+            return this[prop];
+          }
+        };
+        cy.get(&#x27;@draggable&#x27;).trigger(&#x27;dragstart&#x27;, {
+          dataTransfer: dt
+        });
+        cy.get(&#x27;@droppable&#x27;).trigger(&#x27;drop&#x27;, {
+          dataTransfer: dt
+        });
+        // Check 2 cards on 2nd list
+        cy.get(&#x27;mwb-kanban-list&#x27;).eq(1).within(function (els) {
+          cy.root().get(&#x27;p.card[draggable]&#x27;).count(4);
+        });
+        // Check no cards on first list
+        cy.get(&#x27;mwb-kanban-list&#x27;).eq(0).within(function (els) {
+          cy.root().get(&#x27;p.card[draggable]&#x27;).should(&#x27;not.exist&#x27;);
+        });</code></pre></li></ul></li></ul></li></ul></li></ul>
+        </div>
+        <script>
+        function hideSuitesWithout(className) {
+    var suites = document.querySelectorAll('#report > .suite');
+
+    for (var i = 0; i < suites.length; i++) {
+        let suite = suites[i];
+
+        var els = suite.getElementsByClassName(className);
+        if (!els.length) {
+            suite.classList.add('hidden');
+        }
+    }
+}
+
+function unhide() {
+    var suites = document.getElementsByClassName('suite hidden');
+
+    while (suites.length) {
+        suites[0].classList.remove('hidden');
+    }
+}
+
+function togglePasses() {
+    var report = document.getElementById('report');
+
+    report.classList.toggle('hide-passes');
+
+    if (report.classList.contains('hide-passes')) {
+        hideSuitesWithout('test fail');
+    } else {
+        unhide();
+    }
+}
+
+document.getElementById('toggle-passes').addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    this.classList.toggle('checked');
+
+    togglePasses();
+});
+
+var tests = document.getElementsByClassName('test');
+
+for (var i = 0; i < tests.length; i++) {
+    var elem = tests[i];
+    var head = elem.children[0];
+
+    head.onclick = function () {
+        var code = this.parentElement.children[1];
+        var display = code.style.display;
+
+        if (display && display === 'block') {
+            code.style.display = 'none';
+        } else {
+            code.style.display = 'block';
+        }
+    };
+}
+        </script>
+    </body>
+</html>

@@ -19,7 +19,7 @@ describe('Referentials diagram', () => {
   
   context('Static', () => {
 
-    beforeEach(function() { console.log('static: svgRef', this.svgRef) })
+    // beforeEach(function() { console.log('static: svgRef', this.svgRef) })
 
     it('should have an SVG element', () => {
       cy.get('svg')
@@ -82,7 +82,7 @@ describe('Referentials diagram', () => {
 
   context('Layout', () => {
 
-    beforeEach(function() { console.log('static: svgRef', svgRef) })
+    // beforeEach(function() { console.log('static: svgRef', svgRef) })
 
     beforeEach(() => {
 

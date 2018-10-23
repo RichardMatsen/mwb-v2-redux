@@ -3,4 +3,15 @@ node_js:
   - "8.9.4"
 before_script:
   - yarn
-script: npm run test
+
+script:
+  - yarn build --base-href https://RichardMatsen.github.io/mwb-v2-redux/
+
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+    - node_modules

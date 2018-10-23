@@ -1,13 +1,11 @@
 import 'app/rxjs-extensions';
-import { Component, Directive } from '@angular/core';
 import { TestBed, ComponentFixture, async, inject, fakeAsync, tick } from '@angular/core/testing';
 import { Location } from '@angular/common';
 import { SpyLocation } from '@angular/common/testing';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-import { ModalDirective, ModalModule } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { IFileInfo } from 'app/model/fileinfo.model';
 import { NgReduxTestingModule, MockNgRedux } from '@angular-redux/store/testing';
 import { setupMockStore, addtoMockStore } from 'testing-helpers/testing-helpers.module.hlpr';
 import { SearchComponent1 } from './search.component.1';

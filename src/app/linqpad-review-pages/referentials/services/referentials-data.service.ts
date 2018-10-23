@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { StoreService, select } from 'app/store/store.service';
 import { IFileInfo } from 'app/model/fileInfo.model';
-import { IAppState } from 'app/store/state/AppState';
 import { IMeasureUpdate } from 'app/model/measure.model';
 import { DataService } from 'app/services/data-service/data.service';
 import { NameParsingService } from 'app/services/data-service/name-parsing.service';

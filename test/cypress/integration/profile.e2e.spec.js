@@ -25,7 +25,7 @@ describe('Profile Page', () => {
     cy.get('.profile h1').contains('Profile')
   });
 
-  describe.only('edit form and save data', () => {
+  describe('edit form and save data', () => {
     it('should have a first name input', () => {
       cy.get('input').eq(0).type('{selectall}').type('{del}').type('Sammy')
       cy.get('input').eq(0).then(x => console.log('x', x))

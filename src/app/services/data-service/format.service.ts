@@ -1,4 +1,3 @@
-
 import { IFileInfo } from 'app/model/fileInfo.model';
 
 export abstract class FormatService {
