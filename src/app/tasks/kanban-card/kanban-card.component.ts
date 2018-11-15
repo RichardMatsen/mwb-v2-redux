@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { KanbanCard } from '../model/kanban-card';
+import { dateformat } from '../../common/mw.common.module';
 
 @Component({
   selector: 'mwb-kanban-card',
   template: `
-    <p class="card" draggable="true" (dragstart)="dragStart($event)" id="{{card?.id}}" >
-      #{{card?.id}} - {{card?.description}} <span *ngIf="card?.assignedTo">[{{card?.assignedTo}}]</span>
-    </p>
+    <p class="card mwb-kanban-card drag-item" draggable="true" (dragstart)="dragStart($event)" id="{{card?.id}}" >{{cardTitle()}}</p>
   `,
   styles: [`
     p {
@@ -23,6 +22,12 @@ export class KanbanCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  cardTitle(card) {
+    const effectiveDate = typeof this.card.effectiveDate === 'string' ? new Date(this.card.effectiveDate) : this.card.effectiveDate;
+    const assignee = this.card.assignedTo ? `[${this.card.assignedTo}]` : '';
+    return this.card ? `${this.card.description} ${dateformat(effectiveDate, 'dd mmm')} ${assignee}`.trim() : '';
   }
 
   dragStart(ev) {

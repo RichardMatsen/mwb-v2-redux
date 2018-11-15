@@ -1,10 +1,13 @@
 
-export function formatAMPM(date) {
-  if (!date || !(date instanceof Date)) {
+export function formatAMPM(dateTime): string | null {
+  if (!dateTime) {
     return null;
   }
-  const ampm = date.getHours() >= 12 ? 'pm' : 'am';
-  return `${getHoursIn12HourFormat(date)}:${pad(date.getMinutes(), 2)}:${pad(date.getSeconds(), 2)} ${ampm}`;
+  if (!(dateTime instanceof Date)) {
+    return dateTime;
+  }
+  const ampm = dateTime.getHours() >= 12 ? 'pm' : 'am';
+  return `${getHoursIn12HourFormat(dateTime)}:${pad(dateTime.getMinutes(), 2)}:${pad(dateTime.getSeconds(), 2)} ${ampm}`;
 }
 
 function getHoursIn12HourFormat(date): number {

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'error-badge',
   template: `
-    <span class="badge pull-right" *ngIf="item?.metric != null" [ngClass]="item?.badgeColor || item?.color" >
+    <span class="badge error-badge pull-right" *ngIf="item?.metric != null" [ngClass]="item?.badgeColor || item?.color" >
       {{item?.metric}} {{units}}
     </span>
   `,

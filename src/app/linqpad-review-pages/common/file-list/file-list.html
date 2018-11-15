@@ -1,4 +1,4 @@
-<div #borderwrapper class="borderwrapper">
+<div #borderwrapper class="borderwrapper file-list">
   <h4 class="title">{{title}}</h4>
   <div #scrollwrapper class="scrollwrapper" scrollbarPaddingAdjust>
     <div #listwrapper class="listwrapper" >
@@ -6,9 +6,9 @@
         <li class="file-list-item" *ngFor="let item of visibleFiles">
           <a (click)=selectFile(item)>
             <search-indicator class="search-indicator" *ngIf="(searchFound$(item) | async)"></search-indicator>
-            <span class="title">{{item.displayName}}</span>
+            <span class="title display-name">{{item.displayName}}</span>
             <error-badge class="pull-right" [item]="item"></error-badge>
-            <span class="effectiveTime pull-right">{{item.effectiveTime}}</span>
+            <span class="effective-time pull-right">{{ item.effectiveTime | ampm }}</span>
           </a>
         </li>
         <mwb-list-limiter #limiter [listCount]="fileCount" [tooltip]="'Show older dates'"

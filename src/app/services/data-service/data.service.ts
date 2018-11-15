@@ -135,9 +135,9 @@ export abstract class DataService {
   private formatDate(date) {
     // tslint:disable:prefer-const
     let d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
     month = month.length < 2 ? '0' + month : month;
     day = day.length < 2 ? '0' + day : day;
     return [year, month, day].join('-');

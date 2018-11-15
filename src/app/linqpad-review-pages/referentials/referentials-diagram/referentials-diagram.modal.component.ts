@@ -11,7 +11,7 @@ import { SharedDataService } from 'app/services/shared-data.service';
          aria-labelledby="myLargeModalLabel" aria-hidden="true"
          (onHidden)="hide()">
       <div class="modal-dialog">
-        <div class="modal-content">
+        <div class="modal-content referentials-graph">
           <div class="modal-header">
             <h4 class="modal-title pull-left">Entity Relationship Diagram</h4>
             <button type="button" class="close pull-right" (click)="hide()" aria-label="Close">

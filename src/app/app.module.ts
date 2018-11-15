@@ -46,7 +46,7 @@ import { SharedDataService } from './services/shared-data.service';
     MatCardModule
   ],
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   providers: [
     {

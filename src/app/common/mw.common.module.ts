@@ -11,9 +11,11 @@ import './masked-trim/masked-trim';
 import { formatAMPM } from './format-AMPM/format-AMPM';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { ObjectShapeComparer } from './object-shape-comparer/object-shape-comparer';
+import { AmpmPipe } from './ampm-pipe/ampm.pipe';
 
 declare var require;
 const maskedTrim = require('./masked-trim/masked-trim');
+const dateformat = require('dateformat');
 
 export function loggerFactory() {
   return new Logger('MWB', '');
@@ -27,11 +29,13 @@ export function loggerFactory() {
     ErrorBadgeComponent,
     ListLimiterComponent,
     SpinnerComponent,
+    AmpmPipe,
   ],
   declarations: [
     ErrorBadgeComponent,
     ListLimiterComponent,
     SpinnerComponent,
+    AmpmPipe,
   ],
   providers: [
     ToastrService,
@@ -41,10 +45,12 @@ export function loggerFactory() {
 })
 export class MigrationWorkBenchCommonModule {}
 export { ToastrService } ;
-export { ErrorBadgeComponent }
-export { StyleWithLess }
-export { Logger }
-export { maskedTrim }
-export { ListLimiterComponent }
-export { formatAMPM }
-export { SpinnerComponent }
+export { ErrorBadgeComponent };
+export { StyleWithLess };
+export { Logger };
+export { maskedTrim };
+export { ListLimiterComponent };
+export { formatAMPM };
+export { SpinnerComponent };
+export { dateformat };
+export { AmpmPipe };

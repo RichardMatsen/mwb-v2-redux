@@ -6,7 +6,7 @@ import { SharedDataService } from 'app/services/shared-data.service';
   selector: 'mwb-referentials-diagram',
   template: `
     <div>
-      <button class="btn btn-info pull-right" (click)="showDiagram()">
+      <button class="btn btn-info pull-right referentials-button" (click)="showDiagram()">
         <i class="fa fa-sitemap" aria-hidden="true"></i> {{ buttonPrompt }}
       </button>
       <mwb-referentials-diagram-modal #diagramModal></mwb-referentials-diagram-modal>

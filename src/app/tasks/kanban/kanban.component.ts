@@ -9,7 +9,7 @@ import { waitFor$ } from 'app/store/selector-helpers/selector-helpers';
   selector: 'mwb-kanban',
   template: `
     <div>
-      <mwb-kanban-list *ngFor="let list of lists" [list]="list"></mwb-kanban-list>
+      <mwb-kanban-list class="mwb-kanban-list" *ngFor="let list of lists" [list]="list"></mwb-kanban-list>
     </div>
   `,
 })

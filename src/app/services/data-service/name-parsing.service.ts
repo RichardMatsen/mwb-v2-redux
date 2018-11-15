@@ -42,7 +42,7 @@ export class NameParsingService {
   }
 
   private parseEffectiveTime(fileName: string): string {
-    const time = fileName.match(/\d\d\.\d\d/);
+    const time = fileName.match(/(([0-9]|1[0-9]|2[0-3])\.([0-5][0-9]))/);
     if (!time) {
       return '';
     }

@@ -5,6 +5,7 @@ import { Http, Response, ResponseOptions } from '@angular/http';
 import { AuthguardService } from 'app/nav/authguard.service';
 import { AuthService } from 'app/user/auth.service';
 import { ConfigActions } from 'app/store/actions/config.actions';
+import { StoreService } from 'app/store/store.service';
 
 @Component({
   selector: 'mwb-root',
@@ -28,11 +29,14 @@ export class AppComponent implements OnInit {
     private authGuardService: AuthguardService,
     private http: Http,
     private authService: AuthService,
+    private store: StoreService
   ) {}
 
   ngOnInit() {
     this.configActions.initializeConfigRequest();
     this.authService.checkLocalStorage();
+    // (<any>window).MyNamespace
+    window['myApp'] = { store: this.store };
   }
 
 }

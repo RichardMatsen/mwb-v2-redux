@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { select } from 'app/store/store.service';
 import { IFileInfo } from 'app/model/fileInfo.model';
+// import { formatAMPM } from 'app/common/mw.common.module';
+import { AmpmPipe } from '../../../common/mw.common.module';
 
 // REF for scrolling to the bottom of the list:
 //      http://plnkr.co/edit/7yz2DUttPjI5GVJkvr5h?open=app%2Fapp.component.ts
